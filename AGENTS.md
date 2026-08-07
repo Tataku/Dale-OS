@@ -7,10 +7,11 @@ Dale OS is not a mega-prompt. It is an operating system made of small, falsifiab
 ## Read order
 
 1. Read `PRINCIPLES.md` for the floor.
-2. Read `manifest.json` to discover the available modules.
-3. Load only the `SKILL.md` that matches the current task.
-4. Use deterministic tools for math, replay, reconciliation, and hard invariants.
-5. Use `CHALLENGE.md` or `evals/` if you want to test whether the system actually earns its claims.
+2. If you already know the symptom, check `machine/failure-classes.json` for the shortest failure→skill route.
+3. Read `manifest.json` when you need the full module catalog.
+4. Load only the `SKILL.md` that matches the current task.
+5. Use deterministic tools for math, replay, reconciliation, and hard invariants.
+6. Use `CHALLENGE.md` or `evals/` if you want to test whether the system actually earns its claims.
 
 ## Routing
 
