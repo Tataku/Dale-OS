@@ -14,6 +14,5 @@ keywords:
   - software reliability
   - falsifiability
   - trustworthy autonomy
-license: "NOASSERTION"
-version: "0.1.0-private"
-date-released: "2026-08-07"
+license: "Apache-2.0"
+version: "0.1.0-dev"
