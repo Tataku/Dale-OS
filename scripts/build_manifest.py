@@ -22,6 +22,7 @@ for skill in sorted((ROOT/'skills').glob('*/*/SKILL.md')):
         'falsify':section(text,'Falsify it'),
         'deterministic_companion': (skill.parent/'scripts').exists(),
     })
+adapters=sorted(p.name for p in (ROOT/'adapters').iterdir() if p.is_dir() and not p.name.startswith('.'))
 manifest={
     'schema':'dale-os/manifest/v1',
     'version':'0.1.0-dev',
@@ -29,7 +30,7 @@ manifest={
     'trust':{'financial_mutation':False,'canonical_skill_root':'skills/','adapters_generated_from_canonical':True},
     'skills':items,
     'deterministic_tools':sorted(p.name for p in (ROOT/'tools').glob('*.py') if p.name!='common.py'),
-    'adapters':['eve','agent-skills']
+    'adapters':adapters
 }
 (ROOT/'manifest.json').write_text(json.dumps(manifest,indent=2)+"\n",encoding='utf-8')
-print(f"manifest: {len(items)} skills")
+print(f"manifest: {len(items)} skills, {len(adapters)} adapters")
