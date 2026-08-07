@@ -53,13 +53,30 @@ for skill_name,tool_name in COMPANIONS.items():
         if not dst.exists(): fail(f'{dst.relative_to(ROOT)}: missing deterministic companion')
         elif src.read_bytes()!=dst.read_bytes(): fail(f'{dst.relative_to(ROOT)}: deterministic companion drift')
 
-for required in ('AGENTS.md','llms.txt','CHALLENGE.md','PROOF.md','GOVERNANCE.md','machine/agent-index.json'):
+for required in ('AGENTS.md','llms.txt','CHALLENGE.md','PROOF.md','GOVERNANCE.md','machine/agent-index.json','machine/failure-classes.json'):
     if not (ROOT/required).exists(): fail(f'missing agent discovery/proof surface: {required}')
 try:
     idx=json.loads((ROOT/'machine'/'agent-index.json').read_text())
     if idx.get('trust',{}).get('financial_mutation') is not False: fail('agent-index must advertise financial_mutation=false')
+    if idx.get('discovery',{}).get('failure_registry')!='machine/failure-classes.json': fail('agent-index must expose failure registry')
 except Exception as exc:
     fail(f'machine/agent-index.json invalid: {exc}')
+
+try:
+    registry=json.loads((ROOT/'machine'/'failure-classes.json').read_text())
+    rows=registry.get('classes',[])
+    ids=set(); routed=set()
+    if not isinstance(rows,list) or not rows: fail('failure registry must contain classes')
+    for row in rows:
+        cid=row.get('id'); symptom=row.get('symptom'); route=row.get('route')
+        if not cid or cid in ids: fail(f'failure registry missing/duplicate id: {cid!r}')
+        ids.add(cid)
+        if not isinstance(symptom,str) or len(symptom)<20: fail(f'failure registry weak symptom: {cid!r}')
+        if route not in EXPECTED_ALL: fail(f'failure registry unknown route {route!r} for {cid!r}')
+        else: routed.add(route)
+    if routed!=EXPECTED_ALL: fail(f'failure registry coverage drift: {sorted(EXPECTED_ALL-routed)} missing')
+except Exception as exc:
+    fail(f'machine/failure-classes.json invalid: {exc}')
 
 behavior_path=ROOT/'evals'/'behavioral'/'flagship.jsonl'
 covered=set(); ids=set()
@@ -106,4 +123,4 @@ if errors:
     print('VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print('VALIDATION PASS: 20 skills, full behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
+print('VALIDATION PASS: 20 skills, failure routing + behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
