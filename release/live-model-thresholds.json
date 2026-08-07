@@ -1,0 +1,44 @@
+{
+  "schema": "dale-os/live-model-thresholds/v1",
+  "frozen_at": "2026-08-07",
+  "purpose": "Public-v0.1 live-model release gate. Thresholds are committed before any provider-backed result is observed and must not be relaxed to rescue a failing run.",
+  "models": [
+    {
+      "provider": "openai",
+      "model": "gpt-5.1-2025-11-13"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-20250514"
+    }
+  ],
+  "per_model": {
+    "activation": {
+      "coverage": 1.0,
+      "positive_recall_min": 0.95,
+      "positive_exact_route_min": 0.9,
+      "negative_avoidance_min": 0.95
+    },
+    "composition": {
+      "coverage": 1.0,
+      "positive_exact_composition_min": 0.8333,
+      "negative_overcomposition_avoidance_min": 1.0
+    },
+    "behavioral_lexical": {
+      "coverage": 1.0,
+      "lexical_pass_rate_min": 0.85
+    }
+  },
+  "global": {
+    "required_model_families": 2,
+    "api_errors_allowed": 0,
+    "missing_cases_allowed": 0,
+    "unknown_cases_allowed": 0
+  },
+  "interpretation": {
+    "activation_failure": "Inspect the miss. Tune skill descriptions only when the miss demonstrates a real activation boundary problem; do not edit the frozen corpus to improve the score.",
+    "composition_failure": "Inspect whether the composition contract is over-broad or the model failed to select a distinct obligation. Do not add doctrine merely to improve a score.",
+    "behavioral_lexical_failure": "Lexical failure is a review trigger, not automatic semantic failure. Review the raw answer against the skill rule and falsifier before changing a skill.",
+    "pass": "A threshold pass is necessary but not sufficient for a public behavioral claim. Material misses still require semantic review."
+  }
+}
