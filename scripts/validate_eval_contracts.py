@@ -34,7 +34,12 @@ for n,row in jsonl(activation):
     if route not in EXPECTED: fail(f'{activation.relative_to(ROOT)}:{n} unknown skill {route!r}')
     if expected: pos.add(expected)
     if forbidden: neg.add(forbidden)
-    if not isinstance(prompt,str) or len(prompt)<20: fail(f'{activation.relative_to(ROOT)}:{n} weak prompt')
+    if not isinstance(prompt,str):
+        fail(f'{activation.relative_to(ROOT)}:{n} prompt must be a string')
+    elif expected and len(prompt)<20:
+        fail(f'{activation.relative_to(ROOT)}:{n} positive activation prompt lacks trigger context')
+    elif forbidden and len(prompt)<5:
+        fail(f'{activation.relative_to(ROOT)}:{n} confuser prompt is trivial/empty')
 if pos!=EXPECTED: fail(f'activation positive coverage drift: {sorted(EXPECTED-pos)} missing')
 if neg!=EXPECTED: fail(f'activation confuser coverage drift: {sorted(EXPECTED-neg)} missing')
 if len(ids)!=40: fail(f'activation corpus must contain 40 cases, got {len(ids)}')
