@@ -1,0 +1,78 @@
+{
+  "schema": "dale-os/routing-policy/v1",
+  "version": "0.1.0-dev",
+  "principles": [
+    "route-to-the-narrowest-skill-that-fully-owns-the-failure",
+    "a-blocking-authority-or-evidence-gate-precedes-an-execution-skill",
+    "domain-specific-truth-rules-precede-general-truth-rules",
+    "do-not-compose-skills-unless-one-skill-cannot-own-the-task"
+  ],
+  "precedence": [
+    {
+      "when": "the task is specifically about financial provenance or what a financial evidence source may authorize",
+      "prefer": "financial-evidence-grade",
+      "over": "truth-boundary"
+    },
+    {
+      "when": "the movement is specifically hypothesized to be between accounts inside the same portfolio boundary",
+      "prefer": "transfer-neutrality",
+      "over": "money-trail"
+    },
+    {
+      "when": "the question is specifically whether a portfolio return may be published or how it should be measured",
+      "prefer": "performance-truth",
+      "over": "close-the-books"
+    },
+    {
+      "when": "multiple downstream analytics need domain-specific readiness gating",
+      "prefer": "close-the-books",
+      "over": "performance-truth"
+    },
+    {
+      "when": "the task is specifically proving disposal cost basis from acquisition lots",
+      "prefer": "basis-proof",
+      "over": "accounting-integrity"
+    },
+    {
+      "when": "the records may contradict each other but no mutation has been authorized or designed yet",
+      "prefer": "accounting-integrity",
+      "over": "ledger-repair"
+    },
+    {
+      "when": "the task explicitly requires correcting or mutating financial history after diagnosis",
+      "prefer": "ledger-repair",
+      "over": "accounting-integrity"
+    },
+    {
+      "when": "a wrong UI value may originate from shared state, data authority, or sibling consumers",
+      "prefer": "systemic-bug-instinct",
+      "over": "operator-ui-audit"
+    },
+    {
+      "when": "underlying data is already proven correct and the problem is hierarchy, interaction, or operational presentation",
+      "prefer": "operator-ui-audit",
+      "over": "systemic-bug-instinct"
+    },
+    {
+      "when": "the work would cross an unauthorized protected boundary",
+      "prefer": "protected-boundary",
+      "over": "execution-charter"
+    },
+    {
+      "when": "a human decision is already settled and the only issue is carrying it forward",
+      "prefer": "latest-authority",
+      "over": "execution-charter"
+    },
+    {
+      "when": "the work has not started and needs a bounded task contract",
+      "prefer": "execution-charter",
+      "over": "diff-scope-audit"
+    },
+    {
+      "when": "a concrete patch or PR already exists and must be checked against its contract",
+      "prefer": "diff-scope-audit",
+      "over": "execution-charter"
+    }
+  ],
+  "falsifier": "Run the routing benchmark across real model/runtime combinations. Any repeatable confusion that contradicts this policy is evidence to change the policy or skill descriptions, not to hide the miss."
+}
