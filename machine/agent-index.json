@@ -1,7 +1,7 @@
 {
   "schema": "dale-os/agent-index/v1",
   "name": "Dale OS",
-  "version": "0.1.0-dev",
+  "version": "0.1.0-rc.1",
   "purpose": "High-integrity operating system for consequential software and financial agent work",
   "principles": [
     "authority-before-autonomy",
@@ -26,6 +26,7 @@
     "deterministic_tools_are_read_only": true,
     "adversarial_evals": true,
     "canonical_skill_root": "skills/",
+    "generated_adapters": ["eve"],
     "compose_narrowly": true
   },
   "adapters": ["eve", "agent-skills", "claude-code", "codex", "cursor"],
