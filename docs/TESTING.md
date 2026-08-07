@@ -1,23 +1,64 @@
 # Testing
 
-## Local deterministic gate
+Dale OS separates deterministic repository proof from provider-backed model evidence. Do not blend them into one score or one gate.
+
+## Repository gate
+
+Run from the repository root:
 
 ```bash
 python scripts/build_companions.py
 python adapters/eve/scripts/build_skills.py
+python scripts/build_manifest.py
 python scripts/validate_repo.py
+python scripts/validate_eval_contracts.py
+python scripts/validate_discovery.py
+python scripts/validate_hygiene.py
+python scripts/smoke_agent_surface.py
+python scripts/privacy_scan.py
+python scripts/release_gate.py --validate-only
+git diff --exit-code
 ```
 
-The gate validates the canonical skill catalog, generated Eve parity, generated deterministic companion parity, Python syntax, the read-only finance-tool constraint, manifest completeness, and all deterministic financial fixtures.
+This proves:
 
-## Skill package validation
+- canonical 20-skill catalog integrity;
+- deterministic finance fixture behavior;
+- generated companion and Eve parity;
+- activation, behavioral, and composition corpus contracts;
+- machine discovery and composition integrity;
+- version, navigation, retired-path, and documentation hygiene;
+- low-context resolver/CLI behavior;
+- tracked-file privacy rules;
+- release-ledger structural honesty;
+- generated artifacts are current and committed.
 
-Before release, each canonical skill is also run through a skill-package validator. Generated ZIPs are release artifacts and should not be committed to the repo.
+## Agent Skills compatibility
 
-## Model-level evals
+The public-v0.1 release candidate is additionally checked with GitHub CLI:
 
-The Eve adapter includes `evals/*.eval.ts`. These test agent behavior rather than arithmetic. They should be run with at least two model families before public launch and the results should be published only if reproducible.
+```bash
+gh skill publish --dry-run
+```
 
-## Eve adapter smoke gate
+Every canonical skill must also install successfully from the repository. See `INSTALL.md` for the exact supported installation pattern. Release-candidate proof for 20/20 installs is recorded in `PROOF.md` and `release/gates.json`.
 
-GitHub CI also installs the pinned Eve package and runs `eve build` from `adapters/eve/`. This catches framework/API/package-version drift that the Python source validator cannot see.
+## Eve reproducibility gate
+
+The Eve adapter uses a committed npm lockfile. CI runs on Node 24:
+
+```bash
+cd adapters/eve
+npm ci --ignore-scripts
+npm run build
+```
+
+`npm ci` is required for verification; replacing it with a floating install would weaken reproducibility.
+
+## Model-level evidence
+
+Use the frozen corpora and protocol in `docs/MODEL_EVAL_PROTOCOL.md` against at least two independent model families before public launch.
+
+Pass thresholds are declared in `release/model-eval-thresholds.json` before results are observed. Trigger tuning may respond to observed misses, but the frozen corpus and thresholds must not be weakened to improve reported results.
+
+Model evidence is distinct from repository correctness: a fully green static gate does not claim cross-model behavioral consistency.
