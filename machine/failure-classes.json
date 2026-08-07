@@ -1,0 +1,26 @@
+{
+  "schema": "dale-os/failure-classes/v1",
+  "version": "0.1.0-dev",
+  "classes": [
+    {"id":"scope-drift","symptom":"agent broadens the task without authority","route":"execution-charter"},
+    {"id":"symptom-patch","symptom":"visible bug is patched without identifying the mechanism or sibling failures","route":"systemic-bug-instinct"},
+    {"id":"false-certainty","symptom":"unknown, estimated, derived, or inferred data is reported as proven","route":"truth-boundary"},
+    {"id":"authority-loss","symptom":"a settled human decision is forgotten or reopened without new conflicting evidence","route":"latest-authority"},
+    {"id":"diff-scope-mismatch","symptom":"a code change cannot be explained by the stated task contract","route":"diff-scope-audit"},
+    {"id":"unsafe-boundary-crossing","symptom":"work enters a protected or owner-gated surface without sufficient authority","route":"protected-boundary"},
+    {"id":"intent-drift","symptom":"work remains busy but no longer serves the stated objective","route":"intent-drift-check"},
+    {"id":"ui-truth-mismatch","symptom":"the interface displays a wrong or misleading operational value and the UI is treated as the root cause","route":"operator-ui-audit"},
+    {"id":"money-misclassification","symptom":"a cash movement is classified from sign or appearance rather than economic meaning","route":"money-trail"},
+    {"id":"semantic-ledger-contradiction","symptom":"financial rows are schema-valid but cannot all be economically true at once","route":"accounting-integrity"},
+    {"id":"funding-as-performance","symptom":"deposit, withdrawal, unresolved flow, or discontinuity contaminates a return claim","route":"performance-truth"},
+    {"id":"basis-gap","symptom":"realized gain is asserted without defensible lot basis","route":"basis-proof"},
+    {"id":"repair-without-economic-preview","symptom":"ledger history is changed before proving the downstream economic effect","route":"ledger-repair"},
+    {"id":"transfer-nonneutrality","symptom":"an internal transfer is treated as external funding, income, loss, or performance","route":"transfer-neutrality"},
+    {"id":"missing-cash-as-zero","symptom":"absence of a cash mirror or record is interpreted as zero or reconciliation","route":"cash-truth"},
+    {"id":"evidence-grade-escalation","symptom":"an estimate, user attestation, or model inference silently becomes accounting authority","route":"financial-evidence-grade"},
+    {"id":"tax-character-conflation","symptom":"an observed distribution is given unsupported tax character","route":"tax-character-proof"},
+    {"id":"corporate-action-discontinuity","symptom":"a split, symbol change, or supported action breaks economic continuity","route":"corporate-action-continuity"},
+    {"id":"plausible-invalid-model","symptom":"a financial model looks reasonable while violating identities, units, probability, or economic constraints","route":"model-sanity"},
+    {"id":"analytics-before-close","symptom":"analytics publish despite unresolved books that are material to that specific output","route":"close-the-books"}
+  ]
+}
