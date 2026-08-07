@@ -1,0 +1,15 @@
+{
+  "schema": "dale-os/release-gates/v1",
+  "target": "public-v0.1",
+  "visibility_now": "private",
+  "gates": [
+    {"id":"foundation-integrity","status":"PASS","evidence":["PR #1","GitHub Actions run 31158726868"]},
+    {"id":"portable-eval-harness","status":"PASS","evidence":["PR #3","GitHub Actions run 31159263496"]},
+    {"id":"privacy-static-scan","status":"PENDING","evidence":[]},
+    {"id":"fresh-eyes-discovery","status":"PENDING","evidence":[]},
+    {"id":"live-multimodel-evals","status":"BLOCKED_EXTERNAL","evidence":[]},
+    {"id":"trigger-tuning","status":"BLOCKED_EXTERNAL","evidence":[]},
+    {"id":"license-selection","status":"OWNER_REQUIRED","evidence":[]},
+    {"id":"public-launch-authority","status":"OWNER_REQUIRED","evidence":[]}
+  ]
+}
