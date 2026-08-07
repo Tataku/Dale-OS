@@ -1,1 +1,212 @@
-{"schema":"dale-os/manifest/v1","version":"0.1.0-dev","entrypoints":{"agent":"AGENTS.md","human":"README.md","llm_index":"llms.txt","challenge":"CHALLENGE.md"},"trust":{"financial_mutation":false,"canonical_skill_root":"skills/","adapters_generated_from_canonical":true},"skills":[{"name":"accounting-integrity","family":"financial-truth","path":"skills/financial-truth/accounting-integrity/SKILL.md","description":"Test whether financially well-formed records are economically coherent. Use on trade ledgers, cash histories, lot records, reconciliations, portfolio imports, or financial state where schemas pass but realized P&L, shares, basis, dates, flows, or account state may still be wrong.","rule":"**Well-formed data can still lie.**","falsify":"Try to construct the same reported state from the underlying records. If shares, basis, cash, dates, or P&L cannot all be true at once, schema validity does not rescue it.","deterministic_companion":false},{"name":"basis-proof","family":"financial-truth","path":"skills/financial-truth/basis-proof/SKILL.md","description":"Prove cost basis and realized gain from replayable acquisition lots instead of treating missing basis as zero. Use for sells, disposals, FIFO/LIFO/specific-lot analysis, tax-lot verification, oversold positions, or realized P&L where the system must show which lots support the result.","rule":"**No basis, no profit.**","falsify":"Try to replay the disposal against real acquisition lots. If sold quantity exceeds provable lots or basis is missing, realized gain is not proven.","deterministic_companion":true},{"name":"cash-truth","family":"financial-truth","path":"skills/financial-truth/cash-truth/SKILL.md","description":"Enforce one canonical cash authority and honest mirror/reconciliation states. Use when cash appears in multiple stores or UI rows, negative cash may mean margin or missing inflow, mirror rows disappear, or missing balances risk being treated as zero or reconciled.","rule":"**Missing cash is not zero cash.**","falsify":"Try to reconcile canonical cash, mirrors, and consumers without treating absence as zero. A nonzero authority with a missing mirror is drift, not agreement.","deterministic_companion":false},{"name":"close-the-books","family":"financial-truth","path":"skills/financial-truth/close-the-books/SKILL.md","description":"Gate downstream financial analytics on the readiness of their required books. Use before publishing performance, attribution, tax, realized P&L, portfolio diagnostics, or model outputs when positions, cash, flows, lots, basis, corporate actions, or valuations may be incomplete.","rule":"**Do not analyze a book you have not actually closed.**","falsify":"Try to identify which analytics actually depend on each unresolved book. Block only contaminated outputs; if a clean analytic does not depend on the broken domain, it may still proceed.","deterministic_companion":true},{"name":"corporate-action-continuity","family":"financial-truth","path":"skills/financial-truth/corporate-action-continuity/SKILL.md","description":"Preserve economic continuity through splits, reverse splits, symbol changes, and other supported structural corporate actions. Use when an asset identity or share count changes but basis, lots, holding period, cash, or realized P&L may need to remain continuous.","rule":"**The identity changed. The economics may not have.**","falsify":"Try to prove the action is economically structural rather than a disposal or new purchase. If cash, basis, holding period, or realized P&L should change, the continuity rule may not apply.","deterministic_companion":false},{"name":"financial-evidence-grade","family":"financial-truth","path":"skills/financial-truth/financial-evidence-grade/SKILL.md","description":"Grade financial evidence by provenance and constrain what each grade is allowed to drive. Use when financial data comes from statements, filings, user input, deterministic derivation, vendor estimates, LLM research, reconstructed history, or missing sources.","rule":"**An estimate is not an authority.**","falsify":"Try to identify the weakest evidence supporting each downstream use. If an estimate, reconstruction, or model inference is being used as accounting authority, fail the use even if the number looks plausible.","deterministic_companion":false},{"name":"ledger-repair","family":"financial-truth","path":"skills/financial-truth/ledger-repair/SKILL.md","description":"Design and review safe repairs to financial ledgers. Use when deleting, correcting, reclassifying, reversing, or rebuilding trades, cash events, lots, positions, flows, or accounting records and the operator needs an economic dry run, shared preflight, atomic commit plan, rollback, and audit receipt.","rule":"**Preview the economics before changing the books.**","falsify":"Try to show that preview and commit produce the same economic delta from the same inputs. If they use different rules, the repair is not safe enough to execute.","deterministic_companion":true},{"name":"model-sanity","family":"financial-truth","path":"skills/financial-truth/model-sanity/SKILL.md","description":"Adversarially validate financial models and forecasts before trusting their outputs. Use for DCFs, three-statement models, portfolio scenarios, probability trees, TAM/share models, unit economics, capital allocation models, or spreadsheets where formulas can be internally consistent but economically impossible.","rule":"**A plausible model is not automatically a valid model.**","falsify":"Try to break the model from identities, units, bounds, directionality, and independent recomputation. A plausible output does not pass if one hard invariant fails.","deterministic_companion":true},{"name":"money-trail","family":"financial-truth","path":"skills/financial-truth/money-trail/SKILL.md","description":"Trace financial capital flows without inventing economic meaning. Use for deposits, withdrawals, transfers, cash adjustments, settlements, income, fees, taxes, portfolio funding, or unexplained balance changes when every dollar needs a source, destination, classification, and audit trail.","rule":"**Every dollar gets a passport.**","falsify":"Try to pair and explain every movement without using sign alone as meaning. Any unmatched movement that could change external-flow treatment keeps the ledger unresolved.","deterministic_companion":true},{"name":"performance-truth","family":"financial-truth","path":"skills/financial-truth/performance-truth/SKILL.md","description":"Gate and calculate investment performance only when the required valuation and capital-flow evidence is ready. Use for TWR, Modified Dietz, simple return, benchmark comparison, trader-skill analytics, or portfolio history when deposits, withdrawals, gaps, stale values, or untrusted records can contaminate return.","rule":"**Funding is not performance.**","falsify":"Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If you cannot, withhold the return.","deterministic_companion":true},{"name":"tax-character-proof","family":"financial-truth","path":"skills/financial-truth/tax-character-proof/SKILL.md","description":"Separate observed distributions from their tax character and evidence quality. Use for dividends, return of capital, capital-gain distributions, issuer estimates, 19a notices, tax forms, basis reductions, or income classifications where cash receipt is known before final tax treatment is authoritative.","rule":"**The distribution happened. Its character may still be unknown.**","falsify":"Try to separate the observed payment from the final tax characterization. If only an estimate or preliminary notice exists, keep tax character provisional.","deterministic_companion":false},{"name":"transfer-neutrality","family":"financial-truth","path":"skills/financial-truth/transfer-neutrality/SKILL.md","description":"Identify and reconcile internal financial transfers without treating them as portfolio income, expense, contribution, withdrawal, or investment return. Use for account-to-account cash or asset movements, paired transfer events, wallet movements, or transfer-like records with missing counterparties.","rule":"**Money does not teleport.**","falsify":"Try to find the counterparty leg and prove conservation across the portfolio boundary. If one side is missing, do not force the event into contribution or withdrawal.","deterministic_companion":false},{"name":"diff-scope-audit","family":"operator","path":"skills/operator/diff-scope-audit/SKILL.md","description":"Audit a branch, patch, or pull request against its stated task. Use before review or merge to verify the true merge base, map every changed file/hunk to scope, find hidden unrelated work, check protected boundaries and lockstep artifacts, classify test deltas, and keep PR claims honest.","rule":"**Every hunk owes the charter an explanation.**","falsify":"Try to justify every changed hunk from the charter. One unexplained hunk is enough to fail a clean verdict.","deterministic_companion":false},{"name":"execution-charter","family":"operator","path":"skills/operator/execution-charter/SKILL.md","description":"Create a compact execution contract before non-trivial agent work. Use for coding, audit, refactor, migration, research, or operational tasks that need explicit objective, authority, scope, context budget, stop conditions, verification, and writeback before action.","rule":"**Give the agent a fence before you give it a shovel.**","falsify":"Try to prove the charter is too broad: name a file, authority, or verification step that is not required for the objective. If you can, shrink it before work begins.","deterministic_companion":false},{"name":"intent-drift-check","family":"operator","path":"skills/operator/intent-drift-check/SKILL.md","description":"Check whether active work still matches the owner's stated priorities and live project state. Use during long projects, backlog reviews, autonomous loops, or when work is productive-looking but may have drifted from the highest-leverage goal.","rule":"**Busy is not aligned.**","falsify":"Try to connect the active work to the current highest-priority objective with a short evidence chain. If the chain is weak, classify the work as drift even if it is useful.","deterministic_companion":false},{"name":"latest-authority","family":"operator","path":"skills/operator/latest-authority/SKILL.md","description":"Preserve the latest explicit human decision across agent, model, session, and worker handoffs. Use after a user answers a choice, grants or denies authority, sets a constraint, or resolves an ambiguity that future agents must not reopen without new conflicting evidence.","rule":"**The human answered. Carry it forward.**","falsify":"Try to find genuinely newer conflicting evidence or a later human decision. If neither exists, the active receipt remains authoritative and the choice stays closed.","deterministic_companion":false},{"name":"operator-ui-audit","family":"operator","path":"skills/operator/operator-ui-audit/SKILL.md","description":"Audit dense operational or financial UI without jumping straight to restyling. Use for screenshots, confusing dashboards, wrong displayed values, hierarchy problems, inconsistent modes, or requests to make an interface clearer while preserving workflows and data truth.","rule":"**A wrong value in the UI is usually a data problem wearing a costume.**","falsify":"Try to prove the problem is actually visual. Trace the displayed value and state to their authority first; if the underlying truth is wrong, do not call it a styling problem.","deterministic_companion":false},{"name":"protected-boundary","family":"operator","path":"skills/operator/protected-boundary/SKILL.md","description":"Classify and stop unsafe work at protected architectural, financial, security, data, design-system, or governance boundaries. Use when a requested change touches locked code, invariants, guards, schemas, migrations, production, financial writers, or another surface that requires separate authority.","rule":"**Stopping can be the successful action.**","falsify":"Try to identify a path that satisfies the objective without crossing the protected boundary. If none exists, stop and surface the exact authority required.","deterministic_companion":false},{"name":"systemic-bug-instinct","family":"operator","path":"skills/operator/systemic-bug-instinct/SKILL.md","description":"Diagnose bugs as potentially systemic failures. Use when a defect, wrong value, stale state, edge-case failure, broken workflow, or misleading UI is found and you need the root mechanism, failure class, blast radius, root fix location, and regression guard.","rule":"**The visible bug is a witness, not the crime scene.**","falsify":"Try to disprove the systemic hypothesis. Search sibling consumers and show why they are clean. If you cannot explain why the defect stops at one surface, the blast radius is still open.","deterministic_companion":false},{"name":"truth-boundary","family":"operator","path":"skills/operator/truth-boundary/SKILL.md","description":"Enforce provenance and uncertainty boundaries. Use when a system mixes observed, authoritative, user-attested, derived, estimated, inferred, reconstructed, or unknown values; when missing data could become zero; or when downstream output may overstate certainty.","rule":"**Null is not failure. False certainty is.**","falsify":"Try to trace every claimed value back to its evidence grade. If any downstream claim is more certain than its weakest required input, downgrade or withhold it.","deterministic_companion":false}],"deterministic_tools":["basis_proof.py","close_books.py","ledger_delta.py","model_sanity.py","money_trail.py","performance_readiness.py"],"adapters":["eve","agent-skills"]}
+{
+  "schema": "dale-os/manifest/v1",
+  "version": "0.1.0-dev",
+  "entrypoints": {
+    "agent": "AGENTS.md",
+    "human": "README.md",
+    "llm_index": "llms.txt",
+    "challenge": "CHALLENGE.md"
+  },
+  "trust": {
+    "financial_mutation": false,
+    "canonical_skill_root": "skills/",
+    "adapters_generated_from_canonical": true
+  },
+  "skills": [
+    {
+      "name": "accounting-integrity",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/accounting-integrity/SKILL.md",
+      "description": "Test whether financially well-formed records are economically coherent. Use on trade ledgers, cash histories, lot records, reconciliations, portfolio imports, or financial state where schemas pass but realized P&L, shares, basis, dates, flows, or account state may still be wrong.",
+      "rule": "**Well-formed data can still lie.**",
+      "falsify": "Try to construct the same reported state from the underlying records. If shares, basis, cash, dates, or P&L cannot all be true at once, schema validity does not rescue it.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "basis-proof",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/basis-proof/SKILL.md",
+      "description": "Prove cost basis and realized gain from replayable acquisition lots instead of treating missing basis as zero. Use for sells, disposals, FIFO/LIFO/specific-lot analysis, tax-lot verification, oversold positions, or realized P&L where the system must show which lots support the result.",
+      "rule": "**No basis, no profit.**",
+      "falsify": "Try to replay the disposal against real acquisition lots. If sold quantity exceeds provable lots or basis is missing, realized gain is not proven.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "cash-truth",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/cash-truth/SKILL.md",
+      "description": "Enforce one canonical cash authority and honest mirror/reconciliation states. Use when cash appears in multiple stores or UI rows, negative cash may mean margin or missing inflow, mirror rows disappear, or missing balances risk being treated as zero or reconciled.",
+      "rule": "**Missing cash is not zero cash.**",
+      "falsify": "Try to reconcile canonical cash, mirrors, and consumers without treating absence as zero. A nonzero authority with a missing mirror is drift, not agreement.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "close-the-books",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/close-the-books/SKILL.md",
+      "description": "Gate downstream financial analytics on the readiness of their required books. Use before publishing performance, attribution, tax, realized P&L, portfolio diagnostics, or model outputs when positions, cash, flows, lots, basis, corporate actions, or valuations may be incomplete.",
+      "rule": "**Do not analyze a book you have not actually closed.**",
+      "falsify": "Try to identify which analytics actually depend on each unresolved book. Block only contaminated outputs; if a clean analytic does not depend on the broken domain, it may still proceed.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "corporate-action-continuity",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/corporate-action-continuity/SKILL.md",
+      "description": "Preserve economic continuity through splits, reverse splits, symbol changes, and other supported structural corporate actions. Use when an asset identity or share count changes but basis, lots, holding period, cash, or realized P&L may need to remain continuous.",
+      "rule": "**The identity changed. The economics may not have.**",
+      "falsify": "Try to prove the action is economically structural rather than a disposal or new purchase. If cash, basis, holding period, or realized P&L should change, the continuity rule may not apply.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "financial-evidence-grade",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/financial-evidence-grade/SKILL.md",
+      "description": "Grade financial evidence by provenance and constrain what each grade is allowed to drive. Use when financial data comes from statements, filings, user input, deterministic derivation, vendor estimates, LLM research, reconstructed history, or missing sources.",
+      "rule": "**An estimate is not an authority.**",
+      "falsify": "Try to identify the weakest evidence supporting each downstream use. If an estimate, reconstruction, or model inference is being used as accounting authority, fail the use even if the number looks plausible.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "ledger-repair",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/ledger-repair/SKILL.md",
+      "description": "Design and review safe repairs to financial ledgers. Use when deleting, correcting, reclassifying, reversing, or rebuilding trades, cash events, lots, positions, flows, or accounting records and the operator needs an economic dry run, shared preflight, atomic commit plan, rollback, and audit receipt.",
+      "rule": "**Preview the economics before changing the books.**",
+      "falsify": "Try to show that preview and commit produce the same economic delta from the same inputs. If they use different rules, the repair is not safe enough to execute.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "model-sanity",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/model-sanity/SKILL.md",
+      "description": "Adversarially validate financial models and forecasts before trusting their outputs. Use for DCFs, three-statement models, portfolio scenarios, probability trees, TAM/share models, unit economics, capital allocation models, or spreadsheets where formulas can be internally consistent but economically impossible.",
+      "rule": "**A plausible model is not automatically a valid model.**",
+      "falsify": "Try to break the model from identities, units, bounds, directionality, and independent recomputation. A plausible output does not pass if one hard invariant fails.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "money-trail",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/money-trail/SKILL.md",
+      "description": "Trace financial capital flows without inventing economic meaning. Use for deposits, withdrawals, transfers, cash adjustments, settlements, income, fees, taxes, portfolio funding, or unexplained balance changes when every dollar needs a source, destination, classification, and audit trail.",
+      "rule": "**Every dollar gets a passport.**",
+      "falsify": "Try to pair and explain every movement without using sign alone as meaning. Any unmatched movement that could change external-flow treatment keeps the ledger unresolved.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "performance-truth",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/performance-truth/SKILL.md",
+      "description": "Gate and calculate investment performance only when the required valuation and capital-flow evidence is ready. Use for TWR, Modified Dietz, simple return, benchmark comparison, trader-skill analytics, or portfolio history when deposits, withdrawals, gaps, stale values, or untrusted records can contaminate return.",
+      "rule": "**Funding is not performance.**",
+      "falsify": "Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If you cannot, withhold the return.",
+      "deterministic_companion": true
+    },
+    {
+      "name": "tax-character-proof",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/tax-character-proof/SKILL.md",
+      "description": "Separate observed distributions from their tax character and evidence quality. Use for dividends, return of capital, capital-gain distributions, issuer estimates, 19a notices, tax forms, basis reductions, or income classifications where cash receipt is known before final tax treatment is authoritative.",
+      "rule": "**The distribution happened. Its character may still be unknown.**",
+      "falsify": "Try to separate the observed payment from the final tax characterization. If only an estimate or preliminary notice exists, keep tax character provisional.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "transfer-neutrality",
+      "family": "financial-truth",
+      "path": "skills/financial-truth/transfer-neutrality/SKILL.md",
+      "description": "Identify and reconcile internal financial transfers without treating them as portfolio income, expense, contribution, withdrawal, or investment return. Use for account-to-account cash or asset movements, paired transfer events, wallet movements, or transfer-like records with missing counterparties.",
+      "rule": "**Money does not teleport.**",
+      "falsify": "Try to find the counterparty leg and prove conservation across the portfolio boundary. If one side is missing, do not force the event into contribution or withdrawal.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "diff-scope-audit",
+      "family": "operator",
+      "path": "skills/operator/diff-scope-audit/SKILL.md",
+      "description": "Audit a branch, patch, or pull request against its stated task. Use before review or merge to verify the true merge base, map every changed file/hunk to scope, find hidden unrelated work, check protected boundaries and lockstep artifacts, classify test deltas, and keep PR claims honest.",
+      "rule": "**Every hunk owes the charter an explanation.**",
+      "falsify": "Try to justify every changed hunk from the charter. One unexplained hunk is enough to fail a clean verdict.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "execution-charter",
+      "family": "operator",
+      "path": "skills/operator/execution-charter/SKILL.md",
+      "description": "Create a compact execution contract before non-trivial agent work. Use for coding, audit, refactor, migration, research, or operational tasks that need explicit objective, authority, scope, context budget, stop conditions, verification, and writeback before action.",
+      "rule": "**Give the agent a fence before you give it a shovel.**",
+      "falsify": "Try to prove the charter is too broad: name a file, authority, or verification step that is not required for the objective. If you can, shrink it before work begins.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "intent-drift-check",
+      "family": "operator",
+      "path": "skills/operator/intent-drift-check/SKILL.md",
+      "description": "Check whether active work still matches the owner's stated priorities and live project state. Use during long projects, backlog reviews, autonomous loops, or when work is productive-looking but may have drifted from the highest-leverage goal.",
+      "rule": "**Busy is not aligned.**",
+      "falsify": "Try to connect the active work to the current highest-priority objective with a short evidence chain. If the chain is weak, classify the work as drift even if it is useful.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "latest-authority",
+      "family": "operator",
+      "path": "skills/operator/latest-authority/SKILL.md",
+      "description": "Preserve the latest explicit human decision across agent, model, session, and worker handoffs. Use after a user answers a choice, grants or denies authority, sets a constraint, or resolves an ambiguity that future agents must not reopen without new conflicting evidence.",
+      "rule": "**The human answered. Carry it forward.**",
+      "falsify": "Try to find genuinely newer conflicting evidence or a later human decision. If neither exists, the active receipt remains authoritative and the choice stays closed.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "operator-ui-audit",
+      "family": "operator",
+      "path": "skills/operator/operator-ui-audit/SKILL.md",
+      "description": "Audit dense operational or financial UI without jumping straight to restyling. Use for screenshots, confusing dashboards, wrong displayed values, hierarchy problems, inconsistent modes, or requests to make an interface clearer while preserving workflows and data truth.",
+      "rule": "**A wrong value in the UI is usually a data problem wearing a costume.**",
+      "falsify": "Try to prove the problem is actually visual. Trace the displayed value and state to their authority first; if the underlying truth is wrong, do not call it a styling problem.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "protected-boundary",
+      "family": "operator",
+      "path": "skills/operator/protected-boundary/SKILL.md",
+      "description": "Classify and stop unsafe work at protected architectural, financial, security, data, design-system, or governance boundaries. Use when a requested change touches locked code, invariants, guards, schemas, migrations, production, financial writers, or another surface that requires separate authority.",
+      "rule": "**Stopping can be the successful action.**",
+      "falsify": "Try to identify a path that satisfies the objective without crossing the protected boundary. If none exists, stop and surface the exact authority required.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "systemic-bug-instinct",
+      "family": "operator",
+      "path": "skills/operator/systemic-bug-instinct/SKILL.md",
+      "description": "Diagnose bugs as potentially systemic failures. Use when a defect, wrong value, stale state, edge-case failure, broken workflow, or misleading UI is found and you need the root mechanism, failure class, blast radius, root fix location, and regression guard.",
+      "rule": "**The visible bug is a witness, not the crime scene.**",
+      "falsify": "Try to disprove the systemic hypothesis. Search sibling consumers and show why they are clean. If you cannot explain why the defect stops at one surface, the blast radius is still open.",
+      "deterministic_companion": false
+    },
+    {
+      "name": "truth-boundary",
+      "family": "operator",
+      "path": "skills/operator/truth-boundary/SKILL.md",
+      "description": "Enforce provenance and uncertainty boundaries. Use when a system mixes observed, authoritative, user-attested, derived, estimated, inferred, reconstructed, or unknown values; when missing data could become zero; or when downstream output may overstate certainty.",
+      "rule": "**Null is not failure. False certainty is.**",
+      "falsify": "Try to trace every claimed value back to its evidence grade. If any downstream claim is more certain than its weakest required input, downgrade or withhold it.",
+      "deterministic_companion": false
+    }
+  ],
+  "deterministic_tools": [
+    "basis_proof.py",
+    "close_books.py",
+    "ledger_delta.py",
+    "model_sanity.py",
+    "money_trail.py",
+    "performance_readiness.py"
+  ],
+  "adapters": [
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor",
+    "eve"
+  ]
+}
