@@ -18,3 +18,11 @@ jobs:
         run: python adapters/eve/scripts/build_skills.py
       - name: Validate repository
         run: python scripts/validate_repo.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install and compile Eve adapter
+        working-directory: adapters/eve
+        run: |
+          npm install --package-lock=false
+          npm run build

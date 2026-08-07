@@ -4,10 +4,10 @@ Dale OS should earn trust before asking for attention.
 
 ## Required before public
 
-- [ ] Every canonical skill validates.
-- [ ] Deterministic eval suite passes from a clean checkout.
-- [ ] eve adapter builds from canonical skills without manual edits.
-- [ ] At least one live eve eval exists for each flagship skill family.
+- [x] Every canonical skill validates.
+- [x] Deterministic eval suite passes from a clean checkout.
+- [x] Eve skill adapter regenerates from canonical skills without manual edits.
+- [ ] Eve runtime installs/compiles cleanly and live model evals pass for each flagship skill family.
 - [ ] No ACF proprietary formula or private financial record is present.
 - [ ] No credentials, secrets or personal identifiers are present.
 - [ ] Every marketing claim maps to a reproducible repo artifact.
