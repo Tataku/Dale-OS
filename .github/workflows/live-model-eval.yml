@@ -1,10 +1,18 @@
 name: live-model-eval
 
-# Provider-backed model evaluation is intentionally manual.
-# It consumes paid API credits and is release evidence, not a per-commit unit test.
-# Static repository validation remains automatic in validate.yml.
+# Provider-backed model evaluation consumes paid API credits and is release evidence,
+# not a per-commit unit test. Static repository validation remains automatic.
+#
+# Run intentionally in either of two ways:
+# 1) workflow_dispatch from GitHub UI/CLI, or
+# 2) change release/run-live-model-eval.txt on the verification branch.
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - agent/live-model-verification-v0-1
+    paths:
+      - release/run-live-model-eval.txt
 
 permissions:
   contents: read
