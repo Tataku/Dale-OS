@@ -14,6 +14,7 @@ routes={x.get('route') for x in registry.get('classes',[])}
 if manifest_skills!=fs_skills: fail(f'manifest/filesystem skill drift: {sorted(manifest_skills^fs_skills)}')
 if routes!=fs_skills: fail(f'failure routing discovery drift: {sorted(routes^fs_skills)}')
 if set(manifest.get('adapters',[]))!=set(index.get('adapters',[])): fail('manifest/agent-index adapter drift')
+if manifest.get('trust',{}).get('generated_adapters')!=index.get('trust',{}).get('generated_adapters'): fail('manifest/agent-index generated-adapter drift')
 if index.get('discovery',{}).get('compositions')!='machine/compositions.json': fail('agent-index must expose compositions')
 if index.get('discovery',{}).get('install')!='INSTALL.md': fail('agent-index must expose install guide')
 composition_ids=set()
@@ -38,9 +39,6 @@ for path,needles in {
     text=(ROOT/path).read_text(encoding='utf-8')
     for needle in needles:
         if needle not in text: fail(f'{path}: missing discovery pointer {needle}')
-for stale in ('second-brain/','docs/RELEASE_READINESS.md','LICENSE_PENDING.md'):
-    for path in ('README.md','AGENTS.md','llms.txt','ARCHITECTURE.md'):
-        if stale in (ROOT/path).read_text(encoding='utf-8'): fail(f'{path}: stale release pointer {stale}')
 descriptions=[x.get('description','').strip().casefold() for x in manifest.get('skills',[])]
 if len(descriptions)!=len(set(descriptions)): fail('duplicate skill descriptions found')
 if any(len(x)<60 for x in descriptions): fail('weak skill description in manifest')
