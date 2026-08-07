@@ -12,6 +12,7 @@ def fail(message):
 manifest = json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8'))
 index = json.loads((ROOT / 'machine' / 'agent-index.json').read_text(encoding='utf-8'))
 registry = json.loads((ROOT / 'machine' / 'failure-classes.json').read_text(encoding='utf-8'))
+routing = json.loads((ROOT / 'machine' / 'routing-policy.json').read_text(encoding='utf-8'))
 compatibility = json.loads((ROOT / 'machine' / 'compatibility.json').read_text(encoding='utf-8'))
 
 required_entrypoints = {
@@ -20,6 +21,7 @@ required_entrypoints = {
     'llm_index': 'llms.txt',
     'skill_catalog': 'manifest.json',
     'failure_registry': 'machine/failure-classes.json',
+    'routing_policy': 'machine/routing-policy.json',
     'compatibility': 'machine/compatibility.json',
     'challenge': 'CHALLENGE.md',
 }
@@ -33,6 +35,21 @@ skills = {row['name'] for row in manifest.get('skills', [])}
 routes = {row.get('route') for row in registry.get('classes', [])}
 if skills != routes:
     fail(f'failure-first routing drift: missing={sorted(skills-routes)} extra={sorted(routes-skills)}')
+
+precedence = routing.get('precedence', [])
+if not isinstance(precedence, list) or not precedence:
+    fail('routing policy must contain precedence rules')
+else:
+    for i, row in enumerate(precedence, 1):
+        prefer = row.get('prefer')
+        over = row.get('over')
+        when = row.get('when')
+        if prefer not in skills or over not in skills or prefer == over:
+            fail(f'routing precedence #{i} references invalid skill pair: {prefer!r} over {over!r}')
+        if not isinstance(when, str) or len(when) < 30:
+            fail(f'routing precedence #{i} has a weak condition')
+if not routing.get('falsifier'):
+    fail('routing policy must state its falsifier')
 
 # Always-loaded host shims must stay tiny and point back to the canonical contract.
 shims = {
@@ -53,7 +70,7 @@ for path, max_lines in shims.items():
 agents = (ROOT / 'AGENTS.md').read_text(encoding='utf-8')
 if len(agents.splitlines()) > 120:
     fail('AGENTS.md exceeds 120 lines; progressive disclosure is degrading')
-for required in ('manifest.json', 'machine/failure-classes.json', 'CHALLENGE.md'):
+for required in ('manifest.json', 'machine/failure-classes.json', 'machine/routing-policy.json', 'CHALLENGE.md'):
     if required not in agents:
         fail(f'AGENTS.md must expose {required}')
 
@@ -79,4 +96,4 @@ if errors:
         print('-', error)
     raise SystemExit(1)
 
-print(f'DISCOVERY AUDIT PASS: {len(skills)} skills reachable from failure classes; {len(hosts)} host contracts explicit; shims remain thin')
+print(f'DISCOVERY AUDIT PASS: {len(skills)} skills reachable from failure classes; {len(precedence)} collision rules explicit; {len(hosts)} host contracts explicit; shims remain thin')
