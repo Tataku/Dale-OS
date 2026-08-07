@@ -2,7 +2,7 @@
 
 Dale OS is designed around consequential agent behavior, so security reports are welcome.
 
-During the private build, report issues directly to the repository owner rather than opening public disclosures.
+While repository visibility is private, report security issues directly to the repository owner. Public disclosure guidance should be added only when the repository becomes public and a public reporting channel actually exists.
 
 ## Never commit
 
