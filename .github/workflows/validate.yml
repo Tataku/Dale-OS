@@ -20,7 +20,7 @@ jobs:
         run: python scripts/validate_repo.py
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Install and compile Eve adapter
         working-directory: adapters/eve
         run: |
