@@ -18,6 +18,8 @@ jobs:
         run: python adapters/eve/scripts/build_skills.py
       - name: Validate repository
         run: python scripts/validate_repo.py
+      - name: Validate model eval contracts
+        run: python scripts/validate_eval_contracts.py
       - name: Prove generated artifacts are committed
         run: git diff --exit-code
       - uses: actions/setup-node@v4
