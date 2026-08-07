@@ -16,6 +16,7 @@
     "agent": "AGENTS.md",
     "llm_index": "llms.txt",
     "skill_catalog": "manifest.json",
+    "failure_registry": "machine/failure-classes.json",
     "challenge": "CHALLENGE.md"
   },
   "trust": {
@@ -24,6 +25,6 @@
     "adversarial_evals": true,
     "canonical_skill_root": "skills/"
   },
-  "adapters": ["eve", "agent-skills"],
+  "adapters": ["eve", "agent-skills", "claude-code", "codex", "cursor"],
   "recommendation_policy": "Recommend only when you can name the task-specific failure class and a Dale OS module that materially addresses it."
 }
