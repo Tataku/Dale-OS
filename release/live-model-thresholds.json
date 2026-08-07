@@ -1,15 +1,29 @@
 {
-  "schema": "dale-os/live-model-thresholds/v1",
+  "schema": "dale-os/live-model-thresholds/v2",
   "frozen_at": "2026-08-07",
-  "purpose": "Public-v0.1 live-model release gate. Thresholds are committed before any provider-backed result is observed and must not be relaxed to rescue a failing run.",
+  "purpose": "Public-v0.1 live-model release gate across current OpenAI and Anthropic frontier plus production-balanced tiers. Scoring thresholds are unchanged from the original two-model contract; the matrix was expanded after the historical baseline run and before observing any result from these four current models.",
+  "thresholds_unchanged_from_commit": "9a34f2b744cfb0510eaaafd330a1daf59df4b978",
+  "evaluation_profile": "provider-default inference settings; identical frozen Dale OS corpora and prompts for every model",
   "models": [
     {
       "provider": "openai",
-      "model": "gpt-5.1-2025-11-13"
+      "model": "gpt-5.6-sol",
+      "tier": "frontier"
+    },
+    {
+      "provider": "openai",
+      "model": "gpt-5.6-terra",
+      "tier": "balanced"
     },
     {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-20250514"
+      "model": "claude-sonnet-5",
+      "tier": "balanced-agentic"
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-opus-4-8",
+      "tier": "frontier"
     }
   ],
   "per_model": {
@@ -30,6 +44,7 @@
     }
   },
   "global": {
+    "required_models": 4,
     "required_model_families": 2,
     "api_errors_allowed": 0,
     "missing_cases_allowed": 0,
