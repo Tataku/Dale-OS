@@ -1,0 +1,43 @@
+name: live-model-eval
+
+on:
+  push:
+    branches:
+      - agent/live-model-verification-v0-1
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen threshold contract predates results
+        run: |
+          test -f release/live-model-thresholds.json
+          python - <<'PY'
+          import json
+          doc=json.load(open('release/live-model-thresholds.json'))
+          assert doc['schema']=='dale-os/live-model-thresholds/v1'
+          assert doc['frozen_at']=='2026-08-07'
+          assert len(doc['models'])==2
+          print('THRESHOLDS FROZEN: two model families, no post-result relaxation')
+          PY
+      - name: Run provider-backed frozen corpora
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/run_live_model_evals.py
+      - name: Upload durable eval evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dale-os-live-model-eval
+          path: artifacts/live-model-eval/
+          if-no-files-found: warn
+          retention-days: 30
