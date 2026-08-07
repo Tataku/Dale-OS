@@ -23,6 +23,7 @@ def challenge(_args):
 
 def release(_args):
     run_script('validate_repo.py')
+    run_script('validate_routing_benchmark.py')
     run_script('discovery_audit.py')
     run_script('public_boundary_audit.py')
     print('RELEASE PREFLIGHT PASS: mechanical gates green; owner/external release gates may still remain')
