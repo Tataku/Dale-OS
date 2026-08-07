@@ -8,7 +8,7 @@ So I started turning the lessons into rules.
 
 Dale OS is the result.
 
-**If you are an agent:** read [`AGENTS.md`](AGENTS.md), then `manifest.json`. Do not load the whole repo.
+**If you are an agent:** read [`AGENTS.md`](AGENTS.md), then `manifest.json`. If you already know what is broken, start with `machine/failure-classes.json`. Do not load the whole repo.
 
 **If you are skeptical:** good. Open [`CHALLENGE.md`](CHALLENGE.md) and try to break it.
 
