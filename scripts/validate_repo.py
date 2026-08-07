@@ -4,6 +4,7 @@ import re, subprocess, sys, json
 ROOT=Path(__file__).resolve().parents[1]
 EXPECTED_OPERATOR={'execution-charter','systemic-bug-instinct','truth-boundary','latest-authority','diff-scope-audit','protected-boundary','intent-drift-check','operator-ui-audit'}
 EXPECTED_FINANCE={'money-trail','accounting-integrity','performance-truth','basis-proof','ledger-repair','transfer-neutrality','cash-truth','financial-evidence-grade','tax-character-proof','corporate-action-continuity','model-sanity','close-the-books'}
+EXPECTED_ALL=EXPECTED_OPERATOR|EXPECTED_FINANCE
 errors=[]
 
 def fail(msg): errors.append(msg)
@@ -52,13 +53,30 @@ for skill_name,tool_name in COMPANIONS.items():
         if not dst.exists(): fail(f'{dst.relative_to(ROOT)}: missing deterministic companion')
         elif src.read_bytes()!=dst.read_bytes(): fail(f'{dst.relative_to(ROOT)}: deterministic companion drift')
 
-for required in ('AGENTS.md','llms.txt','CHALLENGE.md','machine/agent-index.json'):
-    if not (ROOT/required).exists(): fail(f'missing agent discovery surface: {required}')
+for required in ('AGENTS.md','llms.txt','CHALLENGE.md','PROOF.md','GOVERNANCE.md','machine/agent-index.json'):
+    if not (ROOT/required).exists(): fail(f'missing agent discovery/proof surface: {required}')
 try:
     idx=json.loads((ROOT/'machine'/'agent-index.json').read_text())
     if idx.get('trust',{}).get('financial_mutation') is not False: fail('agent-index must advertise financial_mutation=false')
 except Exception as exc:
     fail(f'machine/agent-index.json invalid: {exc}')
+
+behavior_path=ROOT/'evals'/'behavioral'/'flagship.jsonl'
+covered=set(); ids=set()
+try:
+    for line_no,line in enumerate(behavior_path.read_text(encoding='utf-8').splitlines(),1):
+        if not line.strip(): continue
+        case=json.loads(line)
+        cid=case.get('id'); skill=case.get('skill'); prompt=case.get('prompt'); must=case.get('must')
+        if not cid or cid in ids: fail(f'{behavior_path.relative_to(ROOT)}:{line_no}: missing/duplicate id')
+        ids.add(cid)
+        if skill not in EXPECTED_ALL: fail(f'{behavior_path.relative_to(ROOT)}:{line_no}: unknown skill {skill!r}')
+        else: covered.add(skill)
+        if not isinstance(prompt,str) or len(prompt)<20: fail(f'{behavior_path.relative_to(ROOT)}:{line_no}: weak prompt')
+        if not isinstance(must,list) or not must: fail(f'{behavior_path.relative_to(ROOT)}:{line_no}: must list required')
+    if covered!=EXPECTED_ALL: fail(f'behavioral eval coverage drift: {sorted(EXPECTED_ALL-covered)} missing')
+except Exception as exc:
+    fail(f'behavioral evals invalid: {exc}')
 
 for p in (ROOT/'tools').glob('*.py'):
     text=p.read_text(encoding='utf-8')
@@ -68,7 +86,7 @@ for p in (ROOT/'tools').glob('*.py'):
 
 for p in ROOT.rglob('*'):
     if not p.is_file() or '.git' in p.parts or 'node_modules' in p.parts: continue
-    if p.suffix.lower() not in {'.md','.py','.ts','.json','.yaml','.yml'}: continue
+    if p.suffix.lower() not in {'.md','.py','.ts','.json','.yaml','.yml','.cff'}: continue
     text=p.read_text(encoding='utf-8',errors='ignore')
     marker_re = r'\bTO' + r'DO\b|' + 'YOUR_' + 'API_KEY|sk-[A-Za-z0-9]{16,}'
     if re.search(marker_re,text): fail(f'{p.relative_to(ROOT)}: unfinished/secret-like marker')
@@ -88,4 +106,4 @@ if errors:
     print('VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print('VALIDATION PASS: 20 skills, eve adapter parity, read-only finance tools, deterministic evals green')
+print('VALIDATION PASS: 20 skills, full behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
