@@ -26,10 +26,11 @@ jobs:
           python - <<'PY'
           import json
           doc=json.load(open('release/live-model-thresholds.json'))
-          assert doc['schema']=='dale-os/live-model-thresholds/v1'
+          assert doc['schema']=='dale-os/live-model-thresholds/v3'
           assert doc['frozen_at']=='2026-08-07'
-          assert len(doc['models'])==2
-          print('THRESHOLDS FROZEN: two model families, no post-result relaxation')
+          assert len(doc['models'])==4
+          assert doc['global']['required_models']==4
+          print('THRESHOLDS FROZEN: four benchmark roles, two providers, no post-result relaxation')
           PY
       - name: Run provider-backed frozen corpora
         env:
