@@ -1,0 +1,5 @@
+2026-08-07T16:02:00-05:00
+purpose=verify-systemic-bug-diagnostic-scope-clarification
+provider=openai
+role=balanced
+case=systemic-bug-blast-radius
