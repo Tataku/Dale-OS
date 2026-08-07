@@ -7,13 +7,27 @@ Dale OS should earn trust before asking for attention.
 - [x] Every canonical skill validates.
 - [x] Deterministic eval suite passes from a clean checkout.
 - [x] Eve skill adapter regenerates from canonical skills without manual edits.
-- [ ] Eve runtime installs/compiles cleanly and live model evals pass for each flagship skill family.
-- [ ] No ACF proprietary formula or private financial record is present.
-- [ ] No credentials, secrets or personal identifiers are present.
-- [ ] Every marketing claim maps to a reproducible repo artifact.
-- [ ] Known limitations are visible.
+- [x] Eve runtime installs and compiles cleanly on its declared Node runtime.
+- [x] Generated artifacts are committed exactly; CI fails on drift.
+- [x] Failure-first routing covers every canonical skill.
+- [x] Cross-model routing benchmark has at least two adversarial cases per skill.
+- [x] Agent discovery and thin host shims pass deterministic audit.
+- [x] Automated public-boundary scan checks obvious secrets, labeled private account data, ACF scoring-weight leakage, and unsupported README certification claims.
+- [ ] Live model-in-loop routing/adversarial evals pass across at least two model families.
+- [ ] Trigger descriptions are tuned from observed model activation misses.
+- [ ] Final human privacy/security review confirms no proprietary ACF formula or private financial record is present.
+- [ ] Every launch/outreach claim maps to a reproducible repo artifact.
+- [x] Known limitations are visible in `PROOF.md` and compatibility metadata.
 - [ ] License is selected intentionally.
-- [ ] README tested by someone who did not build the repo.
+- [ ] README/discovery flow is tested by someone who did not build the repo.
+
+## Mechanical preflight
+
+```bash
+python scripts/dale.py release
+```
+
+A green preflight means the repository's mechanical gates pass. It does **not** grant permission to publish and does not satisfy owner/external gates above.
 
 ## Flagship launch demos
 
