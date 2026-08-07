@@ -6,6 +6,8 @@
 - AGENTS.md — machine-first entry point and task router
 - README.md — human overview
 - PRINCIPLES.md — operating floor
+- machine/failure-classes.json — shortest symptom-to-skill route
+- machine/agent-index.json — machine discovery contract
 - manifest.json — machine-readable skill catalog
 - CHALLENGE.md — adversarial quick test
 - ARCHITECTURE.md — one-source/many-adapters design
@@ -43,11 +45,15 @@
 - tools/close_books.py
 
 ## Proof
-- evals/ — adversarial fixtures and behavioral tests
+- evals/ — adversarial fixtures, activation corpus, and behavioral tests
 - cases/ — sanitized incidents that paid for rules
 - docs/TESTING.md — validation contract
-- docs/RELEASE_READINESS.md — release gate
+- docs/MODEL_EVAL_PROTOCOL.md — cross-runtime model evidence contract
+- docs/PUBLIC_RELEASE_READINESS.md — fail-closed public release contract
 
 ## Adapters
 - adapters/eve/ — Eve-native distribution
 - adapters/agent-skills/ — portable Agent Skills usage
+- adapters/claude-code/ — Claude Code host guidance
+- adapters/codex/ — Codex host guidance
+- adapters/cursor/ — Cursor host guidance
