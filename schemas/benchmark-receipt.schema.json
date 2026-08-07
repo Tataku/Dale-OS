@@ -1,0 +1,31 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"dale-os/benchmark-receipt/v1",
+  "title":"Dale OS benchmark receipt",
+  "type":"object",
+  "required":["schema","status","dale_os_commit","corpus_commit","runtime","model","run_at","metrics","limitations"],
+  "properties":{
+    "schema":{"const":"dale-os/benchmark-receipt/v1"},
+    "status":{"enum":["UNVERIFIED","VERIFIED"]},
+    "dale_os_commit":{"type":"string","minLength":7},
+    "corpus_commit":{"type":"string","minLength":7},
+    "runtime":{"type":"string","minLength":1},
+    "model":{"type":"string","minLength":1},
+    "run_at":{"type":"string","format":"date-time"},
+    "metrics":{
+      "type":"object",
+      "properties":{
+        "activation":{"type":"object","properties":{"coverage":{"type":["number","null"]},"positive_recall":{"type":["number","null"]},"exact_route":{"type":["number","null"]},"negative_avoidance":{"type":["number","null"]}},"additionalProperties":false},
+        "behavioral_lexical":{"type":"object","properties":{"coverage":{"type":["number","null"]},"pass_rate":{"type":["number","null"]}},"additionalProperties":false},
+        "semantic_review":{"type":"object","properties":{"reviewed_cases":{"type":"integer","minimum":0},"passed_cases":{"type":"integer","minimum":0},"pass_rate":{"type":["number","null"]}},"additionalProperties":false},
+        "deterministic":{"type":"object","properties":{"fixtures":{"type":"integer","minimum":0},"passed":{"type":"integer","minimum":0}},"additionalProperties":false},
+        "tool_correctness":{"type":"object","properties":{"reviewed_calls":{"type":"integer","minimum":0},"passed_calls":{"type":"integer","minimum":0}},"additionalProperties":false}
+      },
+      "additionalProperties":false
+    },
+    "limitations":{"type":"array","items":{"type":"string","minLength":1},"minItems":1},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "notes":{"type":"string"}
+  },
+  "additionalProperties":false
+}
