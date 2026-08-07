@@ -20,6 +20,12 @@ jobs:
         run: python scripts/validate_repo.py
       - name: Validate model eval contracts
         run: python scripts/validate_eval_contracts.py
+      - name: Validate agent discovery
+        run: python scripts/validate_discovery.py
+      - name: Scan public release surface
+        run: python scripts/privacy_scan.py
+      - name: Validate release gate ledger
+        run: python scripts/release_gate.py --validate-only
       - name: Prove generated artifacts are committed
         run: git diff --exit-code
       - uses: actions/setup-node@v4
