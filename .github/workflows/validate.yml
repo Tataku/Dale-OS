@@ -18,6 +18,8 @@ jobs:
         run: python adapters/eve/scripts/build_skills.py
       - name: Validate repository
         run: python scripts/validate_repo.py
+      - name: Validate skill anatomy
+        run: python scripts/validate_skill_anatomy.py
       - name: Validate routing benchmark
         run: python scripts/validate_routing_benchmark.py
       - name: Audit agent discovery
