@@ -19,6 +19,7 @@
     "skill_catalog": "manifest.json",
     "failure_registry": "machine/failure-classes.json",
     "compositions": "machine/compositions.json",
+    "explanation_contract": "machine/explanation-contract.json",
     "challenge": "CHALLENGE.md"
   },
   "trust": {
