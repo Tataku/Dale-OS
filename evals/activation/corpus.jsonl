@@ -1,0 +1,40 @@
+{"id":"activate-execution-charter","prompt":"Start a multi-file migration that changes schemas and tests. Define what is in scope, what is out, stop conditions, and verification before touching anything.","expected_skill":"execution-charter"}
+{"id":"confuse-execution-charter","prompt":"What is 2 + 2?","forbidden_skill":"execution-charter"}
+{"id":"activate-systemic-bug","prompt":"One screen shows the wrong balance. Before patching it, trace the mechanism and check every sibling consumer for the same failure class.","expected_skill":"systemic-bug-instinct"}
+{"id":"confuse-systemic-bug","prompt":"Change this button label from Save to Done.","forbidden_skill":"systemic-bug-instinct"}
+{"id":"activate-truth-boundary","prompt":"These fields mix vendor estimates, user attestations, derived values, and missing values. Tell me what we are actually allowed to claim.","expected_skill":"truth-boundary"}
+{"id":"confuse-truth-boundary","prompt":"Rewrite this paragraph to sound clearer.","forbidden_skill":"truth-boundary"}
+{"id":"activate-latest-authority","prompt":"The owner already chose option B yesterday. A new worker wants to ask again. Preserve the active decision unless newer conflicting evidence exists.","expected_skill":"latest-authority"}
+{"id":"confuse-latest-authority","prompt":"Give me three naming ideas for this feature.","forbidden_skill":"latest-authority"}
+{"id":"activate-diff-scope","prompt":"Audit this PR against the task and explain every changed hunk, including unrelated cleanup and protected files.","expected_skill":"diff-scope-audit"}
+{"id":"confuse-diff-scope","prompt":"Explain what a pull request is.","forbidden_skill":"diff-scope-audit"}
+{"id":"activate-protected-boundary","prompt":"This change reaches a locked accounting writer and production migration. Determine whether we have authority to cross that boundary.","expected_skill":"protected-boundary"}
+{"id":"confuse-protected-boundary","prompt":"Format this JSON alphabetically.","forbidden_skill":"protected-boundary"}
+{"id":"activate-intent-drift","prompt":"We have been polishing a low-priority tool for two days while the launch blocker remains open. Check whether this work still serves the stated objective.","expected_skill":"intent-drift-check"}
+{"id":"confuse-intent-drift","prompt":"Summarize today's completed tasks.","forbidden_skill":"intent-drift-check"}
+{"id":"activate-operator-ui","prompt":"The dashboard total is wrong. Audit whether the source data, state, or UI presentation is actually responsible before redesigning anything.","expected_skill":"operator-ui-audit"}
+{"id":"confuse-operator-ui","prompt":"Make this marketing hero visually bolder.","forbidden_skill":"operator-ui-audit"}
+{"id":"activate-money-trail","prompt":"Trace these deposits, withdrawals, transfers, fees, and settlements by source, destination, and economic meaning. Do not infer meaning from sign alone.","expected_skill":"money-trail"}
+{"id":"confuse-money-trail","prompt":"Convert $20 to euros using the provided fixed rate.","forbidden_skill":"money-trail"}
+{"id":"activate-accounting-integrity","prompt":"All ledger rows pass schema validation, but shares, cash, basis, dates, and realized P&L may contradict each other. Test whether the records can all be true at once.","expected_skill":"accounting-integrity"}
+{"id":"confuse-accounting-integrity","prompt":"Validate that this JSON has the required keys and types.","forbidden_skill":"accounting-integrity"}
+{"id":"activate-performance-truth","prompt":"Calculate portfolio return, but first determine whether deposits, withdrawals, valuation gaps, and stale prices contaminate the period and which return method is valid.","expected_skill":"performance-truth"}
+{"id":"confuse-performance-truth","prompt":"What percentage of the portfolio is in cash right now?","forbidden_skill":"performance-truth"}
+{"id":"activate-basis-proof","prompt":"Prove realized gain on this sale by replaying acquisition lots. Missing basis must not become zero.","expected_skill":"basis-proof"}
+{"id":"confuse-basis-proof","prompt":"What is the current market value of 10 shares at $25 each?","forbidden_skill":"basis-proof"}
+{"id":"activate-ledger-repair","prompt":"We need to correct historical trades. Preview downstream effects on cash, positions, basis, realized P&L, and performance before any ledger mutation.","expected_skill":"ledger-repair"}
+{"id":"confuse-ledger-repair","prompt":"Explain why this old trade looks suspicious without changing anything.","forbidden_skill":"ledger-repair"}
+{"id":"activate-transfer-neutrality","prompt":"Reconcile account-to-account movements so paired internal transfers net to zero external portfolio flow, and leave unpaired legs unresolved.","expected_skill":"transfer-neutrality"}
+{"id":"confuse-transfer-neutrality","prompt":"Classify this clearly documented external payroll deposit.","forbidden_skill":"transfer-neutrality"}
+{"id":"activate-cash-truth","prompt":"Canonical cash is nonzero but the mirror row is missing. Determine the honest reconciliation state without treating absence as zero.","expected_skill":"cash-truth"}
+{"id":"confuse-cash-truth","prompt":"Add the values in this complete cash table.","forbidden_skill":"cash-truth"}
+{"id":"activate-financial-evidence","prompt":"Grade statement data, filings, user input, deterministic derivations, vendor estimates, LLM research, and missing sources by provenance and downstream authority.","expected_skill":"financial-evidence-grade"}
+{"id":"confuse-financial-evidence","prompt":"Summarize this already-authoritative audited financial statement.","forbidden_skill":"financial-evidence-grade"}
+{"id":"activate-tax-character","prompt":"A distribution was paid, but only a preliminary notice describes its tax character. Separate observed cash from authoritative tax treatment and basis impact.","expected_skill":"tax-character-proof"}
+{"id":"confuse-tax-character","prompt":"Add these already-final ordinary dividend amounts from a 1099-DIV.","forbidden_skill":"tax-character-proof"}
+{"id":"activate-corporate-action","prompt":"A split and symbol change occurred. Preserve shares, lots, basis, and holding-period continuity unless the economics actually changed.","expected_skill":"corporate-action-continuity"}
+{"id":"confuse-corporate-action","prompt":"Record a normal open-market purchase of a new security.","forbidden_skill":"corporate-action-continuity"}
+{"id":"activate-model-sanity","prompt":"Attack this forecast from accounting identities, units, probability bounds, sensitivity direction, and independent recomputation before trusting the output.","expected_skill":"model-sanity"}
+{"id":"confuse-model-sanity","prompt":"Format this already-validated model output as a table.","forbidden_skill":"model-sanity"}
+{"id":"activate-close-books","prompt":"Before publishing performance, realized P&L, tax analytics, and attribution, decide which underlying books are ready and block only outputs contaminated by unresolved domains.","expected_skill":"close-the-books"}
+{"id":"confuse-close-books","prompt":"Show the current allocation percentages from a complete trusted snapshot.","forbidden_skill":"close-the-books"}

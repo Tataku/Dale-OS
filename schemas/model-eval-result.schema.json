@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dale-os/model-eval-result/v1",
+  "title": "Dale OS model evaluation result",
+  "type": "object",
+  "required": ["case_id", "runtime", "model"],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "runtime": {"type": "string", "minLength": 1},
+    "model": {"type": "string", "minLength": 1},
+    "selected_skills": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "response": {"type": "string"},
+    "tool_calls": {"type": "array", "items": {"type": "string"}},
+    "semantic_judgment": {"enum": ["PASS", "FAIL", "UNREVIEWED"]},
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": false,
+  "anyOf": [
+    {"required": ["selected_skills"]},
+    {"required": ["response"]}
+  ]
+}
