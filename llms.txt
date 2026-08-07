@@ -4,9 +4,11 @@
 
 ## Start here
 - AGENTS.md — machine-first entry point and task router
+- INSTALL.md — preview/install/pin/update guidance
 - README.md — human overview
 - PRINCIPLES.md — operating floor
 - machine/failure-classes.json — shortest symptom-to-skill route
+- machine/compositions.json — narrow multi-skill recipes and handoff contracts
 - machine/agent-index.json — machine discovery contract
 - manifest.json — machine-readable skill catalog
 - CHALLENGE.md — adversarial quick test
@@ -43,6 +45,11 @@
 - tools/ledger_delta.py
 - tools/model_sanity.py
 - tools/close_books.py
+
+## Low-context control surface
+- python scripts/dale.py resolve <failure-class> --json
+- python scripts/dale.py composition <composition-id> --json
+- python scripts/dale.py catalog --json
 
 ## Proof
 - evals/ — adversarial fixtures, activation corpus, and behavioral tests
