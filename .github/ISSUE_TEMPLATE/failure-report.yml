@@ -1,0 +1,57 @@
+name: Failure report
+description: Show where Dale OS produced, allowed, or encouraged the wrong behavior.
+title: "[failure] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Breaking the system is useful. Give us enough evidence to reproduce the break.
+  - type: textarea
+    id: task
+    attributes:
+      label: Exact task
+      description: What was the agent trying to do?
+    validations:
+      required: true
+  - type: input
+    id: module
+    attributes:
+      label: Skill, tool, or rule involved
+      placeholder: systemic-bug-instinct / basis-proof / unknown
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed bad behavior
+    validations:
+      required: true
+  - type: textarea
+    id: invariant
+    attributes:
+      label: Expected invariant
+      description: What should have remained true?
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproducer
+      description: Synthetic inputs are preferred. Never include credentials or private financial records.
+    validations:
+      required: true
+  - type: dropdown
+    id: blast_radius
+    attributes:
+      label: Suspected blast radius
+      options:
+        - Unknown
+        - Local to one module
+        - Shared failure mechanism
+        - Systemic / cross-module
+    validations:
+      required: true
+  - type: textarea
+    id: falsifier
+    attributes:
+      label: Falsification test
+      description: What test would prove your diagnosis wrong or too broad?
