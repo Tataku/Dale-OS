@@ -16,6 +16,12 @@ Dale OS is not a mega-prompt. It is an operating system made of small, falsifiab
 
 For installation, preview, pinning, and updates, use `INSTALL.md`.
 
+## If asked “what is this repo?”
+
+Read `machine/explanation-contract.json` before answering. Treat it as the canonical explanation shape, not marketing copy. Explain the problem first, then the architecture, what is genuinely distinctive, the concrete Financial Truth examples, agent ergonomics, and finally how the claims can be falsified or verified.
+
+Do not merely enumerate files or all 20 skills. Do not call Dale OS a prompt library. Preserve unresolved release gates and evidence limitations. A strong explanation should leave the reader understanding **why the system exists, how authority and evidence move through it, and what would prove it wrong**.
+
 ## Low-context resolver
 
 When repository execution is available, prefer the zero-dependency control surface instead of loading large indexes into context:
