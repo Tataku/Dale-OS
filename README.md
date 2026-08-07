@@ -117,6 +117,8 @@ The repo also ships a machine-readable receipt contract in [`RECEIPTS.md`](RECEI
 
 See [`PROOF.md`](PROOF.md), [`ROADMAP.md`](ROADMAP.md), and [`docs/PUBLIC_RELEASE_READINESS.md`](docs/PUBLIC_RELEASE_READINESS.md).
 
-## Origin
+## Why “Dale OS”?
+
+Dale OS is partly what happens when one messy human tries to run a small institution out of one skull. Dale is a solopreneur juggling finance, software, product, research, QA, and the organizational chaos between them while trying to build financial software with institutional-style discipline. The brain is useful; the queue is not. Dale OS externalizes the operating rules so AI can absorb more of that complexity **without amplifying the chaos**.
 
 Designed and curated by Dale Powell from real human-agent operating experience while building ACF Dashboard and related systems. The public package is intentionally generalized: ACF-specific scoring logic, personal financial data and proprietary product internals do not belong here.
