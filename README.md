@@ -55,25 +55,30 @@ For money, ledgers, portfolio analytics and financial models:
 - `model-sanity` — a plausible model is not automatically a valid model.
 - `close-the-books` — do not publish analytics whose required books are not ready.
 
-## How the repo is built
+## Repository map
 
 ```text
 Dale-OS/
+├── README.md                # human entry point
 ├── AGENTS.md                # machine-first entry point
 ├── INSTALL.md               # preview/install/update paths
-├── PRINCIPLES.md
-├── ARCHITECTURE.md
-├── skills/
+├── PRINCIPLES.md            # operating floor
+├── ARCHITECTURE.md          # dependency and authority model
+├── skills/                  # canonical Agent Skills modules
 │   ├── operator/
 │   └── financial-truth/
 ├── tools/                   # deterministic, read-only financial checks
-├── evals/                   # adversarial cases and rubrics
-├── cases/                   # sanitized incidents that paid for a rule
+├── evals/                   # activation, behavior, composition, fixtures
+├── cases/                   # sanitized incidents that paid for rules
 ├── machine/                 # routing, composition, discovery contracts
-├── adapters/                # thin host-specific distributions/guidance
-├── scripts/                 # zero-dependency control surface + validators
-└── docs/
+├── adapters/                # host-specific distributions/guidance
+├── scripts/                 # control surface, generators, validators
+├── schemas/                 # portable machine contracts
+├── release/                 # machine-readable release authority
+└── docs/                    # deeper operating and evaluation contracts
 ```
+
+For detailed navigation, see [`llms.txt`](llms.txt) or [`AGENTS.md`](AGENTS.md).
 
 ## Source rule
 
@@ -104,11 +109,13 @@ python scripts/dale.py challenge
 python scripts/dale.py doctor
 ```
 
-The repo also ships a machine-readable receipt contract in `RECEIPTS.md` + `schemas/receipt.schema.json`, so agent handoffs can preserve claims, unknowns, mutations and verification instead of forwarding confidence without evidence.
+The repo also ships a machine-readable receipt contract in [`RECEIPTS.md`](RECEIPTS.md) and `schemas/receipt.schema.json`, so agent handoffs can preserve claims, unknowns, mutations and verification instead of forwarding confidence without evidence.
 
 ## Status
 
-Private hardening build. See `ROADMAP.md` and `docs/PUBLIC_RELEASE_READINESS.md`.
+**Private public-v0.1 release candidate.** Static engineering, privacy, discovery, Agent Skills compatibility, 20/20 installability, generated-source parity, and frozen Eve reproducibility are verified. Remaining gates are provider-backed cross-model evaluation, evidence-driven trigger tuning, and explicit owner authorization to make the repository public.
+
+See [`PROOF.md`](PROOF.md), [`ROADMAP.md`](ROADMAP.md), and [`docs/PUBLIC_RELEASE_READINESS.md`](docs/PUBLIC_RELEASE_READINESS.md).
 
 ## Origin
 
