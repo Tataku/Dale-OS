@@ -13,6 +13,8 @@ def tracked_files():
     result=subprocess.run(['git','ls-files'],cwd=ROOT,capture_output=True,text=True,check=True)
     return [ROOT/p for p in result.stdout.splitlines() if p]
 
+tracked=tracked_files()
+tracked_rel={str(path.relative_to(ROOT)) for path in tracked}
 version=(ROOT/'VERSION').read_text(encoding='utf-8').strip()
 if not re.fullmatch(r'\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?',version):
     fail(f'VERSION: invalid version {version!r}')
@@ -32,7 +34,7 @@ if f'## {version} ' not in changelog:
     fail('CHANGELOG.md: current VERSION heading missing')
 
 markdown_link=re.compile(r'\[[^\]]*\]\(([^)]+)\)')
-for path in tracked_files():
+for path in tracked:
     if path.suffix.lower()!='.md':
         continue
     text=path.read_text(encoding='utf-8',errors='ignore')
@@ -52,20 +54,27 @@ for path in tracked_files():
         if not resolved.exists():
             fail(f'{path.relative_to(ROOT)}: broken relative link: {raw}')
 
-# Construct retired markers so the validator cannot flag its own source text.
-retired=[
+# Construct retired names so this validator does not match itself during content scanning.
+retired_paths={
     'docs/'+'RELEASE_READINESS.md',
     'LICENSE_'+'PENDING.md',
+}
+for retired_path in retired_paths:
+    if retired_path in tracked_rel:
+        fail(f'retired path is still tracked: {retired_path}')
+
+retired_markers=[
+    *retired_paths,
     'second-'+'brain/',
     '0.1.0-'+'dev',
     'private '+'foundation',
 ]
 text_suffixes={'.md','.txt','.json','.yaml','.yml','.cff','.py'}
-for path in tracked_files():
+for path in tracked:
     if path==Path(__file__).resolve() or path.suffix.lower() not in text_suffixes:
         continue
     text=path.read_text(encoding='utf-8',errors='ignore')
-    for marker in retired:
+    for marker in retired_markers:
         if marker in text:
             fail(f'{path.relative_to(ROOT)}: retired marker present: {marker}')
 
@@ -84,4 +93,4 @@ if errors:
     for error in errors:
         print('-',error)
     raise SystemExit(1)
-print(f'HYGIENE PASS: version {version}, relative links valid, retired markers absent, root contract intact')
+print(f'HYGIENE PASS: version {version}, relative links valid, retired paths/markers absent, root contract intact')
