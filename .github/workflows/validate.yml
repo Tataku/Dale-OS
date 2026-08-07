@@ -33,8 +33,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Install and compile Eve adapter
+          cache: 'npm'
+          cache-dependency-path: adapters/eve/package-lock.json
+      - name: Install frozen Eve dependency graph
         working-directory: adapters/eve
-        run: |
-          npm install --package-lock=false
-          npm run build
+        run: npm ci --ignore-scripts
+      - name: Compile Eve adapter
+        working-directory: adapters/eve
+        run: npm run build
