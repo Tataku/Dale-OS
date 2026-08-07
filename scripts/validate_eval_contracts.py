@@ -51,6 +51,24 @@ for n,row in jsonl(behavior):
     if skill in EXPECTED: behavior_skills.add(skill)
 if behavior_skills!=EXPECTED: fail(f'behavioral coverage drift: {sorted(EXPECTED-behavior_skills)} missing')
 
+composition_defs=json.loads((ROOT/'machine'/'compositions.json').read_text(encoding='utf-8'))
+known_compositions={x['id'] for x in composition_defs.get('compositions',[])}
+composition=ROOT/'evals'/'composition'/'corpus.jsonl'
+comp_pos=set(); comp_neg=set(); comp_ids=set()
+for n,row in jsonl(composition):
+    cid=row.get('id'); expected=row.get('expected_composition'); forbidden=row.get('forbidden_composition'); prompt=row.get('prompt')
+    if not cid or cid in comp_ids: fail(f'{composition.relative_to(ROOT)}:{n} missing/duplicate id')
+    comp_ids.add(cid)
+    if bool(expected)==bool(forbidden): fail(f'{composition.relative_to(ROOT)}:{n} define exactly one composition expectation')
+    route=expected or forbidden
+    if route not in known_compositions: fail(f'{composition.relative_to(ROOT)}:{n} unknown composition {route!r}')
+    if expected: comp_pos.add(expected)
+    if forbidden: comp_neg.add(forbidden)
+    if not isinstance(prompt,str) or len(prompt)<10: fail(f'{composition.relative_to(ROOT)}:{n} weak prompt')
+if comp_pos!=known_compositions: fail(f'composition positive coverage drift: {sorted(known_compositions-comp_pos)} missing')
+if comp_neg!=known_compositions: fail(f'composition confuser coverage drift: {sorted(known_compositions-comp_neg)} missing')
+if len(comp_ids)!=2*len(known_compositions): fail(f'composition corpus must contain 2 cases per composition, got {len(comp_ids)}')
+
 schema=ROOT/'schemas'/'model-eval-result.schema.json'
 try:
     doc=json.loads(schema.read_text(encoding='utf-8'))
@@ -59,7 +77,7 @@ try:
     if required!={'case_id','runtime','model'}: fail(f'model eval required fields drift: {sorted(required)}')
 except Exception as exc: fail(f'{schema.relative_to(ROOT)} invalid: {exc}')
 
-for name in ('score_activation.py','score_behavioral.py'):
+for name in ('score_activation.py','score_behavioral.py','score_composition.py'):
     p=ROOT/'scripts'/name
     r=subprocess.run([sys.executable,'-m','py_compile',str(p)],capture_output=True,text=True)
     if r.returncode: fail(f'{name} compile failed: {r.stderr.strip()}')
@@ -68,4 +86,4 @@ if errors:
     print('EVAL CONTRACT VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print('EVAL CONTRACT PASS: 20 positive routes + 20 confusers + 20 behavioral cases + portable result schema')
+print(f'EVAL CONTRACT PASS: 20 positive routes + 20 confusers + 20 behavioral cases + {len(comp_ids)} composition cases + portable result schema')
