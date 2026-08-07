@@ -1,0 +1,22 @@
+# Skill Catalog
+
+- **`execution-charter`** — Give the agent a fence before you give it a shovel.
+- **`systemic-bug-instinct`** — The visible bug is a witness, not the crime scene.
+- **`truth-boundary`** — Null is not failure. False certainty is.
+- **`latest-authority`** — The human answered. Carry it forward.
+- **`diff-scope-audit`** — Every hunk owes the charter an explanation.
+- **`protected-boundary`** — Stopping can be the successful action.
+- **`intent-drift-check`** — Busy is not aligned.
+- **`operator-ui-audit`** — A wrong value in the UI is usually a data problem wearing a costume.
+- **`money-trail`** — Every dollar gets a passport.
+- **`accounting-integrity`** — Well-formed data can still lie.
+- **`performance-truth`** — Funding is not performance.
+- **`basis-proof`** — No basis, no profit.
+- **`ledger-repair`** — Preview the economics before changing the books.
+- **`transfer-neutrality`** — Money does not teleport.
+- **`cash-truth`** — Missing cash is not zero cash.
+- **`financial-evidence-grade`** — An estimate is not an authority.
+- **`tax-character-proof`** — The distribution happened. Its character may still be unknown.
+- **`corporate-action-continuity`** — The identity changed. The economics may not have.
+- **`model-sanity`** — A plausible model is not automatically a valid model.
+- **`close-the-books`** — Do not analyze a book you have not actually closed.

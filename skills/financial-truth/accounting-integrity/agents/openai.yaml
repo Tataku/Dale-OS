@@ -1,0 +1,3 @@
+interface:
+  display_name: "Accounting Integrity"
+  short_description: "Test whether financially well-formed records are economically coherent"

@@ -1,0 +1,60 @@
+name: Rule proposal
+description: Propose a new invariant only when you can tie it to a failure mechanism and a test.
+title: "[rule] "
+labels: []
+body:
+  - type: textarea
+    id: failure
+    attributes:
+      label: Failure class
+      description: What concrete failure or ambiguity pays for this rule?
+    validations:
+      required: true
+  - type: textarea
+    id: mechanism
+    attributes:
+      label: Root mechanism
+      description: Why does the failure happen beneath the visible symptom?
+    validations:
+      required: true
+  - type: textarea
+    id: invariant
+    attributes:
+      label: Proposed invariant
+      description: State the smallest rule that should remain true.
+    validations:
+      required: true
+  - type: textarea
+    id: falsifier
+    attributes:
+      label: Falsifier
+      description: What evidence would prove this rule wrong, incomplete, or over-broad?
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Narrowest correct layer
+      options:
+        - Skill
+        - Deterministic tool
+        - Eval / fixture
+        - Adapter
+        - Principle / governance
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Boundary / non-applicability
+      description: Where should this rule explicitly not apply?
+    validations:
+      required: true
+  - type: textarea
+    id: proof
+    attributes:
+      label: Proposed proof
+      description: Describe the fixture, eval, case, or reproducible check that should accompany promotion.
+    validations:
+      required: true

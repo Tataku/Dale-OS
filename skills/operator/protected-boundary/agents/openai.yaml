@@ -1,0 +1,3 @@
+interface:
+  display_name: "Protected Boundary"
+  short_description: "Stop unsafe work at protected architecture, financial, data, or governance boundaries"

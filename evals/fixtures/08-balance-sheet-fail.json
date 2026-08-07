@@ -1,0 +1,1 @@
+{"tool":"model_sanity.py","input":{"balance_sheet":{"assets":100,"liabilities":60,"equity":30}},"expect":{"status":"BLOCKED","contains_failures":["balance_sheet_identity_failed"]}}

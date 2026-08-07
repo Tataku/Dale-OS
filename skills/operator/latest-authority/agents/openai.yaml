@@ -1,0 +1,3 @@
+interface:
+  display_name: "Latest Authority"
+  short_description: "Preserve the latest explicit human decision across agent, model, session, and worker handoffs"

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Model Sanity"
+  short_description: "Adversarially validate financial models and forecasts before trusting their outputs"

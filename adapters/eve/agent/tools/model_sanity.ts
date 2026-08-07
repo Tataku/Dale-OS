@@ -1,0 +1,4 @@
+import { defineTool } from "eve/tools";
+import { z } from "zod";
+import { runDaleTool } from "../lib/runDaleTool";
+export default defineTool({description:"Run deterministic sanity checks on a financial model: probability totals, balance-sheet identity, scenario ordering, bounded metrics, and unit equalities.",inputSchema:z.object({probabilities:z.array(z.number()).optional(),probability_tolerance:z.number().positive().optional(),balance_sheet:z.object({assets:z.number(),liabilities:z.number(),equity:z.number(),tolerance:z.number().optional()}).optional(),scenarios:z.object({downside:z.number(),base:z.number(),upside:z.number()}).optional(),bounded_metrics:z.array(z.object({name:z.string(),value:z.number(),min:z.number(),max:z.number()})).default([]),unit_equalities:z.array(z.object({name:z.string(),left_unit:z.string(),right_unit:z.string()})).default([])}),async execute(input){return runDaleTool("model_sanity.py",input);}});

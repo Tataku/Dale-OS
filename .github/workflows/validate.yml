@@ -1,0 +1,30 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  dale-os:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build deterministic skill companions
+        run: python scripts/build_companions.py
+      - name: Build eve skill adapter
+        run: python adapters/eve/scripts/build_skills.py
+      - name: Validate repository
+        run: python scripts/validate_repo.py
+      - name: Prove generated artifacts are committed
+        run: git diff --exit-code
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install and compile Eve adapter
+        working-directory: adapters/eve
+        run: |
+          npm install --package-lock=false
+          npm run build

@@ -1,0 +1,1 @@
+{"tool":"basis_proof.py","input":{"method":"FIFO","events":[{"id":"b1","type":"BUY","ticker":"XYZ","account_id":"A","date":"2026-01-01","shares":12,"price":10},{"id":"s1","type":"SELL","ticker":"XYZ","account_id":"A","date":"2026-02-01","shares":20,"price":20}]},"expect":{"status":"UNRESOLVED","disposal_status":"UNVERIFIED_OVERSOLD","realized_gain_is_null":true}}

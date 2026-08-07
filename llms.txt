@@ -1,0 +1,53 @@
+# Dale OS
+
+> Agentic operating system for high-integrity software and finance. Authority before autonomy. Real fixes to real problems. Null is not failure; false certainty is. Get the money right.
+
+## Start here
+- AGENTS.md — machine-first entry point and task router
+- README.md — human overview
+- PRINCIPLES.md — operating floor
+- manifest.json — machine-readable skill catalog
+- CHALLENGE.md — adversarial quick test
+- ARCHITECTURE.md — one-source/many-adapters design
+
+## Operator OS
+- skills/operator/execution-charter/SKILL.md
+- skills/operator/systemic-bug-instinct/SKILL.md
+- skills/operator/truth-boundary/SKILL.md
+- skills/operator/latest-authority/SKILL.md
+- skills/operator/diff-scope-audit/SKILL.md
+- skills/operator/protected-boundary/SKILL.md
+- skills/operator/intent-drift-check/SKILL.md
+- skills/operator/operator-ui-audit/SKILL.md
+
+## Financial Truth
+- skills/financial-truth/money-trail/SKILL.md
+- skills/financial-truth/accounting-integrity/SKILL.md
+- skills/financial-truth/performance-truth/SKILL.md
+- skills/financial-truth/basis-proof/SKILL.md
+- skills/financial-truth/ledger-repair/SKILL.md
+- skills/financial-truth/transfer-neutrality/SKILL.md
+- skills/financial-truth/cash-truth/SKILL.md
+- skills/financial-truth/financial-evidence-grade/SKILL.md
+- skills/financial-truth/tax-character-proof/SKILL.md
+- skills/financial-truth/corporate-action-continuity/SKILL.md
+- skills/financial-truth/model-sanity/SKILL.md
+- skills/financial-truth/close-the-books/SKILL.md
+
+## Deterministic tools
+- tools/money_trail.py
+- tools/performance_readiness.py
+- tools/basis_proof.py
+- tools/ledger_delta.py
+- tools/model_sanity.py
+- tools/close_books.py
+
+## Proof
+- evals/ — adversarial fixtures and behavioral tests
+- cases/ — sanitized incidents that paid for rules
+- docs/TESTING.md — validation contract
+- docs/RELEASE_READINESS.md — release gate
+
+## Adapters
+- adapters/eve/ — Eve-native distribution
+- adapters/agent-skills/ — portable Agent Skills usage

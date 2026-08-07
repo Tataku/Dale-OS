@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dale-os.dev/schemas/receipt.schema.json",
+  "title": "Dale OS Receipt",
+  "type": "object",
+  "required": ["schema", "skill", "status", "summary", "claims", "unknowns", "mutations", "verification"],
+  "properties": {
+    "schema": {"const": "dale-os/receipt/v1"},
+    "skill": {"type": "string", "minLength": 1},
+    "status": {"enum": ["PASS", "DEGRADED", "UNRESOLVED", "WITHHELD", "BLOCKED"]},
+    "summary": {"type": "string", "minLength": 1},
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "evidence_grade"],
+        "properties": {
+          "claim": {"type": "string", "minLength": 1},
+          "evidence_grade": {"enum": ["OBSERVED", "AUTHORITATIVE", "USER_ATTESTED", "DERIVED", "ESTIMATED", "INFERRED", "RECONSTRUCTED", "UNKNOWN"]},
+          "evidence": {"type": "array", "items": {"type": "string"}}
+        },
+        "additionalProperties": false
+      }
+    },
+    "unknowns": {"type": "array", "items": {"type": "string"}},
+    "mutations": {"type": "array", "items": {"type": "string"}},
+    "verification": {"type": "array", "items": {"type": "string"}},
+    "authority": {"type": "array", "items": {"type": "string"}},
+    "next": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}
