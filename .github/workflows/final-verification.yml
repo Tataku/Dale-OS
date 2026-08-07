@@ -25,11 +25,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_PAGER: cat
         run: gh skill publish --dry-run
-      - name: Prove local discovery and install
+      - name: Prove every skill installs locally
         run: |
           rm -rf /tmp/dale-skills
           mkdir -p /tmp/dale-skills
-          gh skill install . --from-local --all --dir /tmp/dale-skills
+          python - <<'PY' > /tmp/skill-names
+          import json
+          for skill in json.load(open('manifest.json'))['skills']:
+              print(skill['name'])
+          PY
+          while IFS= read -r skill; do
+            gh skill install . "$skill" --from-local --dir "/tmp/dale-skills/$skill"
+          done < /tmp/skill-names
           test "$(find /tmp/dale-skills -name SKILL.md -type f | wc -l)" -eq 20
       - name: Re-run Dale OS release checks
         run: |
