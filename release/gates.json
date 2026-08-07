@@ -5,8 +5,8 @@
   "gates": [
     {"id":"foundation-integrity","status":"PASS","evidence":["PR #1","GitHub Actions run 31158726868"]},
     {"id":"portable-eval-harness","status":"PASS","evidence":["PR #3","GitHub Actions run 31159263496"]},
-    {"id":"privacy-static-scan","status":"PENDING","evidence":[]},
-    {"id":"fresh-eyes-discovery","status":"PENDING","evidence":[]},
+    {"id":"privacy-static-scan","status":"PASS","evidence":["GitHub Actions run 31202696722","privacy scan passed on PR #4 head 84a9f912b3d4b5a931a11b7d62119c6cadb3aedf"]},
+    {"id":"fresh-eyes-discovery","status":"PASS","evidence":["GitHub Actions run 31202696722","discovery validator passed on PR #4 head 84a9f912b3d4b5a931a11b7d62119c6cadb3aedf"]},
     {"id":"live-multimodel-evals","status":"BLOCKED_EXTERNAL","evidence":[]},
     {"id":"trigger-tuning","status":"BLOCKED_EXTERNAL","evidence":[]},
     {"id":"license-selection","status":"PASS","evidence":["Apache License 2.0 selected by owner","LICENSE added in commit 7c7f5b1b804786a9a167d64a601e7794fcc30c5e"]},
