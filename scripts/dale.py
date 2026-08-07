@@ -12,11 +12,20 @@ def catalog(args):
         companion=' +tool' if s.get('deterministic_companion') else ''
         print(f"{s['family']:16} {s['name']}{companion}\n  {s['description']}")
 
+def run_script(name):
+    subprocess.run([sys.executable,str(ROOT/'scripts'/name)],check=True)
+
 def doctor(_args):
-    subprocess.run([sys.executable,str(ROOT/'scripts'/'validate_repo.py')],check=True)
+    run_script('validate_repo.py')
 
 def challenge(_args):
-    subprocess.run([sys.executable,str(ROOT/'scripts'/'run_evals.py')],check=True)
+    run_script('run_evals.py')
+
+def release(_args):
+    run_script('validate_repo.py')
+    run_script('discovery_audit.py')
+    run_script('public_boundary_audit.py')
+    print('RELEASE PREFLIGHT PASS: mechanical gates green; owner/external release gates may still remain')
 
 def receipt(args):
     data=json.loads(Path(args.path).read_text())
@@ -41,6 +50,7 @@ def main():
     c=sub.add_parser('catalog'); c.add_argument('--json',action='store_true'); c.set_defaults(func=catalog)
     d=sub.add_parser('doctor'); d.set_defaults(func=doctor)
     ch=sub.add_parser('challenge'); ch.set_defaults(func=challenge)
+    rel=sub.add_parser('release'); rel.set_defaults(func=release)
     r=sub.add_parser('receipt'); r.add_argument('path'); r.set_defaults(func=receipt)
     args=p.parse_args(); args.func(args)
 if __name__=='__main__': main()
