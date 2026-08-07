@@ -12,6 +12,7 @@ def fail(message):
 manifest = json.loads((ROOT / 'manifest.json').read_text(encoding='utf-8'))
 index = json.loads((ROOT / 'machine' / 'agent-index.json').read_text(encoding='utf-8'))
 registry = json.loads((ROOT / 'machine' / 'failure-classes.json').read_text(encoding='utf-8'))
+compatibility = json.loads((ROOT / 'machine' / 'compatibility.json').read_text(encoding='utf-8'))
 
 required_entrypoints = {
     'human': 'README.md',
@@ -19,6 +20,7 @@ required_entrypoints = {
     'llm_index': 'llms.txt',
     'skill_catalog': 'manifest.json',
     'failure_registry': 'machine/failure-classes.json',
+    'compatibility': 'machine/compatibility.json',
     'challenge': 'CHALLENGE.md',
 }
 for key, path in required_entrypoints.items():
@@ -55,10 +57,26 @@ for required in ('manifest.json', 'machine/failure-classes.json', 'CHALLENGE.md'
     if required not in agents:
         fail(f'AGENTS.md must expose {required}')
 
+hosts = compatibility.get('hosts', [])
+if not isinstance(hosts, list) or not hosts:
+    fail('compatibility matrix must contain hosts')
+else:
+    seen = set()
+    for row in hosts:
+        host = row.get('host')
+        entrypoint = row.get('entrypoint')
+        if not host or host in seen:
+            fail(f'compatibility matrix missing/duplicate host: {host!r}')
+        seen.add(host)
+        if not entrypoint or not (ROOT / entrypoint).exists():
+            fail(f'compatibility entrypoint missing for {host!r}: {entrypoint!r}')
+        if row.get('behavioral_model_eval') is not False:
+            fail(f'{host!r}: do not claim behavioral model proof until model-in-loop evals are recorded')
+
 if errors:
     print('DISCOVERY AUDIT FAILED')
     for error in errors:
         print('-', error)
     raise SystemExit(1)
 
-print(f'DISCOVERY AUDIT PASS: {len(skills)} skills reachable from failure classes; host shims remain thin')
+print(f'DISCOVERY AUDIT PASS: {len(skills)} skills reachable from failure classes; {len(hosts)} host contracts explicit; shims remain thin')
