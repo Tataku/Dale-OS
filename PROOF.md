@@ -23,15 +23,27 @@ Not every rule needs every rung. A rule may never be promoted beyond the evidenc
 - 20 canonical skills validate and package independently.
 - Every skill includes an explicit falsification section.
 - 6 deterministic financial companions are generated from canonical tools.
-- 10 synthetic financial fixtures exercise known failure classes.
+- 10 synthetic financial fixtures exercise known money/accounting/model failure classes.
+- The failure registry routes every canonical skill from a concrete broken-behavior class.
+- The routing benchmark contains 40 adversarial trigger cases: at least two per skill, each with a named nearby confuser.
+- All 20 skills have behavioral eval definitions.
 - Eve skills are generated from canonical skills and parity-checked.
-- GitHub CI rebuilds generated artifacts and runs the repository validator on a clean runner.
-- The Eve adapter is installed and compiled in CI against its declared runtime requirements.
+- GitHub CI rebuilds generated artifacts and fails if regeneration changes the committed tree.
+- The Eve adapter installs and compiles in CI against Eve `0.27.8` on Node 24.
+- Agent discovery has deterministic checks for canonical entrypoints, failure-first routing, compatibility metadata, and thin always-loaded host shims.
+- Public-boundary preflight scans for obvious secrets, labeled private financial account data, ACF scoring-weight leakage, and unsupported README certification claims.
+
+## What is structurally ready but not behaviorally proven
+
+- `machine/compatibility.json` defines seven host discovery contracts without claiming model equivalence.
+- `evals/routing/trigger-cases.jsonl` is ready for cross-model scoring, but no model score is published yet.
+- GitHub Copilot and Gemini CLI shims route inward to canonical Dale OS instead of copying doctrine.
 
 ## What is not proven yet
 
 - Cross-model behavioral consistency across multiple agent/model families.
 - Real-world trigger precision and recall for every skill.
+- Independent fresh-eyes usability/discovery results.
 - Safe autonomous financial mutation. It does not exist in v0.1.
 - Any regulatory, fiduciary, RIA, SEC, or institutional certification claim.
 
