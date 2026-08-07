@@ -4,9 +4,12 @@
 
 ## Start here
 - AGENTS.md — machine-first entry point and task router
+- machine/failure-classes.json — route from known broken behavior
+- machine/routing-policy.json — resolve nearby skill collisions
+- machine/compatibility.json — host discovery contracts and proof level
+- manifest.json — machine-readable canonical skill catalog
 - README.md — human overview
 - PRINCIPLES.md — operating floor
-- manifest.json — machine-readable skill catalog
 - CHALLENGE.md — adversarial quick test
 - ARCHITECTURE.md — one-source/many-adapters design
 
@@ -43,11 +46,18 @@
 - tools/close_books.py
 
 ## Proof
-- evals/ — adversarial fixtures and behavioral tests
+- evals/routing/trigger-cases.jsonl — 40 cross-model routing cases; no model scores claimed yet
+- evals/ — deterministic fixtures and behavioral eval definitions
 - cases/ — sanitized incidents that paid for rules
+- PROOF.md — claim/evidence boundary
 - docs/TESTING.md — validation contract
 - docs/RELEASE_READINESS.md — release gate
 
-## Adapters
-- adapters/eve/ — Eve-native distribution
+## Adapters / host discovery
+- adapters/eve/ — Eve generated reference distribution
 - adapters/agent-skills/ — portable Agent Skills usage
+- adapters/claude-code/ — thin Claude Code guidance
+- adapters/codex/ — thin Codex guidance
+- adapters/cursor/ — thin Cursor guidance
+- .github/copilot-instructions.md — GitHub Copilot discovery shim
+- GEMINI.md — Gemini CLI discovery shim
