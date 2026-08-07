@@ -17,6 +17,7 @@
     "llm_index": "llms.txt",
     "skill_catalog": "manifest.json",
     "failure_registry": "machine/failure-classes.json",
+    "routing_policy": "machine/routing-policy.json",
     "compatibility": "machine/compatibility.json",
     "challenge": "CHALLENGE.md"
   },
