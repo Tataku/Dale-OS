@@ -38,6 +38,11 @@ jobs:
             gh skill install . "$skill" --from-local --dir "/tmp/dale-skills/$skill"
           done < /tmp/skill-names
           test "$(find /tmp/dale-skills -name SKILL.md -type f | wc -l)" -eq 20
+      - name: Rebuild generated surfaces
+        run: |
+          python scripts/build_companions.py
+          python adapters/eve/scripts/build_skills.py
+          python scripts/build_manifest.py
       - name: Re-run Dale OS release checks
         run: |
           python scripts/validate_repo.py
@@ -46,6 +51,7 @@ jobs:
           python scripts/smoke_agent_surface.py
           python scripts/privacy_scan.py
           python scripts/release_gate.py --validate-only
+          git diff --exit-code
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
