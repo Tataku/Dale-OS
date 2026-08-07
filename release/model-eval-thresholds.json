@@ -1,0 +1,28 @@
+{
+  "schema": "dale-os/model-eval-thresholds/v1",
+  "policy": "Each evaluated model must pass independently. Do not blend models into an aggregate score and do not edit the frozen corpus to rescue a failing model.",
+  "activation": {
+    "coverage": 1.0,
+    "positive_recall_min": 0.95,
+    "positive_exact_route_min": 0.90,
+    "negative_avoidance_min": 0.95
+  },
+  "composition": {
+    "coverage": 1.0,
+    "positive_exact_composition_min": 0.85,
+    "negative_overcomposition_avoidance_min": 0.95
+  },
+  "behavior": {
+    "coverage": 1.0,
+    "lexical_smoke_is_gate": false,
+    "semantic_review_required": true,
+    "semantic_pass_rate_min": 0.90,
+    "hard_invariant_failures_allowed": 0
+  },
+  "promotion": {
+    "minimum_model_families": 2,
+    "same_dale_os_commit_required": true,
+    "same_corpus_commit_required": true,
+    "trigger_tuning_requires_frozen_corpus_rerun": true
+  }
+}
