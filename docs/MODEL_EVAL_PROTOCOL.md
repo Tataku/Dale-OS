@@ -1,8 +1,8 @@
 # Model Eval Protocol
 
-Dale OS separates **routing** from **behavior**.
+Dale OS separates **routing**, **composition**, and **behavior**.
 
-A model can choose the right skill and still violate it. A model can also behave sensibly while the router failed to load the intended skill. Those are different defects and should produce different fixes.
+A model can choose the right skill and still violate it. It can also choose every remotely relevant skill and waste context or create instruction collisions. Those are different defects and should produce different fixes.
 
 ## 1. Activation evaluation
 
@@ -28,7 +28,30 @@ Report at least:
 
 Do not hide missing cases inside an average.
 
-## 2. Behavioral evaluation
+## 2. Composition evaluation
+
+Use `evals/composition/corpus.jsonl` when the task genuinely spans multiple failure classes.
+
+Each canonical composition has:
+
+- a positive case where its complete skill set should cooperate;
+- a confuser where loading the entire composition would be overreach.
+
+Score selected skills with:
+
+```bash
+python scripts/score_composition.py results.jsonl
+```
+
+Report separately:
+
+- corpus coverage;
+- positive exact-composition rate;
+- negative over-composition avoidance.
+
+A composition is not better because it loads more doctrine. Exact composition means every included skill owns a distinct obligation in that case.
+
+## 3. Behavioral evaluation
 
 Use `evals/behavioral/flagship.jsonl` after the intended skill is active.
 
@@ -42,12 +65,13 @@ The built-in scorer is intentionally lexical. It is a reproducible smoke test fo
 
 High-stakes published claims therefore require an independent semantic judgment or human review in addition to the lexical score.
 
-## 3. Never combine unlike evidence
+## 4. Never combine unlike evidence
 
 Keep these separate:
 
 - deterministic finance fixture pass rate;
 - skill-routing metrics;
+- composition precision / over-composition avoidance;
 - behavioral lexical smoke score;
 - semantic judgment;
 - framework/runtime compatibility;
@@ -55,7 +79,7 @@ Keep these separate:
 
 A single blended "agent score" would destroy the evidence trail.
 
-## 4. Cross-model comparison
+## 5. Cross-model comparison
 
 For every published run record:
 
@@ -71,8 +95,8 @@ For every published run record:
 
 Compare models only on identical cases and Dale OS commit state.
 
-## 5. Falsification
+## 6. Falsification
 
 A claimed improvement is falsified when the same frozen corpus and scoring contract do not reproduce the improvement on a clean rerun.
 
-Trigger tuning must not edit the test corpus only to make the new description look better. Add genuinely new confusers when a real activation miss exposes a new boundary.
+Trigger or composition tuning must not edit the test corpus only to make new descriptions or recipes look better. Add genuinely new confusers when a real miss exposes a new boundary.
