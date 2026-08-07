@@ -1,0 +1,38 @@
+{
+  "schema": "dale-os/model-cost-policy/v1",
+  "purpose": "Keep model spend proportional to the evidence obligation. Use the least expensive model tier that can satisfy the task, escalate only when capability or consequence justifies it, and make expensive reruns granular rather than habitual.",
+  "default_posture": "economy_first",
+  "principle": "Capability is a budgeted resource, not a default setting.",
+  "rules": [
+    "Estimate or bound the cost of a multi-call workflow before execution when provider pricing and expected token volume are knowable.",
+    "Prefer a balanced or economical model for routine routing, extraction, classification, formatting, and already-bounded work.",
+    "Escalate to a frontier model only when the cheaper tier fails, the task has a materially higher consequence boundary, or the benchmark explicitly requires frontier behavior.",
+    "Record why a frontier escalation was necessary when the workflow emits a receipt.",
+    "Do not rerun model slots that already produced valid evidence when an unrelated provider, parser, or harness component failed; rerun only the affected slot whenever the execution environment permits it.",
+    "Reuse deterministic outputs and previously verified artifacts when their inputs and authority have not changed.",
+    "Keep cost ceilings cross-provider rather than allowing each provider to spend independently without a total workflow budget.",
+    "Fail closed or require explicit authorization when projected spend exceeds a configured workflow ceiling.",
+    "Never trade away accounting, provenance, authority, or safety invariants merely to reduce token cost."
+  ],
+  "benchmark_exception": {
+    "allowed": true,
+    "rule": "A benchmark may intentionally exercise frontier and balanced tiers to measure capability differences. Benchmark breadth does not justify wasteful reruns: isolate model slots and preserve valid receipts whenever possible."
+  },
+  "receipt_fields": [
+    "provider",
+    "model",
+    "role",
+    "input_tokens_when_available",
+    "output_tokens_when_available",
+    "estimated_or_reported_cost_usd_when_available",
+    "escalation_reason_when_frontier",
+    "evidence_reused_or_recomputed"
+  ],
+  "recommended_runtime_controls": {
+    "workflow_cost_ceiling_env": "DALE_OS_MAX_MODEL_COST_USD",
+    "high_cost_warning_env": "DALE_OS_HIGH_COST_WARNING_USD",
+    "provider_specific_caps_are_additional_not_substitutes": true,
+    "default_numeric_values": "unset; host or operator chooses based on provider pricing and use case"
+  },
+  "promotion_rule": "Do not add a canonical Dale OS skill for model-cost optimization until recurring evidence demonstrates a distinct failure class with its own trigger, boundary, falsifier, and eval corpus."
+}
