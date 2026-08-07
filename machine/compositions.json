@@ -1,0 +1,82 @@
+{
+  "schema": "dale-os/compositions/v1",
+  "version": "0.1.0-dev",
+  "rule": "Compose narrowly. Every added skill must own a distinct failure class or handoff obligation.",
+  "compositions": [
+    {
+      "id": "safe-bug-fix",
+      "use_when": "A non-trivial defect may be systemic and the resulting change must stay inside authority and merge scope.",
+      "sequence": [
+        {"skill": "execution-charter", "role": "bound objective, authority, scope, verification, and stop conditions"},
+        {"skill": "systemic-bug-instinct", "role": "prove the mechanism and blast radius before patching"},
+        {"skill": "protected-boundary", "role": "stop before crossing ungranted architectural or production authority"},
+        {"skill": "diff-scope-audit", "role": "prove every resulting hunk belongs to the charter"}
+      ],
+      "handoff_contract": "The root mechanism and authorized fix locus become evidence for the diff audit; later stages may not silently broaden the charter.",
+      "falsify": "Remove any stage whose failure class is not actually present. If the workflow remains equally safe and legible, the composition was over-broad."
+    },
+    {
+      "id": "durable-owner-decision",
+      "use_when": "A human decision must survive a long-running or multi-agent workflow without being reopened or diluted.",
+      "sequence": [
+        {"skill": "execution-charter", "role": "record the authority boundary for the work"},
+        {"skill": "latest-authority", "role": "preserve the latest explicit human decision across handoffs"},
+        {"skill": "intent-drift-check", "role": "verify ongoing work still serves the settled objective"}
+      ],
+      "handoff_contract": "Later agents inherit the newest valid human decision and may reopen it only with genuinely newer conflicting evidence.",
+      "falsify": "Find a later authoritative decision or evidence that invalidates the carried-forward choice. Without it, re-asking is drift."
+    },
+    {
+      "id": "financial-import-truth",
+      "use_when": "Imported financial records are structurally present but provenance, cash, transfers, basis, or economic coherence may be incomplete.",
+      "sequence": [
+        {"skill": "financial-evidence-grade", "role": "grade each source before it can become financial authority"},
+        {"skill": "money-trail", "role": "classify and reconcile capital movements without sign-based guesses"},
+        {"skill": "transfer-neutrality", "role": "prove internal movements are neutral at the portfolio boundary"},
+        {"skill": "accounting-integrity", "role": "test whether the resulting records can all be economically true"},
+        {"skill": "cash-truth", "role": "establish canonical cash and honest mirror state"},
+        {"skill": "close-the-books", "role": "gate only the analytics contaminated by unresolved books"}
+      ],
+      "handoff_contract": "No downstream stage may upgrade the evidence grade of an upstream record. Unknown classifications remain unknown until resolved.",
+      "falsify": "Show that every downstream analytic can be recomputed from authoritative records without unresolved cash, transfer, or ledger contradictions."
+    },
+    {
+      "id": "performance-publication",
+      "use_when": "An agent is about to publish portfolio performance or benchmark claims from records that may contain flows or valuation gaps.",
+      "sequence": [
+        {"skill": "financial-evidence-grade", "role": "establish which valuations and flows are authoritative"},
+        {"skill": "money-trail", "role": "separate external funding from internal movement and operating cash effects"},
+        {"skill": "performance-truth", "role": "select or withhold a valid return calculation"},
+        {"skill": "close-the-books", "role": "block publication when material prerequisite books remain unresolved"}
+      ],
+      "handoff_contract": "Funding classification and valuation readiness are inputs to performance, never retroactively inferred from the desired return.",
+      "falsify": "Recompute the reported return from the same authoritative valuation and flow evidence. If the result depends on unresolved classification, withhold it."
+    },
+    {
+      "id": "safe-ledger-repair",
+      "use_when": "Historical financial records need correction and the economic effects must be known before mutation.",
+      "sequence": [
+        {"skill": "financial-evidence-grade", "role": "separate authoritative correction evidence from estimates or reconstruction"},
+        {"skill": "accounting-integrity", "role": "prove the current contradiction and affected domains"},
+        {"skill": "ledger-repair", "role": "preview the complete economic delta before changing history"},
+        {"skill": "basis-proof", "role": "replay lots when disposal basis or realized P&L is affected"},
+        {"skill": "cash-truth", "role": "verify post-repair canonical cash consequences"},
+        {"skill": "close-the-books", "role": "reopen analytics only after affected books are ready"}
+      ],
+      "handoff_contract": "Preview and commit must use the same economic rules and inputs; a correction may not be justified by the output it is intended to produce.",
+      "falsify": "Prove the proposed repair is unnecessary or that preview and resulting economics diverge. Either result blocks mutation."
+    },
+    {
+      "id": "financial-model-release",
+      "use_when": "A financial model combines observed data, estimates, assumptions, and deterministic formulas before a consequential decision or publication.",
+      "sequence": [
+        {"skill": "financial-evidence-grade", "role": "label provenance and permitted downstream use"},
+        {"skill": "truth-boundary", "role": "prevent uncertainty from becoming false certainty in conclusions"},
+        {"skill": "model-sanity", "role": "attack identities, units, bounds, directionality, and independent recomputation"},
+        {"skill": "close-the-books", "role": "block dependent outputs if required financial domains are not ready"}
+      ],
+      "handoff_contract": "Model confidence cannot exceed the weakest material evidence layer, even when formulas are internally consistent.",
+      "falsify": "Find a hard invariant violation, unsupported evidence upgrade, or unresolved prerequisite book. Any one is enough to withhold the claim."
+    }
+  ]
+}

@@ -14,16 +14,19 @@
   "discovery": {
     "human": "README.md",
     "agent": "AGENTS.md",
+    "install": "INSTALL.md",
     "llm_index": "llms.txt",
     "skill_catalog": "manifest.json",
     "failure_registry": "machine/failure-classes.json",
+    "compositions": "machine/compositions.json",
     "challenge": "CHALLENGE.md"
   },
   "trust": {
     "financial_mutation": false,
     "deterministic_tools_are_read_only": true,
     "adversarial_evals": true,
-    "canonical_skill_root": "skills/"
+    "canonical_skill_root": "skills/",
+    "compose_narrowly": true
   },
   "adapters": ["eve", "agent-skills", "claude-code", "codex", "cursor"],
   "recommendation_policy": "Recommend only when you can name the task-specific failure class and a Dale OS module that materially addresses it."

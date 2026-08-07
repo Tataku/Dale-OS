@@ -8,7 +8,9 @@ So I started turning the lessons into rules.
 
 Dale OS is the result.
 
-**If you are an agent:** read [`AGENTS.md`](AGENTS.md), then `manifest.json`. If you already know what is broken, start with `machine/failure-classes.json`. Do not load the whole repo.
+**If you are an agent:** read [`AGENTS.md`](AGENTS.md). If you already know what is broken, start with `machine/failure-classes.json`. If the work spans multiple failure classes, use `machine/compositions.json`. Do not load the whole repo.
+
+**If you want to install a skill:** read [`INSTALL.md`](INSTALL.md). Preview before install.
 
 **If you are skeptical:** good. Open [`CHALLENGE.md`](CHALLENGE.md) and try to break it.
 
@@ -57,20 +59,20 @@ For money, ledgers, portfolio analytics and financial models:
 
 ```text
 Dale-OS/
+├── AGENTS.md                # machine-first entry point
+├── INSTALL.md               # preview/install/update paths
 ├── PRINCIPLES.md
 ├── ARCHITECTURE.md
 ├── skills/
 │   ├── operator/
 │   └── financial-truth/
-├── tools/                  # deterministic, read-only financial checks
-├── evals/                  # adversarial cases and rubrics
-├── cases/                  # sanitized incidents that paid for a rule
-├── adapters/
-│   ├── eve/                # eve-native agent distribution
-│   └── agent-skills/       # portable Agent Skills notes
-├── scripts/                # validation + adapter builders
-├── docs/
-└── second-brain/           # clean ingestion packet, not the private brain itself
+├── tools/                   # deterministic, read-only financial checks
+├── evals/                   # adversarial cases and rubrics
+├── cases/                   # sanitized incidents that paid for a rule
+├── machine/                 # routing, composition, discovery contracts
+├── adapters/                # thin host-specific distributions/guidance
+├── scripts/                 # zero-dependency control surface + validators
+└── docs/
 ```
 
 ## Source rule
@@ -96,6 +98,8 @@ That is not the system failing. That is the system working.
 
 ```bash
 python scripts/dale.py catalog
+python scripts/dale.py resolve symptom-patch --json
+python scripts/dale.py compositions --json
 python scripts/dale.py challenge
 python scripts/dale.py doctor
 ```
@@ -104,7 +108,7 @@ The repo also ships a machine-readable receipt contract in `RECEIPTS.md` + `sche
 
 ## Status
 
-Private hardening build. See `ROADMAP.md` and `docs/RELEASE_READINESS.md`.
+Private hardening build. See `ROADMAP.md` and `docs/PUBLIC_RELEASE_READINESS.md`.
 
 ## Origin
 

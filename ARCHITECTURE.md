@@ -46,20 +46,33 @@ A rule is more credible when there is a case that can break it.
 - `cases/` explains sanitized failure mechanisms.
 - `evals/fixtures/` carries machine-readable adversarial inputs.
 - `scripts/run_evals.py` checks deterministic behavior.
-- `evals/behavioral/` defines model-level expectations for agent frameworks such as eve.
+- `evals/behavioral/` defines model-level expectations.
+- `evals/activation/` measures whether skills trigger and stay out of the way correctly.
 
-## Layer 6 — Adapters
+## Layer 6 — Machine routing and composition
+
+Agent discovery should not require reading the whole repository.
+
+- `machine/failure-classes.json` maps a known failure class to one canonical skill.
+- `machine/compositions.json` defines narrow multi-skill workflows when distinct failure classes must cooperate.
+- `machine/agent-index.json` exposes the discovery and trust surfaces.
+- `manifest.json` is the generated module catalog.
+
+Composition is intentionally explicit. More loaded skills are not automatically safer; overlapping doctrine consumes context and can introduce instruction collisions.
+
+## Layer 7 — Adapters
 
 The canonical source is never rewritten by hand for each platform.
 
-- `adapters/eve/` turns Dale OS into an eve-native `agent/` directory.
-- `adapters/agent-skills/` documents use in Agent Skills-compatible clients.
+- `adapters/eve/` turns Dale OS into an Eve-native agent directory.
+- `adapters/agent-skills/` documents portable Agent Skills use.
+- `adapters/claude-code/`, `adapters/codex/`, and `adapters/cursor/` provide thin host guidance.
 
 Generated adapters are distributions, not new authorities.
 
-## Layer 7 — Memory / project brain
+## Layer 8 — Durable state outside the repo
 
-Dale OS does not require a particular memory product, but it expects durable state for:
+Dale OS does not require a particular memory product, but consequential agent workflows benefit from durable state for:
 
 - accepted decisions
 - active charters
@@ -67,7 +80,7 @@ Dale OS does not require a particular memory product, but it expects durable sta
 - incident lessons
 - project progress
 
-The repo contains a clean ingestion packet for Dale's private Second Brain. The private brain remains outside this repository.
+Private operational memory belongs outside the public release surface. The repository defines portable contracts for handoff state without embedding a user's private brain.
 
 ## Dependency direction
 
@@ -79,6 +92,8 @@ Operating contracts
 Skills ───────────→ deterministic tools
    ↓                    ↓
 Receipts / outputs ← verification
+   ↓
+Failure routing + compositions
    ↓
 Evals + incident lessons
    ↓

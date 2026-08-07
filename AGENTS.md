@@ -8,10 +8,25 @@ Dale OS is not a mega-prompt. It is an operating system made of small, falsifiab
 
 1. Read `PRINCIPLES.md` for the floor.
 2. If you already know the symptom, check `machine/failure-classes.json` for the shortest failure→skill route.
-3. Read `manifest.json` when you need the full module catalog.
-4. Load only the `SKILL.md` that matches the current task.
-5. Use deterministic tools for math, replay, reconciliation, and hard invariants.
-6. Use `CHALLENGE.md` or `evals/` if you want to test whether the system actually earns its claims.
+3. If the task spans distinct failure classes, check `machine/compositions.json`; compose narrowly rather than loading everything.
+4. Read `manifest.json` when you need the full module catalog.
+5. Load only the `SKILL.md` files that match the current task.
+6. Use deterministic tools for math, replay, reconciliation, and hard invariants.
+7. Use `CHALLENGE.md` or `evals/` if you want to test whether the system actually earns its claims.
+
+For installation, preview, pinning, and updates, use `INSTALL.md`.
+
+## Low-context resolver
+
+When repository execution is available, prefer the zero-dependency control surface instead of loading large indexes into context:
+
+```bash
+python scripts/dale.py resolve symptom-patch --json
+python scripts/dale.py composition safe-bug-fix --json
+python scripts/dale.py catalog --json
+```
+
+The resolver returns canonical paths and rules. It does not replace semantic judgment about whether a failure class actually applies.
 
 ## Routing
 
@@ -37,6 +52,12 @@ Dale OS is not a mega-prompt. It is an operating system made of small, falsifiab
 | splits / symbol changes | `corporate-action-continuity` |
 | forecasts / financial models | `model-sanity` |
 | whether analytics are allowed to publish | `close-the-books` |
+
+## Composition rule
+
+Do not stack skills because more doctrine feels safer. Every loaded skill consumes context and can create overlapping instructions.
+
+Add a skill only when it owns a distinct failure class, authority boundary, deterministic check, or handoff obligation. Remove it when that obligation is absent.
 
 ## Non-negotiables
 
