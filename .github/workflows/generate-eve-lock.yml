@@ -1,0 +1,40 @@
+name: generate-eve-lock
+
+on:
+  push:
+    branches:
+      - agent/eve-lockfile-freeze-v0-5
+
+permissions:
+  contents: write
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/eve-lockfile-freeze-v0-5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Generate lockfile from public npm registry
+        working-directory: adapters/eve
+        run: npm install --package-lock-only --ignore-scripts --registry=https://registry.npmjs.org/
+      - name: Prove frozen install
+        working-directory: adapters/eve
+        run: |
+          npm ci --ignore-scripts --registry=https://registry.npmjs.org/
+          npm run build
+      - name: Commit generated lockfile
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add adapters/eve/package-lock.json
+          if git diff --cached --quiet; then
+            echo "Lockfile already current"
+            exit 0
+          fi
+          git commit -m "chore: freeze Eve dependency graph"
+          git push origin HEAD:agent/eve-lockfile-freeze-v0-5
