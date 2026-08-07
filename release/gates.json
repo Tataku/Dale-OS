@@ -9,7 +9,7 @@
     {"id":"fresh-eyes-discovery","status":"PENDING","evidence":[]},
     {"id":"live-multimodel-evals","status":"BLOCKED_EXTERNAL","evidence":[]},
     {"id":"trigger-tuning","status":"BLOCKED_EXTERNAL","evidence":[]},
-    {"id":"license-selection","status":"OWNER_REQUIRED","evidence":[]},
+    {"id":"license-selection","status":"PASS","evidence":["Apache License 2.0 selected by owner","LICENSE added in commit 7c7f5b1b804786a9a167d64a601e7794fcc30c5e"]},
     {"id":"public-launch-authority","status":"OWNER_REQUIRED","evidence":[]}
   ]
 }
