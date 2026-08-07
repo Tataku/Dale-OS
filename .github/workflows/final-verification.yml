@@ -1,0 +1,51 @@
+name: final-verification
+
+on:
+  push:
+    branches:
+      - agent/dale-os-final-verification-v0-6
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  agent-skills:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install GitHub CLI 2.93.0
+        run: |
+          curl -fsSL https://github.com/cli/cli/releases/download/v2.93.0/gh_2.93.0_linux_amd64.tar.gz -o /tmp/gh.tgz
+          tar -xzf /tmp/gh.tgz -C /tmp
+          sudo install /tmp/gh_2.93.0_linux_amd64/bin/gh /usr/local/bin/gh
+          gh --version
+      - name: Validate all skills against Agent Skills spec
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_PAGER: cat
+        run: gh skill publish --dry-run
+      - name: Prove local discovery and install
+        run: |
+          rm -rf /tmp/dale-skills
+          mkdir -p /tmp/dale-skills
+          gh skill install . --from-local --all --dir /tmp/dale-skills
+          test "$(find /tmp/dale-skills -name SKILL.md -type f | wc -l)" -eq 20
+      - name: Re-run Dale OS release checks
+        run: |
+          python scripts/validate_repo.py
+          python scripts/validate_eval_contracts.py
+          python scripts/validate_discovery.py
+          python scripts/smoke_agent_surface.py
+          python scripts/privacy_scan.py
+          python scripts/release_gate.py --validate-only
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: adapters/eve/package-lock.json
+      - name: Prove frozen Eve graph
+        working-directory: adapters/eve
+        run: |
+          npm ci --ignore-scripts
+          npm run build
