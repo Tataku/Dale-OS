@@ -14,12 +14,17 @@ tracked=[Path(x.decode()) for x in r.stdout.split(b'\0') if x]
 
 forbidden_names={'.env','.env.local','.env.production','id_rsa','id_ed25519'}
 forbidden_suffixes={'.pem','.key','.p12','.pfx','.kdbx','.sqlite','.db','.qfx','.ofx','.xlsx','.xls'}
+# The scanner source necessarily contains the signatures it is designed to detect.
+# Exclude only this file from content-pattern matching; file/path checks still apply.
+content_scan_exempt={Path('scripts/privacy_scan.py')}
 for path in tracked:
     rel=str(path)
     if path.name in forbidden_names or path.suffix.lower() in forbidden_suffixes:
         fail(f'sensitive release file type/name: {rel}')
     if path.parts and path.parts[0]=='second-brain':
         fail(f'internal Second Brain artifact on release surface: {rel}')
+    if path in content_scan_exempt:
+        continue
     full=ROOT/path
     if not full.is_file() or full.stat().st_size>2_000_000:
         continue
