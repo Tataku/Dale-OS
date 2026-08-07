@@ -1,12 +1,10 @@
 name: live-model-eval
 
+# Provider-backed model evaluation is intentionally manual.
+# It consumes paid API credits and is release evidence, not a per-commit unit test.
+# Static repository validation remains automatic in validate.yml.
 on:
-  push:
-    branches:
-      - agent/live-model-verification-v0-1
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
