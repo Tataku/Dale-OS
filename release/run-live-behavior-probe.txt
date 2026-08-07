@@ -1,5 +1,4 @@
-2026-08-07T16:02:00-05:00
-purpose=verify-systemic-bug-diagnostic-scope-clarification
-provider=openai
-role=balanced
-case=systemic-bug-blast-radius
+2026-08-07T17:06:00-05:00
+purpose=verify-observed-behavioral-deviations-after-surgical-skill-clarifications
+cases=openai-balanced:systemic-bug-blast-radius,anthropic-frontier:performance-funding
+scope=targeted-only-no-full-matrix
