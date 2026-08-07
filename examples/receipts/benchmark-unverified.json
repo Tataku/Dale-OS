@@ -1,0 +1,18 @@
+{
+  "schema":"dale-os/benchmark-receipt/v1",
+  "status":"UNVERIFIED",
+  "dale_os_commit":"EXAMPLE_ONLY",
+  "corpus_commit":"EXAMPLE_ONLY",
+  "runtime":"example-runtime",
+  "model":"example-model",
+  "run_at":"2026-08-07T00:00:00Z",
+  "metrics":{
+    "activation":{"coverage":null,"positive_recall":null,"exact_route":null,"negative_avoidance":null},
+    "behavioral_lexical":{"coverage":null,"pass_rate":null},
+    "semantic_review":{"reviewed_cases":0,"passed_cases":0,"pass_rate":null},
+    "deterministic":{"fixtures":10,"passed":10},
+    "tool_correctness":{"reviewed_calls":0,"passed_calls":0}
+  },
+  "limitations":["Example only. No model run occurred and no model-performance claim is supported."],
+  "evidence":[]
+}
