@@ -36,7 +36,7 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/run_live_model_evals.py
+        run: python scripts/run_live_model_evals_resilient.py
       - name: Upload durable eval evidence
         if: always()
         uses: actions/upload-artifact@v4
