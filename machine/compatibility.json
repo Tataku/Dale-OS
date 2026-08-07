@@ -1,0 +1,58 @@
+{
+  "schema": "dale-os/compatibility/v1",
+  "verified_on": "2026-08-07",
+  "canonical_contract": "AGENTS.md",
+  "canonical_skills": "skills/**/SKILL.md",
+  "hosts": [
+    {
+      "host": "eve",
+      "entrypoint": "adapters/eve/agent/instructions.md",
+      "mode": "generated-reference-adapter",
+      "verification": ["adapter-generation-parity", "npm-install", "eve-build"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "openai-codex",
+      "entrypoint": "AGENTS.md",
+      "mode": "native-repository-instructions",
+      "verification": ["static-contract"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "cursor",
+      "entrypoint": "AGENTS.md",
+      "mode": "native-repository-instructions",
+      "verification": ["static-contract"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "github-copilot",
+      "entrypoint": ".github/copilot-instructions.md",
+      "mode": "thin-discovery-shim",
+      "verification": ["static-contract", "thin-shim-audit"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "gemini-cli",
+      "entrypoint": "GEMINI.md",
+      "mode": "thin-discovery-shim",
+      "verification": ["static-contract", "thin-shim-audit"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "claude-code",
+      "entrypoint": "adapters/claude-code/README.md",
+      "mode": "documented-project-memory-shim",
+      "verification": ["static-contract"],
+      "behavioral_model_eval": false
+    },
+    {
+      "host": "agent-skills-compatible",
+      "entrypoint": "skills/",
+      "mode": "canonical-portable-skills",
+      "verification": ["20-skill-package-validation"],
+      "behavioral_model_eval": false
+    }
+  ],
+  "rule": "Compatibility means the host can discover the canonical Dale OS contract without a second authority. It does not imply cross-model behavioral equivalence until model-in-loop evals prove it."
+}
