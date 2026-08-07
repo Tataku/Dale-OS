@@ -62,3 +62,10 @@ jobs:
         run: |
           npm ci --ignore-scripts
           npm run build
+      - name: Report external model credential availability
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          if [ -n "$OPENAI_API_KEY" ]; then echo "OPENAI_CONFIGURED=true"; else echo "OPENAI_CONFIGURED=false"; fi
+          if [ -n "$ANTHROPIC_API_KEY" ]; then echo "ANTHROPIC_CONFIGURED=true"; else echo "ANTHROPIC_CONFIGURED=false"; fi
