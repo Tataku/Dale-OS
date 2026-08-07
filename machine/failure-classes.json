@@ -1,6 +1,5 @@
 {
   "schema": "dale-os/failure-classes/v1",
-  "version": "0.1.0-dev",
   "classes": [
     {"id":"scope-drift","symptom":"agent broadens the task without authority","route":"execution-charter"},
     {"id":"symptom-patch","symptom":"visible bug is patched without identifying the mechanism or sibling failures","route":"systemic-bug-instinct"},

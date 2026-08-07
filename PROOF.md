@@ -18,24 +18,33 @@ A claim should move through this ladder:
 
 Not every rule needs every rung. A rule may never be promoted beyond the evidence it has earned.
 
-## Current v0.1 proof
+## Current public-v0.1 release-candidate proof
 
 - 20 canonical skills validate and package independently.
 - Every skill includes an explicit falsification section.
 - 6 deterministic financial companions are generated from canonical tools.
 - 10 synthetic financial fixtures exercise known failure classes.
+- 40 activation cases cover one positive route and one confuser per skill.
+- 20 behavioral cases exercise each skill's core invariant.
+- 12 composition cases test both exact composition and over-composition avoidance.
 - Eve skills are generated from canonical skills and parity-checked.
-- GitHub CI rebuilds generated artifacts and runs the repository validator on a clean runner.
-- The Eve adapter is installed and compiled in CI against its declared runtime requirements.
+- The Eve dependency graph is frozen with `package-lock.json`; CI installs it with `npm ci` and compiles the adapter on Node 24.
+- GitHub CI rebuilds generated artifacts and fails on drift.
+- GitHub CLI Agent Skills `publish --dry-run` accepts all 20 skills.
+- GitHub CLI successfully installs all 20 skills from the repository on a clean runner.
+- Privacy, discovery, release-ledger, low-context control-surface, and generated-artifact checks pass on clean runners.
+- Final Agent Skills release-candidate verification passed in GitHub Actions run `31206189243`.
+
+The machine-readable release authority is `release/gates.json`.
 
 ## What is not proven yet
 
-- Cross-model behavioral consistency across multiple agent/model families.
-- Real-world trigger precision and recall for every skill.
+- Cross-model behavioral consistency across at least two independent model families.
+- Observed trigger precision/recall sufficient to justify trigger tuning.
 - Safe autonomous financial mutation. It does not exist in v0.1.
 - Any regulatory, fiduciary, RIA, SEC, or institutional certification claim.
 
-Those are not footnotes. They are boundaries.
+Those are boundaries, not implied capabilities.
 
 ## The recommendation test
 

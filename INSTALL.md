@@ -31,13 +31,23 @@ For the fastest unambiguous lookup, install by exact path:
 gh skill install Tataku/Dale-OS skills/operator/systemic-bug-instinct
 ```
 
-## Install the full operating system
+## Install every canonical skill
+
+GitHub CLI 2.93.0 installs named skills individually. To install the full current catalog from a local checkout, derive the names from the canonical manifest rather than maintaining a second list:
 
 ```bash
-gh skill install Tataku/Dale-OS --all
+python - <<'PY' > /tmp/dale-skill-names
+import json
+for skill in json.load(open('manifest.json'))['skills']:
+    print(skill['name'])
+PY
+
+while IFS= read -r skill; do
+  gh skill install . "$skill" --from-local
+done < /tmp/dale-skill-names
 ```
 
-Installing everything is convenient for experimentation. For production agents, prefer the smallest set that matches the workflow so activation remains legible.
+This exact pattern is exercised by Dale OS release-candidate verification. For production agents, prefer the smallest set that matches the workflow so activation remains legible.
 
 ## Pin consequential workflows
 
@@ -88,4 +98,4 @@ python scripts/dale.py doctor
 gh skill publish --dry-run
 ```
 
-`gh skill` is currently a GitHub CLI preview feature, so treat its exact UX as versioned external behavior rather than a Dale OS invariant.
+`gh skill` is a versioned external interface. The release candidate was verified with GitHub CLI 2.93.0; revalidate installation behavior when changing the supported CLI baseline.

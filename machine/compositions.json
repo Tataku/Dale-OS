@@ -1,6 +1,5 @@
 {
   "schema": "dale-os/compositions/v1",
-  "version": "0.1.0-dev",
   "rule": "Compose narrowly. Every added skill must own a distinct failure class or handoff obligation.",
   "compositions": [
     {

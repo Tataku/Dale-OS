@@ -16,12 +16,16 @@ jobs:
         run: python scripts/build_companions.py
       - name: Build eve skill adapter
         run: python adapters/eve/scripts/build_skills.py
+      - name: Build manifest
+        run: python scripts/build_manifest.py
       - name: Validate repository
         run: python scripts/validate_repo.py
       - name: Validate model eval contracts
         run: python scripts/validate_eval_contracts.py
       - name: Validate agent discovery
         run: python scripts/validate_discovery.py
+      - name: Validate repository hygiene
+        run: python scripts/validate_hygiene.py
       - name: Smoke agent control surface
         run: python scripts/smoke_agent_surface.py
       - name: Scan public release surface
