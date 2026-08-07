@@ -1,29 +1,29 @@
 {
-  "schema": "dale-os/live-model-thresholds/v2",
+  "schema": "dale-os/live-model-thresholds/v3",
   "frozen_at": "2026-08-07",
-  "purpose": "Public-v0.1 live-model release gate across current OpenAI and Anthropic frontier plus production-balanced tiers. Scoring thresholds are unchanged from the original two-model contract; the matrix was expanded after the historical baseline run and before observing any result from these four current models.",
+  "purpose": "Public-v0.1 live-model release gate across two current OpenAI slots and two current Anthropic slots. Benchmark roles are frozen; exact provider model IDs are resolved from the API account at runtime and recorded in the receipt.",
   "thresholds_unchanged_from_commit": "9a34f2b744cfb0510eaaafd330a1daf59df4b978",
   "evaluation_profile": "provider-default inference settings; identical frozen Dale OS corpora and prompts for every model",
   "models": [
     {
       "provider": "openai",
-      "model": "gpt-5.6-sol",
-      "tier": "frontier"
+      "role": "frontier",
+      "preferred_ids": ["gpt-5.6-sol", "gpt-5.6", "gpt-5.2-pro", "gpt-5-pro", "gpt-5.2", "gpt-5.1"]
     },
     {
       "provider": "openai",
-      "model": "gpt-5.6-terra",
-      "tier": "balanced"
+      "role": "balanced",
+      "preferred_ids": ["gpt-5.6-terra", "gpt-5.6-mini", "gpt-5.2", "gpt-5.1", "gpt-5-mini"]
     },
     {
       "provider": "anthropic",
-      "model": "claude-sonnet-5",
-      "tier": "balanced-agentic"
+      "role": "frontier",
+      "preferred_ids": ["claude-opus-4-8", "claude-opus-4-1", "claude-opus-4"]
     },
     {
       "provider": "anthropic",
-      "model": "claude-opus-4-8",
-      "tier": "frontier"
+      "role": "balanced",
+      "preferred_ids": ["claude-sonnet-5", "claude-sonnet-4-5", "claude-sonnet-4"]
     }
   ],
   "per_model": {
@@ -50,6 +50,7 @@
     "missing_cases_allowed": 0,
     "unknown_cases_allowed": 0
   },
+  "selection_rule": "For each role, choose the first preferred ID exposed by that provider account. If only dated snapshots exist, choose the newest snapshot whose ID begins with the preferred alias. Never silently substitute a model outside the role's preference list. Never use the same resolved model for two slots.",
   "interpretation": {
     "activation_failure": "Inspect the miss. Tune skill descriptions only when the miss demonstrates a real activation boundary problem; do not edit the frozen corpus to improve the score.",
     "composition_failure": "Inspect whether the composition contract is over-broad or the model failed to select a distinct obligation. Do not add doctrine merely to improve a score.",
