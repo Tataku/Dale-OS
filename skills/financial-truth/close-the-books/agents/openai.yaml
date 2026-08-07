@@ -1,0 +1,3 @@
+interface:
+  display_name: "Close The Books"
+  short_description: "Gate downstream financial analytics on the readiness of their required books"

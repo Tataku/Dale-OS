@@ -1,0 +1,1 @@
+{"name":"dale-os-eve-adapter","private":true,"version":"0.1.0","type":"module","scripts":{"dev":"eve dev","build:skills":"python scripts/build_skills.py","eval":"eve eval","eval:dale":"eve eval"},"dependencies":{"eve":"^0.27.10","zod":"^4.0.0"},"devDependencies":{"typescript":"^5.9.0"}}

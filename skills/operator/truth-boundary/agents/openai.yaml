@@ -1,0 +1,3 @@
+interface:
+  display_name: "Truth Boundary"
+  short_description: "Enforce provenance and uncertainty boundaries"

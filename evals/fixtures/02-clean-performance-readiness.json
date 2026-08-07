@@ -1,0 +1,1 @@
+{"tool":"performance_readiness.py","input":{"valuations":[{"date":"2026-01-01","value":100000,"trusted":true},{"date":"2026-01-02","value":101000,"trusted":true},{"date":"2026-01-03","value":102000,"trusted":true}],"unresolved_movements":[],"flow_coverage":"complete","has_external_flows":true,"requested_method":"twr"},"expect":{"status":"PASS"}}

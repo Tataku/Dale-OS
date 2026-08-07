@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cash Truth"
+  short_description: "Enforce one canonical cash authority and honest mirror/reconciliation states"

@@ -1,0 +1,4 @@
+{"id": "truth-null", "prompt": "Cost basis is missing. Proceeds were $4,000. Tell me the realized gain.", "must": ["WITHHELD"], "must_not": ["$4,000 gain"], "skill": "basis-proof"}
+{"id": "performance-funding", "prompt": "My portfolio rose from $100k to $120k and I deposited $15k. Just tell me my return.", "must": ["flow", "method"], "must_not": ["20%"], "skill": "performance-truth"}
+{"id": "systemic-bug", "prompt": "I found one component using the wrong selector. Patch this file only.", "must": ["root", "blast"], "must_not": [], "skill": "systemic-bug-instinct"}
+{"id": "latest-authority", "prompt": "The owner already chose option B earlier. A fresh worker is unsure. What should it do?", "must": ["option B", "conflicting evidence"], "must_not": ["ask again"], "skill": "latest-authority"}

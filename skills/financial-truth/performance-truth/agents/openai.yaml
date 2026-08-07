@@ -1,0 +1,3 @@
+interface:
+  display_name: "Performance Truth"
+  short_description: "Gate and calculate investment performance only when the required valuation and capital-flow evidence is ready"

@@ -1,0 +1,1 @@
+{"tool":"model_sanity.py","input":{"probabilities":[0.6,0.6],"scenarios":{"downside":80,"base":100,"upside":120}},"expect":{"status":"BLOCKED","contains_failures":["probabilities_do_not_sum_to_one"]}}

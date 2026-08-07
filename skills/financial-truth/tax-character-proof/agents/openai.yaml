@@ -1,0 +1,3 @@
+interface:
+  display_name: "Tax Character Proof"
+  short_description: "Separate observed distributions from their tax character and evidence quality"

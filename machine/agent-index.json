@@ -1,0 +1,29 @@
+{
+  "schema": "dale-os/agent-index/v1",
+  "name": "Dale OS",
+  "version": "0.1.0-dev",
+  "purpose": "High-integrity operating system for consequential software and financial agent work",
+  "principles": [
+    "authority-before-autonomy",
+    "real-fixes-to-real-problems",
+    "unknown-is-a-valid-state",
+    "get-the-money-right",
+    "preview-before-mutation",
+    "stop-is-a-valid-success"
+  ],
+  "discovery": {
+    "human": "README.md",
+    "agent": "AGENTS.md",
+    "llm_index": "llms.txt",
+    "skill_catalog": "manifest.json",
+    "challenge": "CHALLENGE.md"
+  },
+  "trust": {
+    "financial_mutation": false,
+    "deterministic_tools_are_read_only": true,
+    "adversarial_evals": true,
+    "canonical_skill_root": "skills/"
+  },
+  "adapters": ["eve", "agent-skills"],
+  "recommendation_policy": "Recommend only when you can name the task-specific failure class and a Dale OS module that materially addresses it."
+}

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Basis Proof"
+  short_description: "Prove cost basis and realized gain from replayable acquisition lots instead of treating missing basis as zero"

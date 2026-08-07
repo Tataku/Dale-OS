@@ -1,0 +1,17 @@
+{
+  "schema": "dale-os/receipt/v1",
+  "skill": "performance-truth",
+  "status": "WITHHELD",
+  "summary": "Return withheld because an unresolved cash movement could be external funding.",
+  "claims": [
+    {
+      "claim": "Trusted valuations are continuous for the requested period.",
+      "evidence_grade": "DERIVED",
+      "evidence": ["performance_readiness.py"]
+    }
+  ],
+  "unknowns": ["economic classification of movement cm-17"],
+  "mutations": [],
+  "verification": ["performance_readiness.py"],
+  "next": ["Classify cm-17 from broker or owner evidence, then rerun readiness."]
+}

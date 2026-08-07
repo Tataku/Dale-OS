@@ -1,0 +1,1 @@
+{"tool":"close_books.py","input":{"domains":{"positions":"PASS","cash":"PASS","basis":"UNRESOLVED","flows":"PASS","valuations":"PASS"},"analytics":{"allocation":["positions","cash"],"performance":["flows","valuations"],"realized_pnl":["basis"]}},"expect":{"status":"PARTIAL","safe_contains":["allocation","performance"],"withheld_contains":["realized_pnl"]}}

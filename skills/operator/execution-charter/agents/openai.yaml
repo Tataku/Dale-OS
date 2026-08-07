@@ -1,0 +1,3 @@
+interface:
+  display_name: "Execution Charter"
+  short_description: "Create a compact execution contract before non-trivial agent work"

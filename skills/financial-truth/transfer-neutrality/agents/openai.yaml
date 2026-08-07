@@ -1,0 +1,3 @@
+interface:
+  display_name: "Transfer Neutrality"
+  short_description: "Reconcile internal transfers without turning them into external flows or return"

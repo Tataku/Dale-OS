@@ -1,0 +1,3 @@
+interface:
+  display_name: "Financial Evidence Grade"
+  short_description: "Grade financial evidence by provenance and constrain what each grade is allowed to drive"
