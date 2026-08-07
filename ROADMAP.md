@@ -1,37 +1,40 @@
 # Roadmap
 
-## v0.1 — Private foundation
+This file tracks only unfinished or future work. Completed release evidence belongs in `PROOF.md` and `release/gates.json`.
 
-- [x] Define the operating-system architecture.
-- [x] Separate Operator OS and Financial Truth.
-- [x] Create portable canonical skill modules.
-- [x] Add deterministic read-only finance tools.
-- [x] Add synthetic adversarial fixtures and a local eval runner.
-- [x] Add an eve-native adapter and model-level eval examples.
-- [x] Add public/private boundary rules.
-- [x] Add Second Brain ingestion packet.
-- [ ] Run live model-in-the-loop evals against at least two model families.
-- [ ] Tune skill trigger descriptions from observed activation misses.
+## Public v0.1 — Release candidate
 
-## v0.2 — Hardening
+Completed:
 
-- [ ] Add more incident-paid cases from sanitized real failures.
-- [ ] Add property/fuzz tests for financial invariants.
-- [ ] Add cross-account transfer candidate scoring without auto-classification.
-- [ ] Expand corporate-action fixtures.
-- [ ] Build explicit source/provenance receipt schema.
-- [ ] Add adapter CI matrix.
+- canonical Operator OS and Financial Truth skill families
+- deterministic read-only financial tools and adversarial fixtures
+- generated Eve adapter with frozen dependency graph
+- Agent Skills-compatible discovery and install paths
+- machine-readable failure routing and composition contracts
+- activation, behavioral, and composition eval corpora
+- Apache-2.0 licensing
+- privacy, discovery, generated-artifact, and clean-runner release gates
+- GitHub Agent Skills `publish --dry-run` validation
+- 20/20 local skill-install verification through GitHub CLI
 
-## v0.3 — Public release candidate
+Remaining release gates:
 
-- [ ] Choose public license.
-- [ ] Security/privacy scrub.
-- [ ] External fresh-eyes review.
-- [ ] Record short terminal demos.
-- [ ] Finalize README install instructions and examples.
-- [ ] Publish benchmark/eval results only after they are reproducible.
-- [ ] Prepare launch posts and ACF bridge copy.
+- run the frozen eval corpora against at least two independent model families
+- tune trigger descriptions only from observed activation misses, then rerun the frozen corpora
+- owner authorization to make the repository public
 
-## Public launch gate
+The authoritative gate state is `release/gates.json`.
 
-Do not make the repository public until every item in `docs/RELEASE_READINESS.md` passes.
+## Post-v0.1 candidates
+
+Only promote work that is paid for by a demonstrated failure, user need, or measurable portability gap.
+
+- expand sanitized incident cases when new failure classes are observed
+- add property/fuzz tests where deterministic financial invariants benefit from them
+- deepen corporate-action and cross-account transfer fixtures when evidence warrants it
+- expand adapter coverage only for hosts with meaningful demand
+- publish reproducible benchmark receipts after provider-backed model runs exist
+
+## Public launch rule
+
+Do not make the repository public until `python scripts/release_gate.py` returns a ready verdict. See `docs/PUBLIC_RELEASE_READINESS.md`.
