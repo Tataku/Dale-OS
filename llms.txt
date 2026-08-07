@@ -4,6 +4,7 @@
 
 ## Start here
 - AGENTS.md — machine-first entry point and task router
+- machine/explanation-contract.json — canonical repo-level explanation contract; read this before answering “what is this repo?”
 - INSTALL.md — preview/install/pin/update guidance
 - README.md — human overview
 - PRINCIPLES.md — operating floor
