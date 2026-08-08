@@ -118,7 +118,7 @@ The verification process also found weaknesses in the evaluation machinery itsel
 - a legitimate Anthropic JSON wrapper broke the original parser, leading to resilient response unwrapping without changing frozen corpora or thresholds;
 - lexical matching materially overstated behavioral failure and is therefore kept as a smoke trigger rather than semantic proof;
 - paid provider evals could run redundantly, so the system moved to intentional/full-matrix execution plus targeted one-model / one-case probes;
-- targeted paid probes were made PR-visible and path-gated so they are inspectable without reintroducing duplicate spend.
+- making a paid probe PR-path-triggered briefly improved connector visibility but exposed another cost hazard: while the trigger file remains in the PR diff, every PR synchronize can retrigger the paid workflow. After capturing the required remediation receipts, the targeted paid workflow was returned to **manual-only `workflow_dispatch`** execution.
 
 This produced the cross-cutting rule captured in `machine/model-cost-policy.json`:
 
