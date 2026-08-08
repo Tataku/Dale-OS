@@ -7,8 +7,8 @@
     {"id":"portable-eval-harness","status":"PASS","evidence":["PR #3","GitHub Actions run 31159263496"]},
     {"id":"privacy-static-scan","status":"PASS","evidence":["GitHub Actions run 31202696722","privacy scan passed on PR #4 head 84a9f912b3d4b5a931a11b7d62119c6cadb3aedf","GitHub Actions final-verification run 31206189243"]},
     {"id":"fresh-eyes-discovery","status":"PASS","evidence":["GitHub Actions run 31202696722","discovery validator passed on PR #4 head 84a9f912b3d4b5a931a11b7d62119c6cadb3aedf","GitHub Actions final-verification run 31206189243: Agent Skills dry-run PASS and 20/20 local installs PASS"]},
-    {"id":"live-multimodel-evals","status":"BLOCKED_EXTERNAL","evidence":["GitHub Models retired 2026-07-30","Final-verification run 31206189243 confirmed OPENAI_API_KEY and ANTHROPIC_API_KEY are not configured"]},
-    {"id":"trigger-tuning","status":"BLOCKED_EXTERNAL","evidence":["Frozen activation, behavioral, and composition corpora are ready; observed tuning requires live provider-backed model runs"]},
+    {"id":"live-multimodel-evals","status":"PASS","evidence":["GitHub Actions run 31216217764 completed all four provider-backed model roles","Artifact 9008884223 SHA256 9b2eca69374d2458bb10602cce915bd059966f598e8631f604a95294da1f321d","docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md","release/evidence/cross-model-verification-2026-08-07.json"]},
+    {"id":"trigger-tuning","status":"PENDING","evidence":["Four-model semantic review completed: 78/80 semantic passes, 2 genuine deviations, 0 critical invariant violations","systemic-bug-instinct and performance-truth clarified without changing frozen historical baseline","targeted Terra systemic-bug and Opus performance-funding remediation probes queued separately from the baseline"]},
     {"id":"license-selection","status":"PASS","evidence":["Apache License 2.0 selected by owner","LICENSE added in commit 7c7f5b1b804786a9a167d64a601e7794fcc30c5e"]},
     {"id":"public-launch-authority","status":"OWNER_REQUIRED","evidence":[]}
   ]
