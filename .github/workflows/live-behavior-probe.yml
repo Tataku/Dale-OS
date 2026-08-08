@@ -1,15 +1,10 @@
 name: live-behavior-probe
 
 # Paid, targeted verification after narrow behavioral rule changes.
-# This intentionally avoids rerunning the full four-model matrix.
-# PR-path triggering keeps runs visible to review tooling while avoiding duplicate push spend.
+# Manual-only by design: PR path filters retrigger on every synchronize while the
+# trigger file remains in the PR diff, which can cause duplicate paid calls.
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - release/run-live-behavior-probe.txt
 
 permissions:
   contents: read
