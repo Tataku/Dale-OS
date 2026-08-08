@@ -2,11 +2,12 @@ name: live-behavior-probe
 
 # Paid, targeted verification after narrow behavioral rule changes.
 # This intentionally avoids rerunning the full four-model matrix.
+# PR-path triggering keeps runs visible to review tooling while avoiding duplicate push spend.
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
-      - agent/live-model-verification-v0-1
+      - main
     paths:
       - release/run-live-behavior-probe.txt
 
