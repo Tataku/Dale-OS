@@ -2,17 +2,20 @@
 
 **An agentic operating system for high-integrity software and finance.**
 
-I did not start this as a framework. I kept running into the same expensive failure modes while building real software: agents fixing symptoms instead of mechanisms, reopening decisions I had already made, wandering outside scope, calling a PR "shipped," or producing a financially clean-looking number from dirty underlying records.
+[![validate](https://github.com/Tataku/Dale-OS/actions/workflows/validate.yml/badge.svg)](https://github.com/Tataku/Dale-OS/actions/workflows/validate.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-So I started turning the lessons into rules.
+**Authority before autonomy. Evidence before confidence. Real fixes to real problems.**
 
-Dale OS is the result.
+[Install](INSTALL.md) · [Try to break it](CHALLENGE.md) · [Read the proof](PROOF.md) · [Browse the skills](docs/SKILL_CATALOG.md)
+
+Dale OS is a portable control plane for AI agents doing consequential software and financial work. It turns recurring failure modes into small falsifiable skills, deterministic checks, narrow compositions, machine-readable receipts, and reproducible evals.
 
 **If you are an agent:** read [`AGENTS.md`](AGENTS.md). If you already know what is broken, start with `machine/failure-classes.json`. If the work spans multiple failure classes, use `machine/compositions.json`. Do not load the whole repo.
 
-**If you want to install a skill:** read [`INSTALL.md`](INSTALL.md). Preview before install.
+I did not start this as a framework. I kept running into the same expensive failure modes while building real software: agents fixing symptoms instead of mechanisms, reopening decisions I had already made, wandering outside scope, calling a PR "shipped," or producing a financially clean-looking number from dirty underlying records.
 
-**If you are skeptical:** good. Open [`CHALLENGE.md`](CHALLENGE.md) and try to break it.
+So I started turning the lessons into rules. Dale OS is the result.
 
 The basic idea is simple:
 
@@ -54,6 +57,18 @@ For money, ledgers, portfolio analytics and financial models:
 - `corporate-action-continuity` — identity can change without changing economics.
 - `model-sanity` — a plausible model is not automatically a valid model.
 - `close-the-books` — do not publish analytics whose required books are not ready.
+
+## Five-minute proof
+
+```bash
+python scripts/dale.py catalog
+python scripts/dale.py resolve symptom-patch --json
+python scripts/dale.py compositions --json
+python scripts/dale.py challenge
+python scripts/dale.py doctor
+```
+
+The repo ships a machine-readable receipt contract in [`RECEIPTS.md`](RECEIPTS.md) and `schemas/receipt.schema.json`, so agent handoffs can preserve claims, unknowns, mutations and verification instead of forwarding confidence without evidence.
 
 ## Repository map
 
@@ -99,23 +114,13 @@ Reason: evidence insufficient
 
 That is not the system failing. That is the system working.
 
-## Five-minute proof
-
-```bash
-python scripts/dale.py catalog
-python scripts/dale.py resolve symptom-patch --json
-python scripts/dale.py compositions --json
-python scripts/dale.py challenge
-python scripts/dale.py doctor
-```
-
-The repo also ships a machine-readable receipt contract in [`RECEIPTS.md`](RECEIPTS.md) and `schemas/receipt.schema.json`, so agent handoffs can preserve claims, unknowns, mutations and verification instead of forwarding confidence without evidence.
-
 ## Status
 
-**Private public-v0.1 release candidate.** Static engineering, privacy, discovery, Agent Skills compatibility, 20/20 installability, generated-source parity, and frozen Eve reproducibility are verified. Remaining gates are provider-backed cross-model evaluation, evidence-driven trigger tuning, and explicit owner authorization to make the repository public.
+**Public v0.1.0.** The release gates are closed: clean-runner validation, privacy scanning, 20/20 skill installability, generated-source parity, four-model provider-backed evaluation, semantic review, and targeted remediation have all been completed with durable evidence.
 
-See [`PROOF.md`](PROOF.md), [`ROADMAP.md`](ROADMAP.md), and [`docs/PUBLIC_RELEASE_READINESS.md`](docs/PUBLIC_RELEASE_READINESS.md).
+The frozen four-model baseline remains historically intact at **78/80 semantic passes (97.5%) with 0 critical invariant violations**. The two genuine deviations were clarified and then passed targeted post-fix verification; the original benchmark was not rewritten.
+
+See [`PROOF.md`](PROOF.md), [`docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md`](docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md), and [`docs/PUBLIC_RELEASE_READINESS.md`](docs/PUBLIC_RELEASE_READINESS.md).
 
 ## Why “Dale OS”?
 

@@ -10,13 +10,15 @@ The machine-readable authority is `release/gates.json`.
 python scripts/release_gate.py
 ```
 
-A nonzero exit is intentional while any required gate is `PENDING`, `BLOCKED_EXTERNAL`, `OWNER_REQUIRED`, or `FAIL`.
+## Current state
 
-Use `--validate-only` in CI to prove the gate ledger itself is structurally honest without pretending blocked external evidence has been satisfied.
+**Public v0.1.0. Release gates are closed.**
 
-## Proven internally
+The public transition was authorized by the owner and repository visibility was observed as public on 2026-08-08. This document now records the evidence that earned that transition rather than describing unfinished prerequisites.
 
-Dale OS currently proves on clean runners:
+## Proven
+
+Dale OS currently has evidence for:
 
 - repository integrity and generated-source parity;
 - deterministic financial fixtures;
@@ -26,32 +28,28 @@ Dale OS currently proves on clean runners:
 - Apache-2.0 license selection;
 - GitHub Agent Skills dry-run compatibility;
 - 20/20 canonical skill installation through GitHub CLI;
-- frozen Eve dependency installation with `npm ci` and successful Node 24 compilation.
+- frozen Eve dependency installation with `npm ci` and successful Node 24 compilation;
+- provider-backed evaluation across four model roles and two model families;
+- semantic review of all 80 flagship behavioral responses;
+- targeted remediation and successful re-verification of the two genuine behavioral deviations.
 
-The durable release-candidate evidence is recorded in `release/gates.json` and summarized in `PROOF.md`.
+The durable evidence is recorded in `release/gates.json`, `PROOF.md`, `docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md`, and `release/evidence/cross-model-verification-2026-08-07.json`.
 
-## External evidence still required
+## Benchmark interpretation
 
-The repository cannot prove internally:
+The frozen four-model baseline remains historical evidence: **78/80 semantic passes (97.5%) with 0 critical invariant violations**. The two genuine deviations were fixed and then verified separately. Dale OS does not rewrite the original benchmark into a synthetic 100% result.
 
-- behavioral consistency across model families it has not actually run;
-- observed trigger precision/recall without provider-backed runtime observations;
-- owner authorization to change repository visibility.
+Routing, lexical behavior, semantic review, deterministic correctness, and tool correctness remain separate evidence classes. A green result in one class must not be presented as proof of another.
 
-Those are release boundaries, not missing static polish.
+## Ongoing public-release obligations
 
-## Model evidence rule
+Public status does not remove the operating constraints:
 
-Run the frozen activation, behavioral, and composition corpora against at least two independent model families. Pass thresholds are declared in `release/model-eval-thresholds.json` before results are observed. Do not weaken thresholds or mutate the frozen corpus to rescue a disappointing run.
+- preserve the frozen historical evidence;
+- keep security/privacy scans and clean-runner validation green;
+- treat future model claims as versioned evidence, not evergreen guarantees;
+- record meaningful behavior changes in the changelog;
+- keep financial mutation disabled unless explicitly introduced as architecture-level work;
+- update `release/gates.json` when release authority or evidence materially changes.
 
-Trigger descriptions may be tuned only from observed misses. After tuning, rerun the same frozen corpus and preserve before/after evidence.
-
-## Benchmark receipts
-
-Any public model-performance claim should ship with a receipt conforming to `schemas/benchmark-receipt.schema.json`.
-
-The receipt intentionally has no single aggregate score. Routing, lexical behavior, semantic review, deterministic correctness, and tool correctness are different evidence classes.
-
-## Public transition
-
-When every machine gate is `PASS`, the final owner action is explicit authorization to make the repository public. The visibility change itself is not implied by a green build.
+A future release should earn its own evidence rather than inheriting confidence from v0.1.0.
