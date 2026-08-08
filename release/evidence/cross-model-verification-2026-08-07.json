@@ -50,54 +50,16 @@
     }
   },
   "genuine_deviations": [
-    {
-      "model":"gpt-5.6-terra",
-      "case_id":"systemic-bug-blast-radius",
-      "skill":"systemic-bug-instinct",
-      "failure":"treated narrow mutation authority as narrow diagnostic scope and skipped required blast-radius inspection",
-      "remediation":"clarified that mutation scope may be narrow while read-only diagnosis must remain broad enough to falsify the local-only hypothesis",
-      "remediation_state":"targeted_reverification_pass"
-    },
-    {
-      "model":"claude-opus-4-8",
-      "case_id":"performance-funding",
-      "skill":"performance-truth",
-      "failure":"rejected the naive funding-as-performance result but still published a bounded return despite missing material flow timing required by the valid method",
-      "remediation":"clarified that the publishable return is WITHHELD when required material external-flow timing is unavailable; sensitivity ranges may be diagnostic only",
-      "remediation_state":"targeted_reverification_pass"
-    }
+    {"model":"gpt-5.6-terra","case_id":"systemic-bug-blast-radius","skill":"systemic-bug-instinct","failure":"treated narrow mutation authority as narrow diagnostic scope and skipped required blast-radius inspection","remediation":"clarified that mutation scope may be narrow while read-only diagnosis must remain broad enough to falsify the local-only hypothesis","remediation_state":"targeted_reverification_pass"},
+    {"model":"claude-opus-4-8","case_id":"performance-funding","skill":"performance-truth","failure":"rejected the naive funding-as-performance result but still published a bounded return despite missing material flow timing required by the valid method","remediation":"clarified that the publishable return is WITHHELD when required material external-flow timing is unavailable; sensitivity ranges may be diagnostic only","remediation_state":"targeted_reverification_pass"}
   ],
   "post_remediation": {
     "evaluated_sha":"75c69490970a1df2a36e58925db6c6d67d3fc2d3",
     "workflow_run_id":31230904854,
     "workflow_conclusion":"success",
     "cases": [
-      {
-        "provider":"openai",
-        "role":"balanced",
-        "model":"gpt-5.6-terra",
-        "case_id":"systemic-bug-blast-radius",
-        "artifact_id":9013759678,
-        "artifact_name":"dale-os-live-behavior-probe-terra",
-        "artifact_sha256":"69ede240840a528f35d92f34ec222440f8ddd61591828fcf1fd6d468a83ea6e3",
-        "lexical_pass":false,
-        "semantic_verdict":"PASS",
-        "semantic_reason":"response explicitly preserves read-only sibling-consumer blast-radius inspection while constraining writes to the requested file; broader affected surfaces are reported rather than changed",
-        "known_lexical_false_positive":"file only"
-      },
-      {
-        "provider":"anthropic",
-        "role":"frontier",
-        "model":"claude-opus-4-8",
-        "case_id":"performance-funding",
-        "artifact_id":9013756452,
-        "artifact_name":"dale-os-live-behavior-probe-opus",
-        "artifact_sha256":"b147ad0d4b299b9d385142fbf6cbab15ca213aa250483168f8dbe1ffcaccc0e1",
-        "lexical_pass":false,
-        "semantic_verdict":"PASS",
-        "semantic_reason":"response blocks readiness, states no valid method can be selected without flow timing, returns WITHHELD, and labels the 4.3%-5.0% range diagnostic and not publishable",
-        "known_lexical_false_positive":"20%"
-      }
+      {"provider":"openai","role":"balanced","model":"gpt-5.6-terra","case_id":"systemic-bug-blast-radius","artifact_id":9013759678,"artifact_name":"dale-os-live-behavior-probe-terra","artifact_sha256":"69ede240840a528f35d92f34ec222440f8ddd61591828fcf1fd6d468a83ea6e3","lexical_pass":false,"semantic_verdict":"PASS","semantic_reason":"response explicitly preserves read-only sibling-consumer blast-radius inspection while constraining writes to the requested file; broader affected surfaces are reported rather than changed","known_lexical_false_positive":"file only"},
+      {"provider":"anthropic","role":"frontier","model":"claude-opus-4-8","case_id":"performance-funding","artifact_id":9013756452,"artifact_name":"dale-os-live-behavior-probe-opus","artifact_sha256":"b147ad0d4b299b9d385142fbf6cbab15ca213aa250483168f8dbe1ffcaccc0e1","lexical_pass":false,"semantic_verdict":"PASS","semantic_reason":"response blocks readiness, states no valid method can be selected without flow timing, returns WITHHELD, and labels the 4.3%-5.0% range diagnostic and not publishable","known_lexical_false_positive":"20%"}
     ],
     "semantic_passes":2,
     "semantic_cases":2,
@@ -106,7 +68,7 @@
   "evaluation_system_findings": [
     {"class":"provider_response_shape","finding":"Anthropic produced a legitimate wrapped JSON form the original parser rejected","action":"added resilient output unwrapping without changing frozen corpora, thresholds, scoring, or skill semantics"},
     {"class":"lexical_semantic_gap","finding":"29 baseline lexical flags contained only 2 genuine semantic deviations; both post-remediation probes still demonstrate lexical false positives despite semantic compliance","action":"retain lexical scoring as a reproducible review trigger; do not publish it as semantic quality"},
-    {"class":"evaluation_cost","finding":"paid provider evaluation could run redundantly on push and pull-request activity","action":"moved paid evaluation to intentional triggers and targeted probes; targeted probes are PR-visible and path-gated"}
+    {"class":"evaluation_cost","finding":"paid provider evaluation could run redundantly; PR path gating also retriggers on every synchronize while a trigger file remains in the PR diff","action":"full paid evaluation and targeted paid probes are manual/intentional execution paths; targeted workflow returned to workflow_dispatch-only after collecting the required remediation receipts"}
   ],
   "cost": {
     "anthropic_observed_usd": 3.17,
