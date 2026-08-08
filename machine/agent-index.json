@@ -1,7 +1,7 @@
 {
   "schema": "dale-os/agent-index/v1",
   "name": "Dale OS",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0",
   "purpose": "High-integrity operating system for consequential software and financial agent work",
   "principles": [
     "authority-before-autonomy",
