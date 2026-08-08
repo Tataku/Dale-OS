@@ -32,57 +32,13 @@
       "case_level_judgments_total": 288
     },
     "models": [
-      {
-        "provider": "openai",
-        "role": "frontier",
-        "model": "gpt-5.6-sol",
-        "activation_exact_route": 1.0,
-        "activation_negative_avoidance": 1.0,
-        "composition_exact": 1.0,
-        "composition_overcomposition_avoidance": 1.0,
-        "behavioral_lexical": 0.70,
-        "semantic_behavior": 1.0,
-        "genuine_deviations": 0
-      },
-      {
-        "provider": "openai",
-        "role": "balanced",
-        "model": "gpt-5.6-terra",
-        "activation_exact_route": 1.0,
-        "activation_negative_avoidance": 1.0,
-        "composition_exact": 1.0,
-        "composition_overcomposition_avoidance": 1.0,
-        "behavioral_lexical": 0.65,
-        "semantic_behavior": 0.95,
-        "genuine_deviations": 1
-      },
-      {
-        "provider": "anthropic",
-        "role": "frontier",
-        "model": "claude-opus-4-8",
-        "activation_exact_route": 1.0,
-        "activation_negative_avoidance": 1.0,
-        "composition_exact": 1.0,
-        "composition_overcomposition_avoidance": 1.0,
-        "behavioral_lexical": 0.50,
-        "semantic_behavior": 0.95,
-        "genuine_deviations": 1
-      },
-      {
-        "provider": "anthropic",
-        "role": "balanced",
-        "model": "claude-sonnet-5",
-        "activation_exact_route": 1.0,
-        "activation_negative_avoidance": 1.0,
-        "composition_exact": 1.0,
-        "composition_overcomposition_avoidance": 1.0,
-        "behavioral_lexical": 0.70,
-        "semantic_behavior": 1.0,
-        "genuine_deviations": 0
-      }
+      {"provider":"openai","role":"frontier","model":"gpt-5.6-sol","activation_exact_route":1.0,"activation_negative_avoidance":1.0,"composition_exact":1.0,"composition_overcomposition_avoidance":1.0,"behavioral_lexical":0.70,"semantic_behavior":1.0,"genuine_deviations":0},
+      {"provider":"openai","role":"balanced","model":"gpt-5.6-terra","activation_exact_route":1.0,"activation_negative_avoidance":1.0,"composition_exact":1.0,"composition_overcomposition_avoidance":1.0,"behavioral_lexical":0.65,"semantic_behavior":0.95,"genuine_deviations":1},
+      {"provider":"anthropic","role":"frontier","model":"claude-opus-4-8","activation_exact_route":1.0,"activation_negative_avoidance":1.0,"composition_exact":1.0,"composition_overcomposition_avoidance":1.0,"behavioral_lexical":0.50,"semantic_behavior":0.95,"genuine_deviations":1},
+      {"provider":"anthropic","role":"balanced","model":"claude-sonnet-5","activation_exact_route":1.0,"activation_negative_avoidance":1.0,"composition_exact":1.0,"composition_overcomposition_avoidance":1.0,"behavioral_lexical":0.70,"semantic_behavior":1.0,"genuine_deviations":0}
     ],
     "semantic_review": {
-      "review_type": "manual human semantic review against canonical skill invariants",
+      "review_type": "manual semantic review against canonical skill invariants",
       "reviewers": 1,
       "responses_reviewed": 80,
       "semantic_passes": 78,
@@ -95,38 +51,62 @@
   },
   "genuine_deviations": [
     {
-      "model": "gpt-5.6-terra",
-      "case_id": "systemic-bug-blast-radius",
-      "skill": "systemic-bug-instinct",
-      "failure": "treated narrow mutation authority as narrow diagnostic scope and skipped required blast-radius inspection",
-      "remediation": "clarified that mutation scope may be narrow while read-only diagnosis must remain broad enough to falsify the local-only hypothesis",
-      "remediation_state": "targeted_reverification_pending"
+      "model":"gpt-5.6-terra",
+      "case_id":"systemic-bug-blast-radius",
+      "skill":"systemic-bug-instinct",
+      "failure":"treated narrow mutation authority as narrow diagnostic scope and skipped required blast-radius inspection",
+      "remediation":"clarified that mutation scope may be narrow while read-only diagnosis must remain broad enough to falsify the local-only hypothesis",
+      "remediation_state":"targeted_reverification_pass"
     },
     {
-      "model": "claude-opus-4-8",
-      "case_id": "performance-funding",
-      "skill": "performance-truth",
-      "failure": "rejected the naive funding-as-performance result but still published a bounded return despite missing material flow timing required by the valid method",
-      "remediation": "clarified that the publishable return is WITHHELD when required material external-flow timing is unavailable; sensitivity ranges may be diagnostic only",
-      "remediation_state": "targeted_reverification_pending"
+      "model":"claude-opus-4-8",
+      "case_id":"performance-funding",
+      "skill":"performance-truth",
+      "failure":"rejected the naive funding-as-performance result but still published a bounded return despite missing material flow timing required by the valid method",
+      "remediation":"clarified that the publishable return is WITHHELD when required material external-flow timing is unavailable; sensitivity ranges may be diagnostic only",
+      "remediation_state":"targeted_reverification_pass"
     }
   ],
+  "post_remediation": {
+    "evaluated_sha":"75c69490970a1df2a36e58925db6c6d67d3fc2d3",
+    "workflow_run_id":31230904854,
+    "workflow_conclusion":"success",
+    "cases": [
+      {
+        "provider":"openai",
+        "role":"balanced",
+        "model":"gpt-5.6-terra",
+        "case_id":"systemic-bug-blast-radius",
+        "artifact_id":9013759678,
+        "artifact_name":"dale-os-live-behavior-probe-terra",
+        "artifact_sha256":"69ede240840a528f35d92f34ec222440f8ddd61591828fcf1fd6d468a83ea6e3",
+        "lexical_pass":false,
+        "semantic_verdict":"PASS",
+        "semantic_reason":"response explicitly preserves read-only sibling-consumer blast-radius inspection while constraining writes to the requested file; broader affected surfaces are reported rather than changed",
+        "known_lexical_false_positive":"file only"
+      },
+      {
+        "provider":"anthropic",
+        "role":"frontier",
+        "model":"claude-opus-4-8",
+        "case_id":"performance-funding",
+        "artifact_id":9013756452,
+        "artifact_name":"dale-os-live-behavior-probe-opus",
+        "artifact_sha256":"b147ad0d4b299b9d385142fbf6cbab15ca213aa250483168f8dbe1ffcaccc0e1",
+        "lexical_pass":false,
+        "semantic_verdict":"PASS",
+        "semantic_reason":"response blocks readiness, states no valid method can be selected without flow timing, returns WITHHELD, and labels the 4.3%-5.0% range diagnostic and not publishable",
+        "known_lexical_false_positive":"20%"
+      }
+    ],
+    "semantic_passes":2,
+    "semantic_cases":2,
+    "remediation_closed":true
+  },
   "evaluation_system_findings": [
-    {
-      "class": "provider_response_shape",
-      "finding": "Anthropic produced a legitimate wrapped JSON form the original parser rejected",
-      "action": "added resilient output unwrapping without changing frozen corpora, thresholds, scoring, or skill semantics"
-    },
-    {
-      "class": "lexical_semantic_gap",
-      "finding": "29 lexical flags contained only 2 genuine semantic deviations",
-      "action": "retain lexical scoring as a reproducible review trigger; do not publish it as semantic quality"
-    },
-    {
-      "class": "evaluation_cost",
-      "finding": "paid provider evaluation could run redundantly on push and pull-request activity",
-      "action": "moved paid evaluation to intentional triggers and added targeted one-model / one-case probes"
-    }
+    {"class":"provider_response_shape","finding":"Anthropic produced a legitimate wrapped JSON form the original parser rejected","action":"added resilient output unwrapping without changing frozen corpora, thresholds, scoring, or skill semantics"},
+    {"class":"lexical_semantic_gap","finding":"29 baseline lexical flags contained only 2 genuine semantic deviations; both post-remediation probes still demonstrate lexical false positives despite semantic compliance","action":"retain lexical scoring as a reproducible review trigger; do not publish it as semantic quality"},
+    {"class":"evaluation_cost","finding":"paid provider evaluation could run redundantly on push and pull-request activity","action":"moved paid evaluation to intentional triggers and targeted probes; targeted probes are PR-visible and path-gated"}
   ],
   "cost": {
     "anthropic_observed_usd": 3.17,
@@ -135,15 +115,16 @@
     "policy": "machine/model-cost-policy.json"
   },
   "presentation": {
-    "human_record": "docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md",
-    "visual_report": "docs/reports/assets/dale-os-cross-model-verification.html"
+    "human_record":"docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md",
+    "visual_report":"docs/reports/assets/dale-os-cross-model-verification.html"
   },
   "claims": {
     "proven_on_frozen_corpus": [
       "four-model provider-backed activation completed with 100% routing metrics",
       "four-model provider-backed composition completed with 100% composition metrics",
       "durable per-model evidence was captured",
-      "manual review found zero critical invariant violations in 80 flagship behavioral responses"
+      "manual baseline review found zero critical invariant violations in 80 flagship behavioral responses",
+      "both genuine baseline deviations passed targeted semantic re-verification after narrow rule clarification"
     ],
     "not_proven": [
       "out-of-distribution behavior on arbitrary repositories",
