@@ -1,0 +1,125 @@
+{
+  "schema": "dale-os/receipt-transition-cases/v1",
+  "cases": [
+    {
+      "id": "status-softening-without-evidence",
+      "expected": "FAIL",
+      "parent": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return withheld because flow timing is unknown.",
+        "claims": [],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      },
+      "child": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "DEGRADED",
+        "summary": "Return is directionally usable.",
+        "claims": [],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      }
+    },
+    {
+      "id": "unknown-drop-without-resolution",
+      "expected": "FAIL",
+      "parent": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return withheld.",
+        "claims": [],
+        "unknowns": ["deposit timing", "cash mirror"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      },
+      "child": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return remains withheld.",
+        "claims": [],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      }
+    },
+    {
+      "id": "claim-injection-without-verification",
+      "expected": "FAIL",
+      "parent": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return withheld.",
+        "claims": [],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      },
+      "child": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return withheld, but a directional claim was added.",
+        "claims": [{"claim": "20% is directionally usable", "evidence_grade": "DERIVED"}],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      }
+    },
+    {
+      "id": "grade-change-without-evidence",
+      "expected": "FAIL",
+      "parent": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "financial-evidence-grade",
+        "status": "DEGRADED",
+        "summary": "Valuation is estimated.",
+        "claims": [{"claim": "valuation", "evidence_grade": "ESTIMATED", "evidence": ["vendor estimate"]}],
+        "unknowns": [],
+        "mutations": [],
+        "verification": ["source review"]
+      },
+      "child": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "financial-evidence-grade",
+        "status": "PASS",
+        "summary": "Valuation is authoritative.",
+        "claims": [{"claim": "valuation", "evidence_grade": "AUTHORITATIVE", "evidence": ["vendor estimate"]}],
+        "unknowns": [],
+        "mutations": [],
+        "verification": ["source review"]
+      }
+    },
+    {
+      "id": "resolved-with-new-verification",
+      "expected": "PASS",
+      "parent": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "WITHHELD",
+        "summary": "Return withheld because flow timing is unknown.",
+        "claims": [],
+        "unknowns": ["deposit timing"],
+        "mutations": [],
+        "verification": ["performance_readiness.py"]
+      },
+      "child": {
+        "schema": "dale-os/receipt/v1",
+        "skill": "performance-truth",
+        "status": "PASS",
+        "summary": "Return is publishable after deposit timing was verified.",
+        "claims": [{"claim": "flow timing verified", "evidence_grade": "AUTHORITATIVE", "evidence": ["broker activity record"]}],
+        "unknowns": [],
+        "mutations": [],
+        "verification": ["performance_readiness.py", "broker activity record reviewed"]
+      }
+    }
+  ]
+}

@@ -22,6 +22,8 @@ jobs:
         run: python scripts/validate_repo.py
       - name: Validate model eval contracts
         run: python scripts/validate_eval_contracts.py
+      - name: Validate receipt transitions
+        run: python scripts/check_receipt_transition.py --fixtures evals/receipts/transition-cases.json
       - name: Validate agent discovery
         run: python scripts/validate_discovery.py
       - name: Validate repository hygiene
