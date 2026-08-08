@@ -1,0 +1,51 @@
+name: Behavioral failure / adversarial case
+description: Report a case where Dale OS routed, reasoned, composed, or withheld incorrectly.
+title: "[behavior] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Dale OS improves by turning real failures into falsifiable regressions. Please describe the smallest case that demonstrates the problem.
+  - type: input
+    id: skill
+    attributes:
+      label: Skill or composition
+      description: Which skill or composition was loaded, if known?
+      placeholder: performance-truth / safe-ledger-repair / unknown
+    validations:
+      required: false
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Input / task
+      description: Paste the minimal task or scenario that triggered the behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: What did the agent do or claim?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected invariant
+      description: What should Dale OS have preserved, withheld, checked, or refused?
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Agent / model / runtime
+      description: Include model/runtime/version if known. Do not include API keys or private financial data.
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed credentials, private account data, and other sensitive material from this report.
+          required: true
