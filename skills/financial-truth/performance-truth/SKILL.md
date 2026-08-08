@@ -13,10 +13,11 @@ description: Gate and calculate investment performance only when the required va
 
 1. Check readiness before calculating: trusted valuations, sufficient endpoints, continuity, external-flow coverage, and any domain-specific blockers.
 2. Identify the return method and state why it is valid for the available records.
-3. Do not fall back to a flattering simple return when unresolved external flows can be mistaken for gains.
-4. Rebase or narrow across material valuation discontinuities instead of drawing unbounded continuity through a gap.
-5. Publish the method, evidence status, exclusions, and caveats beside the number.
-6. Withhold when unresolved data can materially change the performance conclusion.
+3. If a material external flow is known but its timing is missing and the valid return method depends on that timing, the requested return is **WITHHELD**. A sensitivity range may be shown only as diagnostic context and must be labeled as not being a publishable return result.
+4. Do not fall back to a flattering or approximate simple return when unresolved external flows can be mistaken for gains or when required flow timing is unavailable.
+5. Rebase or narrow across material valuation discontinuities instead of drawing unbounded continuity through a gap.
+6. Publish the method, evidence status, exclusions, and caveats beside the number.
+7. Withhold when unresolved data can materially change the performance conclusion.
 
 ## Deterministic companion
 
@@ -25,11 +26,12 @@ Read `references/DETERMINISTIC_INPUT.md` when you need the input contract.
 
 ## Falsify it
 
-Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If you cannot, withhold the return.
+Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If a material external flow lacks timing required by the chosen method, try to prove that a single publishable return can still be supported. If you cannot, withhold the return.
 
 ## Stop conditions
 
 - Unresolved cash movements could be external flows.
+- A material external flow is known but the timing required by the valid return method is missing.
 - Fewer than two trusted continuous valuations exist for the requested period.
 - The selected calculation method does not match the available flow data.
 

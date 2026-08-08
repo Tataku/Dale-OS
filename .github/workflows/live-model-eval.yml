@@ -1,0 +1,53 @@
+name: live-model-eval
+
+# Provider-backed model evaluation consumes paid API credits and is release evidence,
+# not a per-commit unit test. Static repository validation remains automatic.
+#
+# Run intentionally in either of two ways:
+# 1) workflow_dispatch from GitHub UI/CLI, or
+# 2) change release/run-live-model-eval.txt on the verification branch.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - agent/live-model-verification-v0-1
+    paths:
+      - release/run-live-model-eval.txt
+
+permissions:
+  contents: read
+
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify frozen threshold contract predates results
+        run: |
+          test -f release/live-model-thresholds.json
+          python - <<'PY'
+          import json
+          doc=json.load(open('release/live-model-thresholds.json'))
+          assert doc['schema']=='dale-os/live-model-thresholds/v3'
+          assert doc['frozen_at']=='2026-08-07'
+          assert len(doc['models'])==4
+          assert doc['global']['required_models']==4
+          print('THRESHOLDS FROZEN: four benchmark roles, two providers, no post-result relaxation')
+          PY
+      - name: Run provider-backed frozen corpora
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/run_live_model_evals_resilient.py
+      - name: Upload durable eval evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dale-os-live-model-eval
+          path: artifacts/live-model-eval/
+          if-no-files-found: warn
+          retention-days: 30

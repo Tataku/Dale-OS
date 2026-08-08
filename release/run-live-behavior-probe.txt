@@ -1,0 +1,4 @@
+2026-08-07T17:06:00-05:00
+purpose=verify-observed-behavioral-deviations-after-surgical-skill-clarifications
+cases=openai-balanced:systemic-bug-blast-radius,anthropic-frontier:performance-funding
+scope=targeted-only-no-full-matrix

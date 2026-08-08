@@ -1,0 +1,63 @@
+name: live-behavior-probe
+
+# Paid, targeted verification after narrow behavioral rule changes.
+# Manual-only by design: PR path filters retrigger on every synchronize while the
+# trigger file remains in the PR diff, which can cause duplicate paid calls.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  terra-systemic-bug:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Terra systemic-bug behavioral probe
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: >-
+          python scripts/run_live_behavior_probe.py
+          --provider openai
+          --role balanced
+          --case-id systemic-bug-blast-radius
+          --out artifacts/live-behavior-probe/terra
+      - name: Upload Terra evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dale-os-live-behavior-probe-terra
+          path: artifacts/live-behavior-probe/terra/
+          if-no-files-found: error
+          retention-days: 30
+
+  opus-performance-truth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Opus performance-truth behavioral probe
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: >-
+          python scripts/run_live_behavior_probe.py
+          --provider anthropic
+          --role frontier
+          --case-id performance-funding
+          --out artifacts/live-behavior-probe/opus
+      - name: Upload Opus evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dale-os-live-behavior-probe-opus
+          path: artifacts/live-behavior-probe/opus/
+          if-no-files-found: error
+          retention-days: 30

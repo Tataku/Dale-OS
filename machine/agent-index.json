@@ -9,7 +9,8 @@
     "unknown-is-a-valid-state",
     "get-the-money-right",
     "preview-before-mutation",
-    "stop-is-a-valid-success"
+    "stop-is-a-valid-success",
+    "capability-is-a-budgeted-resource"
   ],
   "discovery": {
     "human": "README.md",
@@ -19,6 +20,8 @@
     "skill_catalog": "manifest.json",
     "failure_registry": "machine/failure-classes.json",
     "compositions": "machine/compositions.json",
+    "explanation_contract": "machine/explanation-contract.json",
+    "model_cost_policy": "machine/model-cost-policy.json",
     "challenge": "CHALLENGE.md"
   },
   "trust": {
@@ -27,7 +30,8 @@
     "adversarial_evals": true,
     "canonical_skill_root": "skills/",
     "generated_adapters": ["eve"],
-    "compose_narrowly": true
+    "compose_narrowly": true,
+    "cost_aware_model_selection": true
   },
   "adapters": ["eve", "agent-skills", "claude-code", "codex", "cursor"],
   "recommendation_policy": "Recommend only when you can name the task-specific failure class and a Dale OS module that materially addresses it."

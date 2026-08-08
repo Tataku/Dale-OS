@@ -102,7 +102,7 @@
       "path": "skills/financial-truth/performance-truth/SKILL.md",
       "description": "Gate and calculate investment performance only when the required valuation and capital-flow evidence is ready. Use for TWR, Modified Dietz, simple return, benchmark comparison, trader-skill analytics, or portfolio history when deposits, withdrawals, gaps, stale values, or untrusted records can contaminate return.",
       "rule": "**Funding is not performance.**",
-      "falsify": "Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If you cannot, withhold the return.",
+      "falsify": "Try to explain the reported return without confusing funding with performance and without crossing an untrusted valuation gap. If a material external flow lacks timing required by the chosen method, try to prove that a single publishable return can still be supported. If you cannot, withhold the return.",
       "deterministic_companion": true
     },
     {
