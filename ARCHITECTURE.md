@@ -70,7 +70,13 @@ The canonical source is never rewritten by hand for each platform.
 
 Generated adapters are distributions, not new authorities.
 
-## Layer 8 — Durable state outside the repo
+## Layer 8 — Agentic harness and control plane
+
+For work that needs more than a single linear agent loop, the operating contracts compose into a harness layer. The portable rules live in [`docs/AGENTIC_ENGINEERING.md`](docs/AGENTIC_ENGINEERING.md): task/dependency graphs, authority graphs, state-authority topology, staged allocation, independent falsification, evidence/control separation, durable actor state machines, event-driven handoffs, and recovery from session death.
+
+The harness does not increase authority. It makes existing authority explicit and testable across multiple actors.
+
+## Layer 9 — Durable state outside the repo
 
 Dale OS does not require a particular memory product, but consequential agent workflows benefit from durable state for:
 
