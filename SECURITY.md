@@ -24,4 +24,4 @@ Please include, privately when appropriate:
 
 ## Financial safety
 
-v0.1 deterministic finance tools are read-only. A change that introduces a financial writer, network call, persistence path, or external side effect is architecture-level work and must not be slipped into an ordinary tool PR.
+Current deterministic finance tools are read-only. A change that introduces a financial writer, network call, persistence path, or external side effect is architecture-level work and must not be slipped into an ordinary tool PR.

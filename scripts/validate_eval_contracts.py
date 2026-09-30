@@ -8,6 +8,7 @@ EXPECTED={
 'execution-charter','systemic-bug-instinct','truth-boundary','latest-authority','diff-scope-audit','protected-boundary','intent-drift-check','operator-ui-audit','swarm',
 'money-trail','accounting-integrity','performance-truth','basis-proof','ledger-repair','transfer-neutrality','cash-truth','financial-evidence-grade','tax-character-proof','corporate-action-continuity','model-sanity','close-the-books'
 }
+EXPECTED_COUNT=len(EXPECTED)
 errors=[]
 def fail(msg): errors.append(msg)
 
@@ -42,7 +43,7 @@ for n,row in jsonl(activation):
         fail(f'{activation.relative_to(ROOT)}:{n} confuser prompt is trivial/empty')
 if pos!=EXPECTED: fail(f'activation positive coverage drift: {sorted(EXPECTED-pos)} missing')
 if neg!=EXPECTED: fail(f'activation confuser coverage drift: {sorted(EXPECTED-neg)} missing')
-if len(ids)!=42: fail(f'activation corpus must contain 42 cases, got {len(ids)}')
+if len(ids)!=2*EXPECTED_COUNT: fail(f'activation corpus must contain {2*EXPECTED_COUNT} cases, got {len(ids)}')
 
 behavior=ROOT/'evals'/'behavioral'/'flagship.jsonl'
 behavior_skills=set()
@@ -86,4 +87,4 @@ if errors:
     print('EVAL CONTRACT VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print(f'EVAL CONTRACT PASS: 21 positive routes + 21 confusers + 21 behavioral cases + {len(comp_ids)} composition cases + portable result schema')
+print(f'EVAL CONTRACT PASS: {EXPECTED_COUNT} positive routes + {EXPECTED_COUNT} confusers + {EXPECTED_COUNT} behavioral cases + {len(comp_ids)} composition cases + portable result schema')

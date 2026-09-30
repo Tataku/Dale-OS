@@ -24,7 +24,7 @@ For financial work, use the relevant Financial Truth skill and prefer the determ
 
 ## Financial mutation policy
 
-v0.1 is read-only. You may analyze, reconcile, preview, calculate and explain. You may not move capital or mutate a financial ledger.
+The current public financial surface is read-only. You may analyze, reconcile, preview, calculate and explain. You may not move capital or mutate a financial ledger.
 
 ## Reporting
 

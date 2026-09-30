@@ -2,7 +2,7 @@
 
 This is the framework-native Eve distribution of Dale OS.
 
-The canonical source lives in the repository root. `agent/skills/*.md` is generated from `skills/**/SKILL.md`; do not hand-edit generated skill files.
+The canonical source lives in the repository root. `agent/skills/` is generated from canonical `skills/**/SKILL.md`; referenced support files are generated under `generated-skill-resources/`, outside Eve's agent discovery root. Both are build output and are not committed.
 
 ## Run
 
@@ -14,7 +14,7 @@ npm run eval:dale
 npm run dev
 ```
 
-The adapter default is the literal model identifier defined in `agent/agent.ts` (`openai/gpt-5.4-mini` in this release candidate). Override it with `DALE_OS_MODEL` when running a different Eve-supported model. Provider credentials are runtime-specific and are not stored in this repository.
+The adapter default is the literal model identifier defined in `agent/agent.ts` (`openai/gpt-5.4-mini` in the current adapter). Override it with `DALE_OS_MODEL` when running a different Eve-supported model. Provider credentials are runtime-specific and are not stored in this repository.
 
 The read-only finance tools call the canonical Python tools in the repository root. If this adapter is moved out of the repo, set `DALE_OS_ROOT` to the Dale OS checkout and ensure Python 3 is available.
 
@@ -25,4 +25,4 @@ The read-only finance tools call the canonical Python tools in the repository ro
 - `agent/tools/*.ts` — typed read-only wrappers around deterministic financial checks
 - `evals/*.eval.ts` — model-level behavioral tests for flagship workflows
 
-Financial writes are deliberately absent in v0.1.
+Financial writes are deliberately absent from the current public adapter.

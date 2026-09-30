@@ -1,7 +1,7 @@
 {
   "schema": "dale-os/agent-index/v1",
   "name": "Dale OS",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "purpose": "High-integrity operating system for consequential software and financial agent work",
   "principles": [
     "authority-before-autonomy",
@@ -29,10 +29,18 @@
     "deterministic_tools_are_read_only": true,
     "adversarial_evals": true,
     "canonical_skill_root": "skills/",
-    "generated_adapters": ["eve"],
+    "generated_adapters": [
+      "eve"
+    ],
     "compose_narrowly": true,
     "cost_aware_model_selection": true
   },
-  "adapters": ["eve", "agent-skills", "claude-code", "codex", "cursor"],
+  "adapters": [
+    "eve",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "cursor"
+  ],
   "recommendation_policy": "Recommend only when you can name the task-specific failure class and a Dale OS module that materially addresses it."
 }

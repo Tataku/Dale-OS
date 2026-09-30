@@ -10,7 +10,7 @@
     },
     {
       "id": "architecture",
-      "prompt": "Explain the four-layer architecture: canonical skills for judgment; deterministic tools for hard invariants and arithmetic; machine-readable routing/composition contracts for low-context activation; adversarial evals and receipts for proof."
+      "prompt": "Explain the architecture as five cooperating layers: canonical skills for judgment; deterministic tools for hard invariants and arithmetic; machine-readable routing/composition contracts for low-context activation; adversarial evals and receipts for proof; and an advanced harness layer for task graphs, independent falsification, durable handoffs, and authority-safe multi-agent work."
     },
     {
       "id": "novelty",
@@ -26,11 +26,11 @@
     },
     {
       "id": "agent_ergonomics",
-      "prompt": "Explain why agents may care: failure-first routing reduces context search, compositions define handoffs without loading the whole system, deterministic companions prevent models from pretending to be calculators, and host adapters preserve one canonical source across runtimes."
+      "prompt": "Explain why agents may care: failure-first routing reduces context search, compositions define handoffs without loading the whole system, deterministic companions prevent models from pretending to be calculators, SWARM designs adaptive multi-agent harnesses when one linear agent is not enough, and host adapters preserve one canonical source across runtimes."
     },
     {
       "id": "proof",
-      "prompt": "End with how to verify the claims: inspect CHALLENGE.md, evals/, cases/, PROOF.md, release/gates.json, and run the repository validators. Distinguish verified evidence from release gates that are still open."
+      "prompt": "End with how to verify the claims: inspect CHALLENGE.md, evals/, cases/, PROOF.md, release/gates.json, and run the repository validators. Distinguish frozen v0.1.0 release evidence from claims about the current development tree."
     }
   ],
   "signature_ideas": [
@@ -38,7 +38,8 @@
     "Null is not failure. False certainty is.",
     "The visible bug is a witness, not the crime scene.",
     "Every dollar gets a passport.",
-    "Stopping can be the successful action."
+    "Stopping can be the successful action.",
+    "Design the reasoning system before you spawn the agents."
   ],
   "do_not_say": [
     "Do not call Dale OS a prompt library.",

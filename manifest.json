@@ -1,6 +1,6 @@
 {
   "schema": "dale-os/manifest/v1",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "entrypoints": {
     "agent": "AGENTS.md",
     "human": "README.md",
@@ -182,7 +182,7 @@
       "family": "operator",
       "path": "skills/operator/swarm/SKILL.md",
       "description": "Design and run the smallest effective multi-agent harness for complex work. Use when the user explicitly says SWARM or asks for a swarm, multi-agent workflow, adaptive orchestration, harness design, parallel investigation, independent falsification, architecture reconciliation, broad audit, competing root-cause hypotheses, or high-risk work that benefits from independent reasoning lanes. Do not use for trivial edits or linear tasks one agent can complete cheaply; the best swarm may use zero subagents. SWARM grants orchestration, not broader implementation, merge, deploy, credential, financial, or destructive authority.",
-      "rule": "**Design the reasoning system before you spawn the agents.**",
+      "rule": "**Design the reasoning system before you spawn the agents.** SWARM is a meta-orchestrator. It chooses the smallest task-specific workflow likely to produce a correct result, then expands, deepens, prunes, or stops that workflow as evidence arrives. Agent count is never the objective. The best swarm is sometimes zero subagents.",
       "falsify": "Try to prove the swarm is unnecessary or badly shaped. Ask: - Can one agent reach the same answer with the same evidence and confidence? - Are two lanes actually answering the same question from the same evidence? - Does any worker exist only to make the run look thorough? - Can a claimed independent verifier see the discoverer's framing? - Are parallel writers competing for one authority? - Does the harness have a stopping condition, or only more possible work? If a smaller workflow preserves correctness, use the smaller workflow.",
       "deterministic_companion": false
     },

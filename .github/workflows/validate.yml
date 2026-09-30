@@ -3,47 +3,34 @@ name: validate
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   dale-os:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build deterministic skill companions
-        run: python scripts/build_companions.py
-      - name: Build eve skill adapter
-        run: python adapters/eve/scripts/build_skills.py
-      - name: Build manifest
-        run: python scripts/build_manifest.py
-      - name: Validate repository
-        run: python scripts/validate_repo.py
-      - name: Validate model eval contracts
-        run: python scripts/validate_eval_contracts.py
-      - name: Validate receipt transitions
-        run: python scripts/check_receipt_transition.py --fixtures evals/receipts/transition-cases.json
-      - name: Validate agent discovery
-        run: python scripts/validate_discovery.py
-      - name: Validate repository hygiene
-        run: python scripts/validate_hygiene.py
-      - name: Smoke agent control surface
-        run: python scripts/smoke_agent_surface.py
-      - name: Scan public release surface
-        run: python scripts/privacy_scan.py
-      - name: Validate release gate ledger
-        run: python scripts/release_gate.py --validate-only
-      - name: Prove generated artifacts are committed
-        run: git diff --exit-code
+
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
           cache: 'npm'
           cache-dependency-path: adapters/eve/package-lock.json
-      - name: Install frozen Eve dependency graph
-        working-directory: adapters/eve
-        run: npm ci --ignore-scripts
-      - name: Compile Eve adapter
-        working-directory: adapters/eve
-        run: npm run build
+
+      - name: Verify Dale OS
+        run: python scripts/verify.py --with-eve
+
+      - name: Prove committed generated artifacts are current
+        run: git diff --exit-code

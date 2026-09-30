@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 EXPECTED_OPERATOR={'execution-charter','systemic-bug-instinct','truth-boundary','latest-authority','diff-scope-audit','protected-boundary','intent-drift-check','operator-ui-audit','swarm'}
 EXPECTED_FINANCE={'money-trail','accounting-integrity','performance-truth','basis-proof','ledger-repair','transfer-neutrality','cash-truth','financial-evidence-grade','tax-character-proof','corporate-action-continuity','model-sanity','close-the-books'}
 EXPECTED_ALL=EXPECTED_OPERATOR|EXPECTED_FINANCE
+EXPECTED_COUNT=len(EXPECTED_ALL)
 errors=[]
 
 def fail(msg): errors.append(msg)
@@ -41,9 +42,27 @@ if found['financial-truth']!=EXPECTED_FINANCE: fail(f'financial skill set drift:
 
 for family,names in found.items():
     for name in names:
-        src=ROOT/'skills'/family/name/'SKILL.md'; dst=ROOT/'adapters'/'eve'/'agent'/'skills'/f'{name}.md'
-        if not dst.exists(): fail(f'eve adapter missing {name}')
-        elif src.read_bytes()!=dst.read_bytes(): fail(f'eve adapter drift: {name}')
+        src=ROOT/'skills'/family/name/'SKILL.md'
+        dst=ROOT/'adapters'/'eve'/'agent'/'skills'/f'{name}.md'
+        if not dst.exists():
+            fail(f'eve adapter missing {name}')
+            continue
+        expected=src.read_text(encoding='utf-8')
+        refs=src.parent/'references'
+        if refs.exists():
+            expected=expected.replace('(references/', f'(../../generated-skill-resources/{name}/')
+        if dst.read_text(encoding='utf-8')!=expected:
+            fail(f'eve adapter drift: {name}')
+        if refs.exists():
+            for ref in refs.rglob('*'):
+                if not ref.is_file():
+                    continue
+                rel=ref.relative_to(refs)
+                generated=ROOT/'adapters'/'eve'/'generated-skill-resources'/name/rel
+                if not generated.exists():
+                    fail(f'eve adapter reference missing: {name}/{rel}')
+                elif generated.read_bytes()!=ref.read_bytes():
+                    fail(f'eve adapter reference drift: {name}/{rel}')
 
 COMPANIONS={'money-trail':'money_trail.py','performance-truth':'performance_readiness.py','basis-proof':'basis_proof.py','ledger-repair':'ledger_delta.py','model-sanity':'model_sanity.py','close-the-books':'close_books.py'}
 for skill_name,tool_name in COMPANIONS.items():
@@ -99,7 +118,7 @@ for p in (ROOT/'tools').glob('*.py'):
     text=p.read_text(encoding='utf-8')
     for token in ('requests','urllib','socket','http.client','subprocess','os.system','pathlib.Path.write','open('):
         if token in text and p.name!='common.py':
-            fail(f'{p.relative_to(ROOT)}: v0.1 read-only purity token found: {token}')
+            fail(f'{p.relative_to(ROOT)}: current read-only purity token found: {token}')
 
 for p in ROOT.rglob('*'):
     if not p.is_file() or '.git' in p.parts or 'node_modules' in p.parts: continue
@@ -117,10 +136,10 @@ if r.returncode: fail('deterministic evals failed:\n'+r.stdout+r.stderr)
 r=subprocess.run([sys.executable,str(ROOT/'scripts'/'build_manifest.py')],capture_output=True,text=True)
 if r.returncode: fail('manifest build failed')
 manifest=json.loads((ROOT/'manifest.json').read_text())
-if len(manifest.get('skills',[]))!=21: fail('manifest must contain 21 skills')
+if len(manifest.get('skills',[]))!=EXPECTED_COUNT: fail(f'manifest must contain {EXPECTED_COUNT} skills')
 
 if errors:
     print('VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print('VALIDATION PASS: 21 skills, failure routing + behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
+print(f'VALIDATION PASS: {EXPECTED_COUNT} skills, failure routing + behavioral coverage, eve parity, read-only finance tools, deterministic evals green')

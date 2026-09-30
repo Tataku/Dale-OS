@@ -47,7 +47,7 @@ while IFS= read -r skill; do
 done < /tmp/dale-skill-names
 ```
 
-This exact pattern is exercised by Dale OS release-candidate verification. For production agents, prefer the smallest set that matches the workflow so activation remains legible.
+The v0.1.0 release candidate exercised this pattern against its then-current 20-skill catalog. A future release must re-run installation proof against the catalog it ships. For production agents, prefer the smallest set that matches the workflow so activation remains legible.
 
 ## Pin consequential workflows
 

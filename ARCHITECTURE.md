@@ -37,7 +37,7 @@ Current read-only tools cover:
 - model sanity checks
 - book-close gating
 
-No tool in v0.1 moves capital or mutates a user's financial system.
+No current public Dale OS tool moves capital or mutates a user's financial system.
 
 ## Layer 5 — Evals and cases
 
