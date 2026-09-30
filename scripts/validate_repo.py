@@ -5,6 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 EXPECTED_OPERATOR={'execution-charter','systemic-bug-instinct','truth-boundary','latest-authority','diff-scope-audit','protected-boundary','intent-drift-check','operator-ui-audit','swarm'}
 EXPECTED_FINANCE={'money-trail','accounting-integrity','performance-truth','basis-proof','ledger-repair','transfer-neutrality','cash-truth','financial-evidence-grade','tax-character-proof','corporate-action-continuity','model-sanity','close-the-books'}
 EXPECTED_ALL=EXPECTED_OPERATOR|EXPECTED_FINANCE
+EXPECTED_COUNT=len(EXPECTED_ALL)
 errors=[]
 
 def fail(msg): errors.append(msg)
@@ -117,10 +118,10 @@ if r.returncode: fail('deterministic evals failed:\n'+r.stdout+r.stderr)
 r=subprocess.run([sys.executable,str(ROOT/'scripts'/'build_manifest.py')],capture_output=True,text=True)
 if r.returncode: fail('manifest build failed')
 manifest=json.loads((ROOT/'manifest.json').read_text())
-if len(manifest.get('skills',[]))!=21: fail('manifest must contain 21 skills')
+if len(manifest.get('skills',[]))!=EXPECTED_COUNT: fail(f'manifest must contain {EXPECTED_COUNT} skills')
 
 if errors:
     print('VALIDATION FAILED')
     for e in errors: print('-',e)
     raise SystemExit(1)
-print('VALIDATION PASS: 21 skills, failure routing + behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
+print(f'VALIDATION PASS: {EXPECTED_COUNT} skills, failure routing + behavioral coverage, eve parity, read-only finance tools, deterministic evals green')
