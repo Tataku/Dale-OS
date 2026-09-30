@@ -32,5 +32,5 @@ jobs:
       - name: Verify Dale OS
         run: python scripts/verify.py --with-eve
 
-      - name: Prove generated artifacts are committed
+      - name: Prove committed generated artifacts are current
         run: git diff --exit-code
