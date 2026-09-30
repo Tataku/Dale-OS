@@ -22,7 +22,7 @@ git diff --exit-code
 
 This proves:
 
-- canonical 20-skill catalog integrity;
+- canonical 21-skill catalog integrity;
 - deterministic finance fixture behavior;
 - generated companion and Eve parity;
 - activation, behavioral, and composition corpus contracts;
