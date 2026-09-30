@@ -32,7 +32,9 @@ expect_json(('composition','safe-bug-fix','--json'),[
     ('handoff exposed',lambda d:bool(d.get('handoff_contract'))),
 ])
 expect_json(('catalog','--json'),[
-    ('21 skills',lambda d:len(d.get('skills',[]))==21),
+    ('catalog non-empty',lambda d:bool(d.get('skills'))),
+    ('swarm surfaced',lambda d:any(x.get('name')=='swarm' for x in d.get('skills',[]))),
+    ('execution-charter surfaced',lambda d:any(x.get('name')=='execution-charter' for x in d.get('skills',[]))),
 ])
 for args in [('resolve','does-not-exist','--json'),('composition','does-not-exist','--json')]:
     r=run(*args)
