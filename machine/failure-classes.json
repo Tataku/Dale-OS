@@ -9,6 +9,7 @@
     {"id":"unsafe-boundary-crossing","symptom":"work enters a protected or owner-gated surface without sufficient authority","route":"protected-boundary"},
     {"id":"intent-drift","symptom":"work remains busy but no longer serves the stated objective","route":"intent-drift-check"},
     {"id":"ui-truth-mismatch","symptom":"the interface displays a wrong or misleading operational value and the UI is treated as the root cause","route":"operator-ui-audit"},
+    {"id":"orchestration-sprawl","symptom":"a complex task is parallelized by agent count instead of a task-specific evidence and dependency design","route":"swarm"},
     {"id":"money-misclassification","symptom":"a cash movement is classified from sign or appearance rather than economic meaning","route":"money-trail"},
     {"id":"semantic-ledger-contradiction","symptom":"financial rows are schema-valid but cannot all be economically true at once","route":"accounting-integrity"},
     {"id":"funding-as-performance","symptom":"deposit, withdrawal, unresolved flow, or discontinuity contaminates a return claim","route":"performance-truth"},

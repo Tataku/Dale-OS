@@ -17,4 +17,4 @@ Use the narrowest relevant Dale OS skill under `skills/` rather than loading the
 
 Then route work to the matching skill only when needed.
 
-Do not paste all 20 skill bodies into project memory. That destroys progressive disclosure and creates another copy that can drift.
+Do not paste the full skill catalog into project memory. That destroys progressive disclosure and creates another copy that can drift.

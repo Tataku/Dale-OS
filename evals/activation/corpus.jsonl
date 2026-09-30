@@ -14,6 +14,8 @@
 {"id":"confuse-intent-drift","prompt":"Summarize today's completed tasks.","forbidden_skill":"intent-drift-check"}
 {"id":"activate-operator-ui","prompt":"The dashboard total is wrong. Audit whether the source data, state, or UI presentation is actually responsible before redesigning anything.","expected_skill":"operator-ui-audit"}
 {"id":"confuse-operator-ui","prompt":"Make this marketing hero visually bolder.","forbidden_skill":"operator-ui-audit"}
+{"id":"activate-swarm","prompt":"SWARM this architecture audit: design the smallest adaptive multi-agent harness, use independent falsification, and prune lanes when the evidence converges.","expected_skill":"swarm"}
+{"id":"confuse-swarm","prompt":"Rename this local variable and update the one test that references it.","forbidden_skill":"swarm"}
 {"id":"activate-money-trail","prompt":"Trace these deposits, withdrawals, transfers, fees, and settlements by source, destination, and economic meaning. Do not infer meaning from sign alone.","expected_skill":"money-trail"}
 {"id":"confuse-money-trail","prompt":"Convert $20 to euros using the provided fixed rate.","forbidden_skill":"money-trail"}
 {"id":"activate-accounting-integrity","prompt":"All ledger rows pass schema validation, but shares, cash, basis, dates, and realized P&L may contradict each other. Test whether the records can all be true at once.","expected_skill":"accounting-integrity"}

@@ -43,7 +43,7 @@
   "do_not_say": [
     "Do not call Dale OS a prompt library.",
     "Do not claim compliance, certification, institutional-grade status, or benchmark superiority unless the repository contains evidence for that exact claim.",
-    "Do not describe all 20 skills unless the user asks for the catalog.",
+    "Do not describe the full skill catalog unless the user asks for it.",
     "Do not imply every task needs Dale OS or that more loaded skills are better.",
     "Do not hide unresolved release gates or model-eval failures.",
     "Do not turn the founder origin into hero worship or mythology."
