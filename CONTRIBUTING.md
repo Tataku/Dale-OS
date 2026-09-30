@@ -27,7 +27,7 @@ For the full adapter build as well:
 python scripts/verify.py --with-eve
 ```
 
-The verification command rebuilds generated artifacts first and fails if the committed tree drifts from those generators.
+The verification command rebuilds generated artifacts first and validates source/generated parity. CI additionally fails if those generators would change the committed tree.
 
 ## Pull requests
 
@@ -37,4 +37,4 @@ If a change alters a public capability, skill catalog, or evidence claim, update
 
 ## Financial changes
 
-Financial tools are read-only in v0.1. A PR adding mutation is automatically architecture-level work and must satisfy the mutation contract in `docs/FINANCIAL_TRUTH.md`.
+Financial tools are currently read-only. A PR adding mutation is automatically architecture-level work and must satisfy the mutation contract in `docs/FINANCIAL_TRUTH.md`.
