@@ -11,9 +11,29 @@ This repo is opinionated on purpose.
 
 Do not add doctrine because it sounds wise. Prefer rules paid for by real incidents or adversarial tests.
 
+## Developer quickstart
+
+A local checkout needs Python 3.12+ for the core validation surface. Node 24 is only required for the Eve adapter compile.
+
+Run the same repository-level checks expected in CI:
+
+```bash
+python scripts/verify.py
+```
+
+For the full adapter build as well:
+
+```bash
+python scripts/verify.py --with-eve
+```
+
+The verification command rebuilds generated artifacts first and fails if the committed tree drifts from those generators.
+
 ## Pull requests
 
-Keep one concern per PR when practical. State scope-IN and scope-OUT. Include the test/eval that proves the change. Do not weaken a guard just to make a change pass.
+Keep one concern per PR when practical. State scope-IN and scope-OUT. Include the test/eval that proves the change. Run `python scripts/verify.py` before review. Do not weaken a guard just to make a change pass.
+
+If a change alters a public capability, skill catalog, or evidence claim, update version/changelog/proof surfaces in the same PR. Historical release evidence must remain historical; do not rewrite an old benchmark to describe a newer tree.
 
 ## Financial changes
 
