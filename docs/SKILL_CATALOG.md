@@ -8,6 +8,7 @@
 - **`protected-boundary`** — Stopping can be the successful action.
 - **`intent-drift-check`** — Busy is not aligned.
 - **`operator-ui-audit`** — A wrong value in the UI is usually a data problem wearing a costume.
+- **`swarm`** — Design the reasoning system before you spawn the agents.
 - **`money-trail`** — Every dollar gets a passport.
 - **`accounting-integrity`** — Well-formed data can still lie.
 - **`performance-truth`** — Funding is not performance.
