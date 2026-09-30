@@ -50,7 +50,7 @@ for family,names in found.items():
         expected=src.read_text(encoding='utf-8')
         refs=src.parent/'references'
         if refs.exists():
-            expected=expected.replace('(references/', f'(references/{name}/')
+            expected=expected.replace('(references/', f'(../skill-resources/{name}/')
         if dst.read_text(encoding='utf-8')!=expected:
             fail(f'eve adapter drift: {name}')
         if refs.exists():
@@ -58,7 +58,7 @@ for family,names in found.items():
                 if not ref.is_file():
                     continue
                 rel=ref.relative_to(refs)
-                generated=ROOT/'adapters'/'eve'/'agent'/'skills'/'references'/name/rel
+                generated=ROOT/'adapters'/'eve'/'agent'/'skill-resources'/name/rel
                 if not generated.exists():
                     fail(f'eve adapter reference missing: {name}/{rel}')
                 elif generated.read_bytes()!=ref.read_bytes():
