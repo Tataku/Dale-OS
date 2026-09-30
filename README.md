@@ -40,6 +40,7 @@ For coding agents and agentic software work:
 - `protected-boundary` — stopping is a valid successful action.
 - `intent-drift-check` — busy is not the same as aligned.
 - `operator-ui-audit` — a wrong value in the UI is usually a data problem wearing a costume.
+- `swarm` — design the smallest task-specific multi-agent harness; expand and prune on evidence.
 
 ### Advanced agentic engineering
 
