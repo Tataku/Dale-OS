@@ -24,6 +24,7 @@
 - skills/operator/protected-boundary/SKILL.md
 - skills/operator/intent-drift-check/SKILL.md
 - skills/operator/operator-ui-audit/SKILL.md
+- skills/operator/swarm/SKILL.md
 
 ## Financial Truth
 - skills/financial-truth/money-trail/SKILL.md
