@@ -1,0 +1,3 @@
+interface:
+  display_name: "SWARM"
+  short_description: "Design adaptive multi-agent harnesses for complex work"
