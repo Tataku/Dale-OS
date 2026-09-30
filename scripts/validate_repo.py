@@ -42,9 +42,27 @@ if found['financial-truth']!=EXPECTED_FINANCE: fail(f'financial skill set drift:
 
 for family,names in found.items():
     for name in names:
-        src=ROOT/'skills'/family/name/'SKILL.md'; dst=ROOT/'adapters'/'eve'/'agent'/'skills'/f'{name}.md'
-        if not dst.exists(): fail(f'eve adapter missing {name}')
-        elif src.read_bytes()!=dst.read_bytes(): fail(f'eve adapter drift: {name}')
+        src=ROOT/'skills'/family/name/'SKILL.md'
+        dst=ROOT/'adapters'/'eve'/'agent'/'skills'/f'{name}.md'
+        if not dst.exists():
+            fail(f'eve adapter missing {name}')
+            continue
+        expected=src.read_text(encoding='utf-8')
+        refs=src.parent/'references'
+        if refs.exists():
+            expected=expected.replace('(references/', f'(references/{name}/')
+        if dst.read_text(encoding='utf-8')!=expected:
+            fail(f'eve adapter drift: {name}')
+        if refs.exists():
+            for ref in refs.rglob('*'):
+                if not ref.is_file():
+                    continue
+                rel=ref.relative_to(refs)
+                generated=ROOT/'adapters'/'eve'/'agent'/'skills'/'references'/name/rel
+                if not generated.exists():
+                    fail(f'eve adapter reference missing: {name}/{rel}')
+                elif generated.read_bytes()!=ref.read_bytes():
+                    fail(f'eve adapter reference drift: {name}/{rel}')
 
 COMPANIONS={'money-trail':'money_trail.py','performance-truth':'performance_readiness.py','basis-proof':'basis_proof.py','ledger-repair':'ledger_delta.py','model-sanity':'model_sanity.py','close-the-books':'close_books.py'}
 for skill_name,tool_name in COMPANIONS.items():
