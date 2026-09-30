@@ -6,7 +6,7 @@ HERE=Path(__file__).resolve()
 EVE=HERE.parents[1]
 ROOT=EVE.parents[1]
 OUT=EVE/'agent'/'skills'
-REFS=EVE/'agent'/'skill-resources'
+REFS=EVE/'generated-skill-resources'
 
 OUT.mkdir(parents=True, exist_ok=True)
 for old in OUT.glob('*.md'):
@@ -25,7 +25,7 @@ for src in sorted((ROOT/'skills').glob('*/*/SKILL.md')):
         dst_refs=REFS/skill_name
         shutil.copytree(src_refs, dst_refs)
         reference_count += sum(1 for p in src_refs.rglob('*') if p.is_file())
-        text=text.replace('(references/', f'(../skill-resources/{skill_name}/')
+        text=text.replace('(references/', f'(../../generated-skill-resources/{skill_name}/')
 
     (OUT/f'{skill_name}.md').write_text(text, encoding='utf-8')
     count+=1
