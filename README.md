@@ -7,7 +7,7 @@
 
 **Authority before autonomy. Evidence before confidence. Real fixes to real problems.**
 
-[Install](INSTALL.md) · [Try to break it](CHALLENGE.md) · [Read the proof](PROOF.md) · [Browse the skills](docs/SKILL_CATALOG.md)
+[Install](INSTALL.md) · [Advanced agentic engineering](docs/AGENTIC_ENGINEERING.md) · [Try to break it](CHALLENGE.md) · [Read the proof](PROOF.md) · [Browse the skills](docs/SKILL_CATALOG.md)
 
 Dale OS is a portable control plane for AI agents doing consequential software and financial work. It turns recurring failure modes into small falsifiable skills, deterministic checks, narrow compositions, machine-readable receipts, and reproducible evals.
 
@@ -40,6 +40,12 @@ For coding agents and agentic software work:
 - `protected-boundary` — stopping is a valid successful action.
 - `intent-drift-check` — busy is not the same as aligned.
 - `operator-ui-audit` — a wrong value in the UI is usually a data problem wearing a costume.
+
+### Advanced agentic engineering
+
+For hard software work that exceeds a single-agent loop, Dale OS also documents the harness layer: adaptive task graphs, authority graphs, state-authority topology, independent falsification, durable worker/reviewer loops, evidence/control separation, exact-SHA handoffs, recovery, and write-topology rules. See [`docs/AGENTIC_ENGINEERING.md`](docs/AGENTIC_ENGINEERING.md).
+
+The central shift is from **prompt engineering** to **environment engineering**: shape what agents can see, what they are allowed to decide, how they prove progress, how they hand off, and what makes completion valid.
 
 ### Financial Truth
 
