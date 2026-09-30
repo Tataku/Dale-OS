@@ -12,13 +12,15 @@ python scripts/release_gate.py
 
 ## Current state
 
-**Public v0.1.0. Release gates are closed.**
+**Frozen public release: v0.1.0. Release gates are closed for that release.**
 
 The public transition was authorized by the owner and repository visibility was observed as public on 2026-08-08. This document now records the evidence that earned that transition rather than describing unfinished prerequisites.
 
+The current development tree is `0.2.0-dev` and includes post-release capabilities such as SWARM. Those additions do not inherit the v0.1.0 20-skill install proof or provider-backed behavioral matrix; see `PROOF.md` for the current-tree vs frozen-release boundary.
+
 ## Proven
 
-Dale OS currently has evidence for:
+For the frozen v0.1.0 release, Dale OS has evidence for:
 
 - repository integrity and generated-source parity;
 - deterministic financial fixtures;
