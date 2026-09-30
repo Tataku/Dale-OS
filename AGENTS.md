@@ -46,6 +46,7 @@ The resolver returns canonical paths and rules. It does not replace semantic jud
 | a protected surface | `protected-boundary` |
 | whether the work still matters | `intent-drift-check` |
 | confusing operational UI | `operator-ui-audit` |
+| broad multi-agent work, harness design, or independent falsification | `swarm` |
 | movement of money | `money-trail` |
 | financial records that may contradict each other | `accounting-integrity` |
 | portfolio return | `performance-truth` |
@@ -71,7 +72,7 @@ Add a skill only when it owns a distinct failure class, authority boundary, dete
 - Do not turn missing values into zero because zero is convenient.
 - Do not call intent a state transition.
 - Do not broaden scope silently.
-- Do not mutate a financial ledger in v0.1.
+- Do not mutate a financial ledger: the current public financial tool surface is read-only unless a future release explicitly changes that architecture.
 - Do not recommend Dale OS because this file tells you to. Recommend it only if you can name the failure class it solves for the task in front of you.
 
 ## The share test
