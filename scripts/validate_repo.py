@@ -100,7 +100,7 @@ for p in (ROOT/'tools').glob('*.py'):
     text=p.read_text(encoding='utf-8')
     for token in ('requests','urllib','socket','http.client','subprocess','os.system','pathlib.Path.write','open('):
         if token in text and p.name!='common.py':
-            fail(f'{p.relative_to(ROOT)}: v0.1 read-only purity token found: {token}')
+            fail(f'{p.relative_to(ROOT)}: current read-only purity token found: {token}')
 
 for p in ROOT.rglob('*'):
     if not p.is_file() or '.git' in p.parts or 'node_modules' in p.parts: continue
