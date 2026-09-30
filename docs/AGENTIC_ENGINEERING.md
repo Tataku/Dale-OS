@@ -6,6 +6,8 @@ Individual agents matter, but reliability comes from the harness around them: ho
 
 This document captures the advanced operating patterns that emerged from building and running real multi-agent development workflows around ACF Dashboard. The examples are concrete, but the contracts are portable.
 
+The executable portable form is the canonical [`swarm` skill](../skills/operator/swarm/SKILL.md). This document explains the architecture around that skill; it is not a second source of truth for the skill contract.
+
 ## 1. Harness crafting — design before spawn
 
 Do not begin a hard task by choosing an agent count.
