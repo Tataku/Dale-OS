@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0-dev — development
 
 - Added `swarm`, an adaptive multi-agent harness skill with design-before-spawn, staged allocation, independent falsification, adversarial synthesis, authority-migration, and write-topology contracts.
 - Expanded the canonical catalog from 20 to 21 skills while preserving the frozen v0.1.0 20-skill release evidence as historical proof.
