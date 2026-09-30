@@ -18,21 +18,36 @@ A claim should move through this ladder:
 
 Not every rule needs every rung. A rule may never be promoted beyond the evidence it has earned.
 
-## Current public-v0.1 release-candidate proof
+## Current development-tree proof
 
-- 21 canonical skills validate and package independently; the post-v0.1 SWARM addition was packaged with the same Agent Skills validator before repository integration.
-- Every skill includes an explicit falsification section.
-- 6 deterministic financial companions are generated from canonical tools.
-- 10 synthetic financial fixtures exercise known failure classes.
-- 40 activation cases cover one positive route and one confuser per skill.
-- 20 behavioral cases exercise each skill's core invariant.
-- 12 composition cases test both exact composition and over-composition avoidance.
-- Eve skills are generated from canonical skills and parity-checked.
-- The Eve dependency graph is frozen with `package-lock.json`; CI installs it with `npm ci` and compiles the adapter on Node 24.
-- GitHub CI rebuilds generated artifacts and fails on drift.
-- GitHub CLI Agent Skills `publish --dry-run` accepts all 20 skills.
-- GitHub CLI successfully installs all 20 skills from the repository on a clean runner.
-- Privacy, discovery, release-ledger, low-context control-surface, and generated-artifact checks pass on clean runners.
+The current tree is `0.2.0-dev`.
+
+- 21 canonical skills are present, including `swarm`.
+- Every current skill includes an explicit falsification section.
+- Current activation coverage contains one positive route and one confuser per skill.
+- Current behavioral coverage contains one flagship case per skill.
+- SWARM has a standalone packaged skill that passed the ChatGPT skill validator before repository integration.
+- Generated Eve skills and deterministic financial companions are rebuilt from canonical sources and parity-checked.
+- Repository validation covers routing, behavioral contracts, receipt transitions, discovery, hygiene, privacy, release-ledger integrity, and the low-context control surface.
+- `python scripts/verify.py` is the canonical local verification entrypoint; `--with-eve` adds the frozen Node/Eve compile.
+
+These checks prove structure and deterministic contracts for the current tree. They do **not** retroactively add SWARM to the frozen v0.1.0 provider-backed model matrix.
+
+## Frozen v0.1.0 release proof
+
+The public v0.1.0 release evidence remains historical and unchanged:
+
+- 20 canonical skills validated and packaged independently.
+- 40 activation cases covered one positive route and one confuser per skill.
+- 20 behavioral cases exercised each skill's core invariant.
+- 12 composition cases tested exact composition and over-composition avoidance.
+- 6 deterministic financial companions were generated from canonical tools.
+- 10 synthetic financial fixtures exercised known failure classes.
+- Eve skills were generated from canonical skills and parity-checked.
+- The Eve dependency graph was frozen with `package-lock.json`, installed with `npm ci`, and compiled on Node 24.
+- GitHub CLI Agent Skills `publish --dry-run` accepted all 20 skills.
+- GitHub CLI successfully installed all 20 skills from the repository on a clean runner.
+- Privacy, discovery, release-ledger, low-context control-surface, and generated-artifact checks passed on clean runners.
 - Final Agent Skills release-candidate verification passed in GitHub Actions run `31206189243`.
 
 ### Provider-backed cross-model evidence
@@ -76,7 +91,7 @@ The machine-readable release authority is `release/gates.json`.
 - Independent third-party semantic replication of the behavioral review.
 - Out-of-distribution behavior on arbitrary real repositories.
 - Long-horizon multi-agent handoff reliability.
-- Safe autonomous financial mutation. It does not exist in v0.1.
+- Safe autonomous financial mutation. It does not exist in the current public tool surface.
 - Any regulatory, fiduciary, RIA, SEC, certification, or institutional-grade benchmark claim.
 
 Those are boundaries, not implied capabilities.
