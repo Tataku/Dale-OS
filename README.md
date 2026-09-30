@@ -26,6 +26,23 @@ The basic idea is simple:
 
 This repository is the canonical source. Skills are modules inside the operating system. Deterministic tools handle math and reconciliation where reasoning alone is not good enough. Evals try to break the rules before real work does.
 
+## Developer quickstart
+
+If you want the fastest technical read, inspect these in order:
+
+1. [`skills/operator/swarm/SKILL.md`](skills/operator/swarm/SKILL.md) — the adaptive multi-agent harness.
+2. [`docs/AGENTIC_ENGINEERING.md`](docs/AGENTIC_ENGINEERING.md) — the graph, authority, handoff, and control-plane architecture behind it.
+3. [`machine/failure-classes.json`](machine/failure-classes.json) and [`machine/compositions.json`](machine/compositions.json) — low-context routing and narrow composition.
+4. [`CHALLENGE.md`](CHALLENGE.md) and [`PROOF.md`](PROOF.md) — how the claims are attacked instead of merely asserted.
+
+From a checkout:
+
+```bash
+python scripts/verify.py
+# add Node 24 / Eve adapter verification:
+python scripts/verify.py --with-eve
+```
+
 ## Two systems, one philosophy
 
 ### Operator OS
@@ -123,9 +140,11 @@ That is not the system failing. That is the system working.
 
 ## Status
 
-**Public v0.1.0.** The release gates are closed: clean-runner validation, privacy scanning, 20/20 skill installability, generated-source parity, four-model provider-backed evaluation, semantic review, and targeted remediation have all been completed with durable evidence.
+**Current tree: 0.2.0-dev.** It adds the canonical `swarm` skill and the advanced agentic-engineering layer.
 
-The frozen four-model baseline remains historically intact at **78/80 semantic passes (97.5%) with 0 critical invariant violations**. The two genuine deviations were clarified and then passed targeted post-fix verification; the original benchmark was not rewritten.
+**Frozen public release evidence: v0.1.0.** That release closed clean-runner validation, privacy scanning, 20/20 skill installability, generated-source parity, four-model provider-backed evaluation, semantic review, and targeted remediation. The historical four-model baseline remains **78/80 semantic passes (97.5%) with 0 critical invariant violations**; it is not rewritten to include post-v0.1 capabilities.
+
+SWARM has its own activation/behavioral coverage and repository validators in the current tree, but it is **not** claimed as part of the frozen v0.1.0 provider-backed matrix.
 
 See [`PROOF.md`](PROOF.md), [`docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md`](docs/reports/CROSS_MODEL_VERIFICATION_2026-08-07.md), and [`docs/PUBLIC_RELEASE_READINESS.md`](docs/PUBLIC_RELEASE_READINESS.md).
 
