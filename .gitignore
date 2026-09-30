@@ -10,3 +10,4 @@ coverage/
 
 # Eve skill markdown is generated from canonical skills at build time.
 adapters/eve/agent/skills/
+adapters/eve/agent/skill-resources/
