@@ -2,7 +2,7 @@
 
 This is the framework-native Eve distribution of Dale OS.
 
-The canonical source lives in the repository root. `agent/skills/` is generated from canonical `skills/**/SKILL.md` plus each skill's `references/`; do not hand-edit generated skill files. Generated Eve skill files are build output and are not committed.
+The canonical source lives in the repository root. `agent/skills/` is generated from canonical `skills/**/SKILL.md`; referenced support files are generated under `agent/skill-resources/` so Eve does not mistake them for standalone skills. Both are build output and are not committed.
 
 ## Run
 
