@@ -20,7 +20,7 @@ Not every rule needs every rung. A rule may never be promoted beyond the evidenc
 
 ## Current public-v0.1 release-candidate proof
 
-- 20 canonical skills validate and package independently.
+- 21 canonical skills validate and package independently; the post-v0.1 SWARM addition was packaged with the same Agent Skills validator before repository integration.
 - Every skill includes an explicit falsification section.
 - 6 deterministic financial companions are generated from canonical tools.
 - 10 synthetic financial fixtures exercise known failure classes.
