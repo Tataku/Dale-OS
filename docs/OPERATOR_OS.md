@@ -36,3 +36,9 @@ A strong agent can also say:
 > I stopped. The requested change crosses a protected boundary and the current authority does not permit that write.
 
 Both are successful outcomes.
+
+## Advanced systems
+
+When the work is too broad, coupled, or consequential for the default loop, do not solve that by making one prompt larger.
+
+Use the advanced harness layer in [`AGENTIC_ENGINEERING.md`](AGENTIC_ENGINEERING.md): design the work graph before spawning, map canonical authority and shared-state ownership, allocate agents on information boundaries, independently falsify findings, keep evidence separate from control, and make long-running loops durable, resumable, observable, and externally adjudicated where needed.
